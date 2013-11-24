@@ -31,6 +31,26 @@
             android:name="edu.berkeley.cs160.howwasyourday.AddComment"
             android:label="@string/title_activity_add_comment" >
         </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.Doodle"
+            android:label="@string/title_activity_doodle" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.DrawDoodle"
+            android:label="@string/title_activity_draw_doodle" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.SharePhoto"
+            android:label="@string/title_activity_share_photo" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.RecordVideo"
+            android:label="@string/title_activity_record_video" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.RecordAudio"
+            android:label="@string/title_activity_record_audio" >
+        </activity>
     </application>
 
 </manifest>
