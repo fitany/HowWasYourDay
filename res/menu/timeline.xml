@@ -6,19 +6,19 @@
         android:showAsAction="never"
         android:title="@string/action_settings"/>
     <item android:id="@+id/photo"
-          android:icon="@drawable/ic_action_photo"
+          android:icon="@drawable/ic_action_photo2"
           android:title="@string/photo"
           android:showAsAction="ifRoom" />
     <item android:id="@+id/video"
-          android:icon="@drawable/ic_action_video"
+          android:icon="@drawable/ic_action_video2"
           android:title="@string/video"
           android:showAsAction="ifRoom" />
     <item android:id="@+id/audio"
-          android:icon="@drawable/ic_action_microphone"
+          android:icon="@drawable/ic_action_microphone2"
           android:title="@string/audio"
           android:showAsAction="ifRoom" />
     <item android:id="@+id/draw"
-          android:icon="@drawable/ic_action_edit"
+          android:icon="@drawable/ic_action_edit2"
           android:title="@string/draw"
           android:showAsAction="ifRoom" />
     

@@ -8,4 +8,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Post" >
 
+    <!--
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/border"
+        android:src="@drawable/ic_launcher" />
+	-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="112dp"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical" >
+        
+		<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="121dp"
+	        android:layout_marginTop="44dp"
+	        android:orientation="vertical" >
+    	</LinearLayout>
+    	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="121dp"
+	        android:layout_marginTop="44dp"
+	        android:orientation="vertical" >
+	        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="121dp"
+	        android:layout_marginTop="44dp"
+	        android:orientation="horizontal" >
+		        <EditText
+		        android:id="@+id/editText1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_centerVertical="true"
+		        android:layout_marginRight="68dp"
+		        android:ems="10"
+		        android:inputType="textMultiLine" >
+		        </EditText>
+		    </LinearLayout>
+    	</LinearLayout>
+    </LinearLayout>
+	
 </RelativeLayout>

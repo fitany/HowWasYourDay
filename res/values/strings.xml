@@ -10,5 +10,6 @@
     <string name="timeline">Timeline</string>
     <string name="title_activity_post">Post</string>
     <string name="hello_world">Hello world!</string>
+    <string name="add_comment">Comment</string>
 
 </resources>
