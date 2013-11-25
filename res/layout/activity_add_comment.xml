@@ -66,4 +66,29 @@
         <requestFocus />
     </EditText>
 
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_action_edit2" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/imageButton5"
+        android:src="@drawable/ic_action_edit2" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/imageButton2"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="18dp"
+        android:src="@drawable/ic_action_edit2" />
+
 </RelativeLayout>

@@ -1,8 +1,10 @@
 package edu.berkeley.cs160.howwasyourday;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 
 public class AddComment extends Activity {
 
@@ -10,6 +12,12 @@ public class AddComment extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_comment);
+		ActionBar actionBar = getActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
+        View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
+                null);
+        actionBar.setCustomView(view);
 	}
 
 	@Override
