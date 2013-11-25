@@ -23,7 +23,7 @@ public class Timeline extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-        View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
+        View view = View.inflate(getApplicationContext(), R.layout.activity_timeline,
                 null);
         actionBar.setCustomView(view);
     }
