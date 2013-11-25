@@ -1,10 +1,12 @@
 package edu.berkeley.cs160.howwasyourday;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class Timeline extends Activity {
 	
@@ -17,6 +19,13 @@ public class Timeline extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+         
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
+        View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
+                null);
+        actionBar.setCustomView(view);
     }
 
     @Override
