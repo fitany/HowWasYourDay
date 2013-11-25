@@ -12,5 +12,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="add_comment">Comment</string>
     <string name="title_activity_add_comment">Add Comment</string>
+    <string name="title_activity_doodle">Doodle</string>
+    <string name="title_activity_draw_doodle">DrawDoodle</string>
+    <string name="title_activity_share_photo">SharePhoto</string>
+    <string name="title_activity_record_video">RecordVideo</string>
+    <string name="title_activity_record_audio">RecordAudio</string>
 
 </resources>
