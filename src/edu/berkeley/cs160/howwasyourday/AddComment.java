@@ -15,7 +15,7 @@ public class AddComment extends Activity {
 		ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-       View view = View.inflate(getApplicationContext(), R.layout.activity_add_comment,
+       View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
                 null);
         actionBar.setCustomView(view);
 	}
