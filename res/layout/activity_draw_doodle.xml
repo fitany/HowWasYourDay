@@ -15,8 +15,8 @@
         android:layout_height="550sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
         android:background="#fff" />
 
     <Button
@@ -26,8 +26,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/round_button"
-        android:gravity="center_vertical|center_horizontal"/>
-    
+        android:gravity="center_vertical|center_horizontal" />
+
     <Button
         android:id="@+id/yellow"
         android:layout_width="50sp"
@@ -36,42 +36,38 @@
         android:layout_below="@+id/red"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_button"
-        android:gravity="center_vertical|center_horizontal"/>
+        android:gravity="center_vertical|center_horizontal" />
 
-    <Button
-        android:id="@+id/clearDrawing"
+    <ImageButton
+        android:id="@+id/clearDoodle"
         android:layout_width="100sp"
         android:layout_height="30sp"
         android:layout_alignLeft="@+id/drawArea"
+        android:layout_alignTop="@+id/submitDoodle"
         android:layout_alignParentBottom="true"
-        android:textSize="12sp" 
-        android:text="Clear" />
+        android:background="@color/light_grey"
+        android:scaleType="fitXY"
+        android:onClick="done"
+        android:src="@drawable/clear" />
 
-    <Button
-        android:id="@+id/doneDrawing"
+    <ImageButton
+        android:id="@+id/submitDoodle"
         android:layout_width="100sp"
         android:layout_height="30sp"
-        android:layout_alignBaseline="@+id/clearDrawing"
-        android:layout_alignBottom="@+id/clearDrawing"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/drawArea"
-        android:text="Done"
-        android:textSize="12sp" />
+        android:background="@color/light_grey"
+        android:scaleType="fitXY"
+        android:src="@drawable/submit" />
 
-    <Button
-        android:id="@+id/draw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Erase"
-        android:layout_alignBottom="@+id/Erase"
-        android:layout_alignLeft="@+id/doneDrawing"
-        android:text="Draw" />
-
-    <Button
-        android:id="@+id/Erase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/clearDrawing"
-        android:layout_alignTop="@+id/red"
-        android:text="Erase" />
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:background="@color/light_grey"
+        android:src="@drawable/green" />
 
 </RelativeLayout>
