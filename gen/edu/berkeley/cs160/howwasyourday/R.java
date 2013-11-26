@@ -72,26 +72,26 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f090019;
         public static final int audio=0x7f09001d;
-        public static final int blue_button=0x7f09000e;
-        public static final int button1=0x7f090006;
-        public static final int button2=0x7f090005;
+        public static final int blue_button=0x7f09000f;
+        public static final int button1=0x7f090007;
+        public static final int button2=0x7f090006;
         public static final int draw=0x7f09001e;
-        public static final int drawArea=0x7f09000a;
-        public static final int editText1=0x7f090002;
-        public static final int green_button=0x7f09000d;
-        public static final int imageButton1=0x7f090001;
-        public static final int imageButton2=0x7f090003;
-        public static final int imageButton3=0x7f090004;
-        public static final int imageButton4=0x7f090007;
+        public static final int drawArea=0x7f09000b;
+        public static final int editText1=0x7f090003;
+        public static final int green_button=0x7f09000e;
+        public static final int imageButton1=0x7f090002;
+        public static final int imageButton2=0x7f090004;
+        public static final int imageButton3=0x7f090005;
+        public static final int imageButton4=0x7f090008;
         public static final int imageButton5=0x7f090009;
-        public static final int imageButton6=0x7f090008;
+        public static final int imageButton6=0x7f09000a;
         public static final int imageView1=0x7f090000;
         public static final int imageView2=0x7f090011;
         public static final int imageView3=0x7f090013;
         public static final int photo=0x7f09001b;
-        public static final int purple_button=0x7f09000f;
-        public static final int red_button=0x7f09000b;
-        public static final int textView1=0x7f090010;
+        public static final int purple_button=0x7f090010;
+        public static final int red_button=0x7f09000c;
+        public static final int textView1=0x7f090001;
         public static final int textView2=0x7f090012;
         public static final int textView3=0x7f090014;
         public static final int textView5=0x7f090015;
@@ -100,16 +100,18 @@ public final class R {
         public static final int textView8=0x7f090018;
         public static final int timeline=0x7f09001a;
         public static final int video=0x7f09001c;
-        public static final int yellow_button=0x7f09000c;
+        public static final int yellow_button=0x7f09000d;
     }
     public static final class layout {
-        public static final int activity_add_comment=0x7f030000;
-        public static final int activity_draw_doodle=0x7f030001;
-        public static final int activity_post=0x7f030002;
-        public static final int activity_record_audio=0x7f030003;
-        public static final int activity_record_video=0x7f030004;
-        public static final int activity_share_photo=0x7f030005;
-        public static final int activity_timeline=0x7f030006;
+        public static final int action_bar_add_comment=0x7f030000;
+        public static final int action_bar_timeline=0x7f030001;
+        public static final int activity_add_comment=0x7f030002;
+        public static final int activity_draw_doodle=0x7f030003;
+        public static final int activity_post=0x7f030004;
+        public static final int activity_record_audio=0x7f030005;
+        public static final int activity_record_video=0x7f030006;
+        public static final int activity_share_photo=0x7f030007;
+        public static final int activity_timeline=0x7f030008;
     }
     public static final class menu {
         public static final int add_comment=0x7f080000;
