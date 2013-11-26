@@ -3,7 +3,7 @@
     android:layout_height="fill_parent"
     android:layout_margin="10dp"
     android:padding="10dp"
-    android:background="@drawable/blue_bg" >
+    android:background="@drawable/darkblue_bg" >
 
     <ImageView
         android:id="@+id/imageView1"
@@ -17,27 +17,27 @@
 
     <ImageButton
         android:id="@+id/imageButton1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignLeft="@+id/editText1"
         android:layout_below="@+id/editText1"
-        android:src="@drawable/ic_action_microphone2" />
+        android:src="@drawable/ic_action_emotion" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignTop="@+id/imageButton1"
         android:layout_toRightOf="@+id/imageButton1"
-        android:src="@drawable/ic_action_edit2" />
+        android:src="@drawable/ic_action_place" />
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignTop="@+id/imageButton2"
         android:layout_toRightOf="@+id/imageButton2"
-        android:src="@drawable/ic_action_video2" />
+        android:src="@drawable/ic_action_microphone2" />
 
     <Button
         android:id="@+id/button2"
@@ -47,7 +47,7 @@
         android:layout_below="@+id/imageButton3"
         android:background="@drawable/button"
         android:layout_marginTop="10dp"
-        android:text="Button" />
+        android:text="Post" />
 
     <Button
         android:id="@+id/button1"
@@ -57,15 +57,15 @@
         android:layout_below="@+id/imageButton1"
         android:background="@drawable/button"
         android:layout_marginTop="10dp"
-        android:text="Button" />
+        android:text="Cancel" />
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignLeft="@+id/editText1"
-       android:layout_below="@+id/imageView1"
-        android:src="@drawable/ic_action_edit2" />
+        android:layout_below="@+id/imageView1"
+        android:src="@drawable/ic_action_rotate_right" />
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
@@ -75,6 +75,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         android:background="@drawable/border"
+        android:gravity="top"
         android:ems="10"
         android:inputType="textMultiLine" >
         <requestFocus />
@@ -82,18 +83,18 @@
 
     <ImageButton
         android:id="@+id/imageButton6"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_above="@+id/editText1"
         android:layout_alignRight="@+id/editText1"
-        android:src="@drawable/ic_action_edit2" />
+        android:src="@drawable/ic_action_brightness_high" />
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_below="@+id/imageView1"
         android:layout_toLeftOf="@+id/imageButton6"
-        android:src="@drawable/ic_action_edit2" />
+        android:src="@drawable/ic_action_brightness_low" />
 
 </RelativeLayout>

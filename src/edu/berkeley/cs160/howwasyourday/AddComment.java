@@ -27,7 +27,7 @@ public class AddComment extends Activity {
         actionBar.setCustomView(view);
         
 
-        
+       /* 
         final Button buttonBright = (Button) findViewById(R.id.imageButton5);
         final Button buttonDark = (Button) findViewById (R.id.imageButton6);
         final Button buttonRotateClockwise = (Button) findViewById (R.id.imageButton4);
@@ -132,7 +132,7 @@ public class AddComment extends Activity {
             	}
         });
         
-	}
+	*/}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
