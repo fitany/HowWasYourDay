@@ -64,5 +64,26 @@
         android:layout_marginTop="14dp"
         android:background="@drawable/purple_button"
         android:gravity="center_vertical|center_horizontal" />
+     <ImageButton
+        android:id="@+id/clearDoodle"
+        android:layout_width="100sp"
+        android:layout_height="30sp"
+        android:layout_alignLeft="@+id/drawArea"
+        android:layout_alignTop="@+id/submitDoodle"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_grey"
+        android:scaleType="fitXY"
+        android:onClick="done"
+        android:src="@drawable/clear" />
+
+    <ImageButton
+        android:id="@+id/submitDoodle"
+        android:layout_width="100sp"
+        android:layout_height="30sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/drawArea"
+        android:background="@color/light_grey"
+        android:scaleType="fitXY"
+        android:src="@drawable/submit" />
 
 </RelativeLayout>
