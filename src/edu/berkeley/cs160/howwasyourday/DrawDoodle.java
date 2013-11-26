@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -60,7 +61,7 @@ public class DrawDoodle extends Activity {
 		} else if (v.getId()== R.id.red_button) {
 			Toast.makeText(this, "You have chosen red.",
 					Toast.LENGTH_SHORT).show();
-					loc = Color.RED; 
+					loc = 0xf00; 
 		} else if (v.getId()== R.id.green_button) {
 			Toast.makeText(this, "You have chosen green.",
 					Toast.LENGTH_SHORT).show();
@@ -73,12 +74,25 @@ public class DrawDoodle extends Activity {
 		} else if (v.getId()== R.id.purple_button) {
 			Toast.makeText(this, "You have chosen purple.",
 					Toast.LENGTH_SHORT).show();
-					loc = Color.parseColor("purple"); 
+					loc = 0xd1a5ea; 
 		} else if (v.getId()== R.id.Eraser) {
 			Toast.makeText(this, "You have chosen eraser.",
 					Toast.LENGTH_SHORT).show();
 					loc = Color.WHITE; 
-		} else {
+		}  else if (v.getId()== R.id.Pencil) {
+			Toast.makeText(this, "You have chosen pencil.",
+					Toast.LENGTH_SHORT).show();
+		    drawArea.setSize(2);
+
+		} else if (v.getId()== R.id.Brush) {
+			Toast.makeText(this, "You have chosen brush.",
+					Toast.LENGTH_SHORT).show();
+		    drawArea.setSize(10);
+		} else if (v.getId()== R.id.Text) {
+			Toast.makeText(this, "You have chosen text.",
+					Toast.LENGTH_SHORT).show();
+		}
+		else {
 		
 		}
 		

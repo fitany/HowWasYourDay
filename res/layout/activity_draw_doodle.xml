@@ -120,7 +120,7 @@
         android:layout_above="@+id/red_button"
         android:layout_toLeftOf="@+id/Eraser"
         android:background="@color/light_grey"
-        android:onClick="done"
+        android:onClick="getColor"
         android:scaleType="fitXY"
         android:src="@drawable/brush" />
 
@@ -131,7 +131,7 @@
         android:layout_alignTop="@+id/Brush"
         android:layout_toLeftOf="@+id/Brush"
         android:background="@color/light_grey"
-        android:onClick="done"
+        android:onClick="getColor"
         android:scaleType="fitXY"
         android:src="@drawable/pencil" />
 
@@ -142,7 +142,7 @@
         android:layout_alignTop="@+id/Pencil"
         android:layout_toLeftOf="@+id/Pencil"
         android:background="@color/light_grey"
-        android:onClick="done"
+        android:onClick="text"
         android:scaleType="fitXY"
         android:src="@drawable/text" />
 
