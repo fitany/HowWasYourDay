@@ -11,9 +11,17 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int black=0x7f04000b;
+        public static final int blue=0x7f040007;
+        public static final int green=0x7f040005;
         public static final int light_grey=0x7f040002;
         public static final int opaque_red=0x7f040000;
+        public static final int purple=0x7f040009;
+        public static final int translucent_blue=0x7f040008;
+        public static final int translucent_green=0x7f040006;
+        public static final int translucent_purple=0x7f04000a;
         public static final int translucent_red=0x7f040001;
+        public static final int translucent_yellow=0x7f040004;
         public static final int yellow=0x7f040003;
     }
     public static final class dimen {
@@ -28,44 +36,49 @@ public final class R {
     }
     public static final class drawable {
         public static final int blue_bg=0x7f020000;
-        public static final int border=0x7f020001;
-        public static final int button=0x7f020002;
-        public static final int clear=0x7f020003;
-        public static final int drawing=0x7f020004;
-        public static final int green=0x7f020005;
-        public static final int ic_action_copy=0x7f020006;
-        public static final int ic_action_delete=0x7f020007;
-        public static final int ic_action_done=0x7f020008;
-        public static final int ic_action_edit=0x7f020009;
-        public static final int ic_action_edit2=0x7f02000a;
-        public static final int ic_action_locate=0x7f02000b;
-        public static final int ic_action_microphone=0x7f02000c;
-        public static final int ic_action_microphone2=0x7f02000d;
-        public static final int ic_action_photo=0x7f02000e;
-        public static final int ic_action_photo2=0x7f02000f;
-        public static final int ic_action_refresh=0x7f020010;
-        public static final int ic_action_search=0x7f020011;
-        public static final int ic_action_star=0x7f020012;
-        public static final int ic_action_user=0x7f020013;
-        public static final int ic_action_user_add=0x7f020014;
-        public static final int ic_action_video=0x7f020015;
-        public static final int ic_action_video2=0x7f020016;
-        public static final int ic_launcher=0x7f020017;
-        public static final int mom=0x7f020018;
-        public static final int playing=0x7f020019;
-        public static final int round_button=0x7f02001a;
-        public static final int submit=0x7f02001b;
-        public static final int tom=0x7f02001c;
+        public static final int blue_button=0x7f020001;
+        public static final int border=0x7f020002;
+        public static final int button=0x7f020003;
+        public static final int clear=0x7f020004;
+        public static final int drawing=0x7f020005;
+        public static final int green=0x7f020006;
+        public static final int green_button=0x7f020007;
+        public static final int ic_action_copy=0x7f020008;
+        public static final int ic_action_delete=0x7f020009;
+        public static final int ic_action_done=0x7f02000a;
+        public static final int ic_action_edit=0x7f02000b;
+        public static final int ic_action_edit2=0x7f02000c;
+        public static final int ic_action_locate=0x7f02000d;
+        public static final int ic_action_microphone=0x7f02000e;
+        public static final int ic_action_microphone2=0x7f02000f;
+        public static final int ic_action_photo=0x7f020010;
+        public static final int ic_action_photo2=0x7f020011;
+        public static final int ic_action_refresh=0x7f020012;
+        public static final int ic_action_search=0x7f020013;
+        public static final int ic_action_star=0x7f020014;
+        public static final int ic_action_user=0x7f020015;
+        public static final int ic_action_user_add=0x7f020016;
+        public static final int ic_action_video=0x7f020017;
+        public static final int ic_action_video2=0x7f020018;
+        public static final int ic_launcher=0x7f020019;
+        public static final int mom=0x7f02001a;
+        public static final int playing=0x7f02001b;
+        public static final int purple_button=0x7f02001c;
+        public static final int red_button=0x7f02001d;
+        public static final int submit=0x7f02001e;
+        public static final int tom=0x7f02001f;
+        public static final int yellow_button=0x7f020020;
     }
     public static final class id {
-        public static final int action_settings=0x7f090018;
-        public static final int audio=0x7f09001c;
+        public static final int action_settings=0x7f090019;
+        public static final int audio=0x7f09001d;
+        public static final int blue_button=0x7f09000e;
         public static final int button1=0x7f090006;
         public static final int button2=0x7f090005;
-        public static final int clearDoodle=0x7f09000d;
-        public static final int draw=0x7f09001d;
+        public static final int draw=0x7f09001e;
         public static final int drawArea=0x7f09000a;
         public static final int editText1=0x7f090002;
+        public static final int green_button=0x7f09000d;
         public static final int imageButton1=0x7f090001;
         public static final int imageButton2=0x7f090003;
         public static final int imageButton3=0x7f090004;
@@ -73,21 +86,21 @@ public final class R {
         public static final int imageButton5=0x7f090009;
         public static final int imageButton6=0x7f090008;
         public static final int imageView1=0x7f090000;
-        public static final int imageView2=0x7f090010;
-        public static final int imageView3=0x7f090012;
-        public static final int photo=0x7f09001a;
-        public static final int red=0x7f09000b;
-        public static final int submitDoodle=0x7f09000e;
-        public static final int textView1=0x7f09000f;
-        public static final int textView2=0x7f090011;
-        public static final int textView3=0x7f090013;
-        public static final int textView5=0x7f090014;
-        public static final int textView6=0x7f090015;
-        public static final int textView7=0x7f090016;
-        public static final int textView8=0x7f090017;
-        public static final int timeline=0x7f090019;
-        public static final int video=0x7f09001b;
-        public static final int yellow=0x7f09000c;
+        public static final int imageView2=0x7f090011;
+        public static final int imageView3=0x7f090013;
+        public static final int photo=0x7f09001b;
+        public static final int purple_button=0x7f09000f;
+        public static final int red_button=0x7f09000b;
+        public static final int textView1=0x7f090010;
+        public static final int textView2=0x7f090012;
+        public static final int textView3=0x7f090014;
+        public static final int textView5=0x7f090015;
+        public static final int textView6=0x7f090016;
+        public static final int textView7=0x7f090017;
+        public static final int textView8=0x7f090018;
+        public static final int timeline=0x7f09001a;
+        public static final int video=0x7f09001c;
+        public static final int yellow_button=0x7f09000c;
     }
     public static final class layout {
         public static final int activity_add_comment=0x7f030000;
