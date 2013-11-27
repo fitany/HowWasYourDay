@@ -87,6 +87,7 @@
         android:layout_height="30sp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/drawArea"
+                android:onClick="done"
         android:background="@color/light_grey"
         android:scaleType="fitXY"
         android:src="@drawable/submit" />
@@ -142,8 +143,18 @@
         android:layout_alignTop="@+id/Pencil"
         android:layout_toLeftOf="@+id/Pencil"
         android:background="@color/light_grey"
-        android:onClick="text"
+        android:onClick="showText"
         android:scaleType="fitXY"
         android:src="@drawable/text" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/drawArea"
+        android:layout_below="@+id/purple_button"
+        android:ems="10"
+        android:visibility = "gone"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

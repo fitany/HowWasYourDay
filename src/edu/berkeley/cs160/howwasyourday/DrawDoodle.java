@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class DrawDoodle extends Activity {
@@ -95,13 +96,23 @@ public class DrawDoodle extends Activity {
 			Toast.makeText(this, "You have chosen brush.",
 					Toast.LENGTH_SHORT).show();
 			size= 10;
-		} else if (v.getId()== R.id.Text) {
-			Toast.makeText(this, "You have chosen text.",
-					Toast.LENGTH_SHORT).show();
-		} else {
+		}  else {
 			
 		}
 		drawArea.setSize(size);
+	}
+	
+	public void showText (View v) {
+		if (v.getId()== R.id.Text) {
+			Toast.makeText(this, "You have chosen text.",
+					Toast.LENGTH_SHORT).show();
+		}
+		EditText text = (EditText)findViewById(R.id.editText);
+		text.setVisibility(View.VISIBLE);
+		String value = text.getText().toString();
+		drawArea.text(value);
+		text.setVisibility(View.INVISIBLE);
+
 	}
 	
 	public void done(View v){

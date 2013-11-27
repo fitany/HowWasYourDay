@@ -66,6 +66,12 @@ public class DrawArea extends View {
 		this.color = color;
 		paint.setColor(color);
 	}
+	public void text(String inp) {
+		paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
+        paint.setTextSize(20);
+		c.drawText(inp,50, 230, paint);
+	}
 	
 	public void setSize(int size) {
 		this.size = size;
