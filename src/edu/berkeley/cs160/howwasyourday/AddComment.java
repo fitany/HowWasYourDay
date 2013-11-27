@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class AddComment extends Activity {
@@ -26,9 +27,9 @@ public class AddComment extends Activity {
                 null);
         actionBar.setCustomView(view);
         
-        final Button buttonBright = (Button) findViewById(R.id.imageButton5);
-        final Button buttonDark = (Button) findViewById (R.id.imageButton6);
-        final Button buttonRotateClockwise = (Button) findViewById (R.id.imageButton4);
+        final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
+        final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
+        final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
         
         buttonBright.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
