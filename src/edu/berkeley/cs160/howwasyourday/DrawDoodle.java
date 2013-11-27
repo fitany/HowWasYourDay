@@ -79,24 +79,29 @@ public class DrawDoodle extends Activity {
 			Toast.makeText(this, "You have chosen eraser.",
 					Toast.LENGTH_SHORT).show();
 					loc = Color.WHITE; 
-		}  else if (v.getId()== R.id.Pencil) {
+		}  else {
+		
+		}
+		drawArea.setColor(loc);
+	}
+	
+	public void getStroke(View v) {
+		int size = 10;
+		if (v.getId()== R.id.Pencil) {
 			Toast.makeText(this, "You have chosen pencil.",
 					Toast.LENGTH_SHORT).show();
-		    drawArea.setSize(2);
-
+			size = 3;
 		} else if (v.getId()== R.id.Brush) {
 			Toast.makeText(this, "You have chosen brush.",
 					Toast.LENGTH_SHORT).show();
-		    drawArea.setSize(10);
+			size= 10;
 		} else if (v.getId()== R.id.Text) {
 			Toast.makeText(this, "You have chosen text.",
 					Toast.LENGTH_SHORT).show();
+		} else {
+			
 		}
-		else {
-		
-		}
-		
-		drawArea.setColor(loc);
+		drawArea.setSize(size);
 	}
 	
 	public void done(View v){

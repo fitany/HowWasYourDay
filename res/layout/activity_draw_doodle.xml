@@ -120,7 +120,7 @@
         android:layout_above="@+id/red_button"
         android:layout_toLeftOf="@+id/Eraser"
         android:background="@color/light_grey"
-        android:onClick="getColor"
+        android:onClick="getStroke"
         android:scaleType="fitXY"
         android:src="@drawable/brush" />
 
@@ -131,7 +131,7 @@
         android:layout_alignTop="@+id/Brush"
         android:layout_toLeftOf="@+id/Brush"
         android:background="@color/light_grey"
-        android:onClick="getColor"
+        android:onClick="getStroke"
         android:scaleType="fitXY"
         android:src="@drawable/pencil" />
 
