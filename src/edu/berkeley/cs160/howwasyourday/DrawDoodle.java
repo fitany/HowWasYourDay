@@ -116,7 +116,7 @@ public class DrawDoodle extends Activity {
 	}
 	
 	public void done(View v){
-		Intent i = new Intent(this, Post.class);
+		Intent i = new Intent(this, AddComment.class);
 		startActivity(i);
 	}
 
