@@ -17,6 +17,10 @@
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Timeline"
             android:label="@string/app_name" >
+<<<<<<< HEAD
+=======
+            
+>>>>>>> cffb4c6c12093be9e8ec6121386768b91d6e64aa
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,6 +33,13 @@
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.AddComment"
             android:label="@string/title_activity_add_comment" >
+<<<<<<< HEAD
+=======
+           <!--   <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+>>>>>>> cffb4c6c12093be9e8ec6121386768b91d6e64aa
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Doodle"

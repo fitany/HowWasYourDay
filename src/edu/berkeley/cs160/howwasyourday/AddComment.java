@@ -35,6 +35,7 @@ public class AddComment extends Activity {
                 null);
         actionBar.setCustomView(view);
         
+<<<<<<< HEAD
         //load image
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("letters", Context.MODE_PRIVATE);
@@ -58,6 +59,11 @@ public class AddComment extends Activity {
         final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
         final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
         final ImageButton buttonPost = (ImageButton) findViewById (R.id.imageButton4);
+=======
+        final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
+        final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
+        final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
+>>>>>>> cffb4c6c12093be9e8ec6121386768b91d6e64aa
         
         buttonBright.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

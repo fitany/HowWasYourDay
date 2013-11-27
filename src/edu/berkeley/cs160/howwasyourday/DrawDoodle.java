@@ -11,12 +11,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class DrawDoodle extends Activity {
@@ -54,6 +58,22 @@ public class DrawDoodle extends Activity {
 		}; 
 		
 		drawArea.setOnTouchListener(touchListener);
+		
+		EditText text = (EditText)findViewById(R.id.editText);
+		text.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+				if (arg2.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+					String value = arg0.getText().toString();
+					drawArea.text(value);
+					arg0.setVisibility(TextView.INVISIBLE);
+					return true;
+				}
+				return false;
+			}
+			
+		});
 	} 
 	
 	public void clear(View v) {
@@ -115,9 +135,6 @@ public class DrawDoodle extends Activity {
 		}
 		EditText text = (EditText)findViewById(R.id.editText);
 		text.setVisibility(View.VISIBLE);
-		String value = text.getText().toString();
-		drawArea.text(value);
-		text.setVisibility(View.INVISIBLE);
 
 	}
 	
