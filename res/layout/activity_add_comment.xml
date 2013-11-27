@@ -47,6 +47,7 @@
         android:layout_below="@+id/imageButton3"
         android:background="@drawable/button"
         android:layout_marginTop="10dp"
+		android:onClick="newTimeline"
         android:text="Post" />
 
     <Button

@@ -1,8 +1,14 @@
 package edu.berkeley.cs160.howwasyourday;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.Menu;
@@ -116,6 +122,17 @@ public class DrawDoodle extends Activity {
 	}
 	
 	public void done(View v){
+		ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("letters", Context.MODE_PRIVATE);
+        File mypath=new File(directory,"mypic.bmp");
+        FileOutputStream fos = null;
+        try {           
+            fos = new FileOutputStream(mypath);
+            drawArea.saveBitmap(fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		Intent i = new Intent(this, AddComment.class);
 		startActivity(i);
 	}

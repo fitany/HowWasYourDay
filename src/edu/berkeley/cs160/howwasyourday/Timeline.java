@@ -1,12 +1,24 @@
 package edu.berkeley.cs160.howwasyourday;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class Timeline extends Activity {
 	
@@ -25,9 +37,28 @@ public class Timeline extends Activity {
 
         View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
                 null);
-        actionBar.setCustomView(view);
+        actionBar.setCustomView (view);
+		
+		if(getIntent().getExtras() != null){
+			Bundle b = getIntent().getExtras();
+			Boolean newPic = b.getBoolean("NEWPIC");
+			if(newPic){
+				ContextWrapper cw = new ContextWrapper(getApplicationContext());
+		        File directory = cw.getDir("letters", Context.MODE_PRIVATE);
+			    try {
+			        File f=new File(directory, "mypic.bmp");
+			        Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(f));
+			        ImageButton iv = (ImageButton) findViewById(R.id.imageButton1);
+			        iv.setImageBitmap(bm);
+			        iv.setBackgroundColor(Color.WHITE);
+			    } 
+			    catch (FileNotFoundException e) 
+			    {
+			        e.printStackTrace();
+			    }
+			}
+		}
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	getMenuInflater().inflate(R.menu.timeline, menu);
