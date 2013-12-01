@@ -88,14 +88,14 @@ public final class R {
         public static final int Eraser=0x7f090014;
         public static final int Pencil=0x7f090016;
         public static final int Text=0x7f090017;
-        public static final int action_settings=0x7f090025;
-        public static final int audio=0x7f090029;
+        public static final int action_settings=0x7f090027;
+        public static final int audio=0x7f09002b;
         public static final int black_button=0x7f090011;
         public static final int blue_button=0x7f09000f;
         public static final int button1=0x7f090007;
         public static final int button2=0x7f090006;
         public static final int clearDoodle=0x7f090013;
-        public static final int draw=0x7f09002a;
+        public static final int draw=0x7f09002c;
         public static final int drawArea=0x7f09000b;
         public static final int editText=0x7f090018;
         public static final int editText1=0x7f090003;
@@ -112,7 +112,7 @@ public final class R {
         public static final int imageView3=0x7f09001f;
         public static final int login=0x7f09001b;
         public static final int password=0x7f09001a;
-        public static final int photo=0x7f090027;
+        public static final int photo=0x7f090029;
         public static final int purple_button=0x7f090010;
         public static final int red_button=0x7f09000c;
         public static final int register=0x7f09001c;
@@ -120,12 +120,14 @@ public final class R {
         public static final int textView1=0x7f090001;
         public static final int textView2=0x7f09001e;
         public static final int textView3=0x7f090020;
-        public static final int textView5=0x7f090021;
-        public static final int textView6=0x7f090022;
-        public static final int textView7=0x7f090023;
-        public static final int textView8=0x7f090024;
-        public static final int timeline=0x7f090026;
-        public static final int video=0x7f090028;
+        public static final int textView5=0x7f090023;
+        public static final int textView6=0x7f090024;
+        public static final int textView7=0x7f090025;
+        public static final int textView8=0x7f090026;
+        public static final int timeline=0x7f090028;
+        public static final int userType=0x7f090022;
+        public static final int username=0x7f090021;
+        public static final int video=0x7f09002a;
         public static final int yellow_button=0x7f09000d;
     }
     public static final class layout {

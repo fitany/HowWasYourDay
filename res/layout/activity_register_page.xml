@@ -8,9 +8,76 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RegisterPage" >
 
-    <TextView
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Email" 
+        android:singleLine="true"
+        android:shape="rectangle"
+        android:background="@color/light_grey"
+        android:inputType="textEmailAddress"/>
+    
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Password" 
+        android:singleLine="true"
+        android:shape="rectangle"
+        android:background="@color/light_grey"
+        android:inputType="textPassword"/>
+    
+    <EditText
+            android:id="@+id/username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:hint="Username" 
+            android:singleLine="true"
+            android:shape="rectangle"
+            android:background="@color/light_grey"
+            android:inputType="text"/>
+        
+        <EditText
+            android:id="@+id/userType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:hint="userType" 
+            android:singleLine="true"
+            android:shape="rectangle"
+            android:background="@color/light_grey"
+            android:inputType="text"/>
+
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/password"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="136dp"
+        android:text="Back" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignRight="@+id/password"
+        android:layout_marginRight="24dp"
+        android:onClick="done"
+        android:text="Done" />
 
 </RelativeLayout>

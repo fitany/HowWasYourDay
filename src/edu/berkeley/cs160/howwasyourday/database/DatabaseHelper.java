@@ -25,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTable="Posts";
 	static final String PostId="PostId";
 	static final String PostUserId="PostUserId";
+	static final String PostDiscription="PostDiscription";
 	static final String PostPic="PostPic";
 	static final String PostAudio="PostAudio";
 	static final String PostVideo="PostVideo";
@@ -33,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 2); 
+		super(context, dbName, null, 3); 
 	}
 
 	@Override
@@ -65,8 +66,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-//		db.execSQL("DROP TABLE IF EXISTS "+employeeTable);
-//	    db.execSQL("DROP TABLE IF EXISTS "+deptTable);
+		db.execSQL("DROP TABLE IF EXISTS "+familyTable);
+		db.execSQL("DROP TABLE IF EXISTS "+userTable);
 //	  
 //	    db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger");
 //	    db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger22");
@@ -75,15 +76,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    onCreate(db);
 	}
 	
-	public void createUser(SQLiteDatabase db, String email, String password) {
+	public void createUser(SQLiteDatabase db, String email, String password, String username, String userType) {
 		ContentValues cv=new ContentValues();
 	    cv.put(UserEmail, email);
 	    cv.put(UserPassword, password);
+	    cv.put(UserName, username);
+	    cv.put(UserType, userType);
 	    db.insert(userTable, null, cv);
 	}
 	
 	public Cursor findUser(SQLiteDatabase db, String email) {
-		Cursor c = db.query(userTable, new String[] {UserEmail, UserPassword}, UserEmail+"=?", new String[]{email}, null,null, null);
+		Cursor c = db.query(userTable, new String[] {UserId, UserPassword, UserName, UserType}, UserEmail+"=?", new String[]{email}, null,null, null);
 	    return c;
 	}
 	
