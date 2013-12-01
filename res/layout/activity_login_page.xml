@@ -15,8 +15,10 @@
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
             android:paddingLeft="10dp"
-            android:text="Email"
+            android:hint="Email" 
             android:singleLine="true"
+            android:shape="rectangle"
+            android:background="@color/light_grey"
             android:inputType="textEmailAddress"/>
         
         <EditText
@@ -26,8 +28,10 @@
             android:layout_below="@+id/email"
             android:layout_margin="10dp"
             android:paddingLeft="10dp"
-            android:text="Password"
+            android:hint="Password" 
             android:singleLine="true"
+            android:shape="rectangle"
+            android:background="@color/light_grey"
             android:inputType="textPassword"/>
 
         <Button
