@@ -26,6 +26,7 @@ public class Timeline extends Activity {
 	MenuItem audio;
 	MenuItem video;
 	MenuItem photo;
+	User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class Timeline extends Activity {
          
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        
+        currentUser = LoginPage.getCurUser();
 
         View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
                 null);

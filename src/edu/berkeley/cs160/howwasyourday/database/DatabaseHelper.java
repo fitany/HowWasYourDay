@@ -1,10 +1,19 @@
 package edu.berkeley.cs160.howwasyourday.database;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Date;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import edu.berkeley.cs160.howwasyourday.PostEntry;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -33,8 +42,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostFeeling="Feeling";
 	static final String PostTime="PostTime";
 	
+	private Date date = new Date();
+	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 3); 
+		super(context, dbName, null, 5); 
 	}
 
 	@Override
@@ -43,24 +54,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		  
 		  db.execSQL("CREATE TABLE "+familyTable+" ("+FamilyId+ " INTEGER PRIMARY KEY , "+FamilyName+ " TEXT UNIQUE)");
 		  
-		  db.execSQL("CREATE TABLE "+userTable+" ("+UserId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ UserEmail+" TEXT NOT NULL UNIQUE, "+UserPassword+" TEXT NOT NULL, " + UserName +" TEXT, " +UserType+ " TEXT, " + UserFamilyId + " INTEGER ,FOREIGN KEY ("+UserFamilyId+") REFERENCES "+familyTable+" ("+FamilyId+"));");
+		  db.execSQL("CREATE TABLE "+userTable+" ("+UserId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ UserEmail +" TEXT NOT NULL UNIQUE, "+ UserPassword +" TEXT NOT NULL, " + UserName +" TEXT, " +UserType+ " TEXT, " + UserFamilyId + " INTEGER ,FOREIGN KEY ("+UserFamilyId+") REFERENCES "+familyTable+" ("+FamilyId+"));");
 		  
+		  db.execSQL("CREATE TABLE "+PostTable+" ("+PostId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ PostUserId +" INTEGER NOT NULL, "+PostDiscription+" TEXT, " + PostFeeling +" TEXT, " +PostTime+ " INTEGER NOT NULL, " + PostPic + " BLOB, " + PostAudio + " BLOB, " + PostVideo + " BLOB, " + PostDoodle + " INTEGER ,FOREIGN KEY ("+PostUserId+") REFERENCES "+userTable+" ("+UserId+"));");
 		  
-//		  db.execSQL("CREATE TRIGGER fk_empdept_deptid " +
-//		    " BEFORE INSERT "+
-//		    " ON "+employeeTable+
-//		    
-//		    " FOR EACH ROW BEGIN"+
-//		    " SELECT CASE WHEN ((SELECT "+colDeptID+" FROM "+deptTable+" WHERE "+colDeptID+"=new."+colDept+" ) IS NULL)"+" THEN RAISE (ABORT,'Foreign Key Violation') END;"+"  END;");
-//		  
-//		  db.execSQL("CREATE VIEW "+viewEmps+
-//		    " AS SELECT "+employeeTable+"."+colID+" AS _id,"+
-//		    " "+employeeTable+"."+colName+","+
-//		    " "+employeeTable+"."+colAge+","+
-//		    " "+deptTable+"."+colDeptName+""+
-//		    " FROM "+employeeTable+" JOIN "+deptTable+
-//		    " ON "+employeeTable+"."+colDept+" ="+deptTable+"."+colDeptID
-//		    );
 	}
 
 	@Override
@@ -68,11 +65,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS "+familyTable);
 		db.execSQL("DROP TABLE IF EXISTS "+userTable);
-//	  
-//	    db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger");
-//	    db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger22");
-//	    db.execSQL("DROP TRIGGER IF EXISTS fk_empdept_deptid");
-//	    db.execSQL("DROP VIEW IF EXISTS "+viewEmps);
+		db.execSQL("DROP TABLE IF EXISTS "+PostTable);
+
 	    onCreate(db);
 	}
 	
@@ -88,6 +82,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Cursor findUser(SQLiteDatabase db, String email) {
 		Cursor c = db.query(userTable, new String[] {UserId, UserPassword, UserName, UserType}, UserEmail+"=?", new String[]{email}, null,null, null);
 	    return c;
+	}
+	
+	public void savePic(SQLiteDatabase db, int userID, String discription, int feeling, Drawable pic) {
+		ContentValues cv=new ContentValues();
+		Bitmap bitmap = ((BitmapDrawable)pic).getBitmap();
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		cv.put(PostPic, stream.toByteArray());
+		db.insert(PostTable, null, cv);
+	}
+	
+	public void savePic(SQLiteDatabase db, int userID, String discription, int feeling, Bitmap bitmap) {
+		ContentValues cv=new ContentValues();
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		cv.put(PostPic, stream.toByteArray());
+		cv.put(PostUserId, userID);
+		cv.put(PostDiscription, discription);
+		cv.put(PostFeeling, feeling);
+		cv.put(PostTime, date.getTime());
+		db.insert(PostTable, null, cv);
+	}
+	
+	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, Bitmap bitmap) {
+		savePic(db, userID, discription, feeling, bitmap);
+	}
+	
+	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, Drawable pic) {
+		savePic(db, userID, discription, feeling, pic);
+	}
+	
+	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, String[] ids) {
+		Cursor c = db.query(userTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle}, PostUserId+"=?", ids, null,null, PostTime);
+	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
+	    
+	    while(c.moveToNext()) {
+	    	byte[] pic = c.getBlob(0);
+	    	Bitmap picPic = BitmapFactory.decodeByteArray(pic , 0, pic.length);
+	    	byte[] doodle = c.getBlob(1);
+	    	Bitmap doodlePic = BitmapFactory.decodeByteArray(doodle , 0, doodle.length);
+	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), picPic, doodlePic);
+	    	posts.add(post);
+	    }
+	    
+	    return posts;
 	}
 	
 }
