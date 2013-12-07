@@ -8,21 +8,27 @@
 package edu.berkeley.cs160.howwasyourday;
 
 public final class R {
+    public static final class anim {
+        public static final int in_from_left=0x7f040000;
+        public static final int in_from_right=0x7f040001;
+        public static final int out_to_left=0x7f040002;
+        public static final int out_to_right=0x7f040003;
+    }
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f04000b;
-        public static final int blue=0x7f040007;
-        public static final int green=0x7f040005;
-        public static final int light_grey=0x7f040002;
-        public static final int opaque_red=0x7f040000;
-        public static final int purple=0x7f040009;
-        public static final int translucent_blue=0x7f040008;
-        public static final int translucent_green=0x7f040006;
-        public static final int translucent_purple=0x7f04000a;
-        public static final int translucent_red=0x7f040001;
-        public static final int translucent_yellow=0x7f040004;
-        public static final int yellow=0x7f040003;
+        public static final int black=0x7f05000b;
+        public static final int blue=0x7f050007;
+        public static final int green=0x7f050005;
+        public static final int light_grey=0x7f050002;
+        public static final int opaque_red=0x7f050000;
+        public static final int purple=0x7f050009;
+        public static final int translucent_blue=0x7f050008;
+        public static final int translucent_green=0x7f050006;
+        public static final int translucent_purple=0x7f05000a;
+        public static final int translucent_red=0x7f050001;
+        public static final int translucent_yellow=0x7f050004;
+        public static final int yellow=0x7f050003;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -31,8 +37,8 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
         public static final int black_button=0x7f020000;
@@ -43,92 +49,106 @@ public final class R {
         public static final int button=0x7f020005;
         public static final int clear=0x7f020006;
         public static final int darkblue_bg=0x7f020007;
-        public static final int drawborder=0x7f020008;
-        public static final int drawing=0x7f020009;
-        public static final int eraser=0x7f02000a;
-        public static final int green=0x7f02000b;
-        public static final int green_button=0x7f02000c;
-        public static final int home=0x7f02000d;
-        public static final int ic_action_back=0x7f02000e;
-        public static final int ic_action_brightness_high=0x7f02000f;
-        public static final int ic_action_brightness_low=0x7f020010;
-        public static final int ic_action_copy=0x7f020011;
-        public static final int ic_action_delete=0x7f020012;
-        public static final int ic_action_done=0x7f020013;
-        public static final int ic_action_edit=0x7f020014;
-        public static final int ic_action_edit2=0x7f020015;
-        public static final int ic_action_emotion=0x7f020016;
-        public static final int ic_action_locate=0x7f020017;
-        public static final int ic_action_microphone=0x7f020018;
-        public static final int ic_action_microphone2=0x7f020019;
-        public static final int ic_action_photo=0x7f02001a;
-        public static final int ic_action_photo2=0x7f02001b;
-        public static final int ic_action_place=0x7f02001c;
-        public static final int ic_action_refresh=0x7f02001d;
-        public static final int ic_action_rotate_right=0x7f02001e;
-        public static final int ic_action_search=0x7f02001f;
-        public static final int ic_action_star=0x7f020020;
-        public static final int ic_action_user=0x7f020021;
-        public static final int ic_action_user_add=0x7f020022;
-        public static final int ic_action_video=0x7f020023;
-        public static final int ic_action_video2=0x7f020024;
-        public static final int ic_launcher=0x7f020025;
-        public static final int mom=0x7f020026;
-        public static final int pencil=0x7f020027;
-        public static final int playing=0x7f020028;
-        public static final int purple_button=0x7f020029;
-        public static final int red_button=0x7f02002a;
-        public static final int submit=0x7f02002b;
-        public static final int text=0x7f02002c;
-        public static final int tom=0x7f02002d;
-        public static final int yellow_button=0x7f02002e;
+        public static final int dot=0x7f020008;
+        public static final int drawborder=0x7f020009;
+        public static final int drawing=0x7f02000a;
+        public static final int eraser=0x7f02000b;
+        public static final int green=0x7f02000c;
+        public static final int green_button=0x7f02000d;
+        public static final int home=0x7f02000e;
+        public static final int ic_action_back=0x7f02000f;
+        public static final int ic_action_brightness_high=0x7f020010;
+        public static final int ic_action_brightness_low=0x7f020011;
+        public static final int ic_action_copy=0x7f020012;
+        public static final int ic_action_delete=0x7f020013;
+        public static final int ic_action_done=0x7f020014;
+        public static final int ic_action_edit=0x7f020015;
+        public static final int ic_action_edit2=0x7f020016;
+        public static final int ic_action_emotion=0x7f020017;
+        public static final int ic_action_locate=0x7f020018;
+        public static final int ic_action_microphone=0x7f020019;
+        public static final int ic_action_microphone2=0x7f02001a;
+        public static final int ic_action_photo=0x7f02001b;
+        public static final int ic_action_photo2=0x7f02001c;
+        public static final int ic_action_place=0x7f02001d;
+        public static final int ic_action_refresh=0x7f02001e;
+        public static final int ic_action_rotate_right=0x7f02001f;
+        public static final int ic_action_search=0x7f020020;
+        public static final int ic_action_star=0x7f020021;
+        public static final int ic_action_user=0x7f020022;
+        public static final int ic_action_user_add=0x7f020023;
+        public static final int ic_action_video=0x7f020024;
+        public static final int ic_action_video2=0x7f020025;
+        public static final int ic_launcher=0x7f020026;
+        public static final int mom=0x7f020027;
+        public static final int pencil=0x7f020028;
+        public static final int playing=0x7f020029;
+        public static final int purple_button=0x7f02002a;
+        public static final int red_button=0x7f02002b;
+        public static final int submit=0x7f02002c;
+        public static final int text=0x7f02002d;
+        public static final int tom=0x7f02002e;
+        public static final int tutorial1=0x7f02002f;
+        public static final int tutorial2=0x7f020030;
+        public static final int tutorial3=0x7f020031;
+        public static final int yellow_button=0x7f020032;
     }
     public static final class id {
-        public static final int Brush=0x7f090015;
-        public static final int Eraser=0x7f090014;
-        public static final int Pencil=0x7f090016;
-        public static final int Text=0x7f090017;
-        public static final int action_settings=0x7f090027;
-        public static final int audio=0x7f09002b;
-        public static final int black_button=0x7f090011;
-        public static final int blue_button=0x7f09000f;
-        public static final int button1=0x7f090007;
-        public static final int button2=0x7f090006;
-        public static final int clearDoodle=0x7f090013;
-        public static final int draw=0x7f09002c;
-        public static final int drawArea=0x7f09000b;
-        public static final int editText=0x7f090018;
-        public static final int editText1=0x7f090003;
-        public static final int email=0x7f090019;
-        public static final int green_button=0x7f09000e;
-        public static final int imageButton1=0x7f090002;
-        public static final int imageButton2=0x7f090004;
-        public static final int imageButton3=0x7f090005;
-        public static final int imageButton4=0x7f090008;
-        public static final int imageButton5=0x7f090009;
-        public static final int imageButton6=0x7f09000a;
-        public static final int imageView1=0x7f090000;
-        public static final int imageView2=0x7f09001d;
-        public static final int imageView3=0x7f09001f;
-        public static final int login=0x7f09001b;
-        public static final int password=0x7f09001a;
-        public static final int photo=0x7f090029;
-        public static final int purple_button=0x7f090010;
-        public static final int red_button=0x7f09000c;
-        public static final int register=0x7f09001c;
-        public static final int submitDoodle=0x7f090012;
-        public static final int textView1=0x7f090001;
-        public static final int textView2=0x7f09001e;
-        public static final int textView3=0x7f090020;
-        public static final int textView5=0x7f090023;
-        public static final int textView6=0x7f090024;
-        public static final int textView7=0x7f090025;
-        public static final int textView8=0x7f090026;
-        public static final int timeline=0x7f090028;
-        public static final int userType=0x7f090022;
-        public static final int username=0x7f090021;
-        public static final int video=0x7f09002a;
-        public static final int yellow_button=0x7f09000d;
+        public static final int Brush=0x7f0a0015;
+        public static final int Eraser=0x7f0a0014;
+        public static final int Pencil=0x7f0a0016;
+        public static final int Text=0x7f0a0017;
+        public static final int action_settings=0x7f0a0031;
+        public static final int audio=0x7f0a0035;
+        public static final int black_button=0x7f0a0011;
+        public static final int blue_button=0x7f0a000f;
+        public static final int button1=0x7f0a0007;
+        public static final int button2=0x7f0a0006;
+        public static final int clearDoodle=0x7f0a0013;
+        public static final int dot1=0x7f0a0022;
+        public static final int dot2=0x7f0a0023;
+        public static final int dot3=0x7f0a0024;
+        public static final int dot4=0x7f0a0025;
+        public static final int dot5=0x7f0a0026;
+        public static final int draw=0x7f0a0036;
+        public static final int drawArea=0x7f0a000b;
+        public static final int editText=0x7f0a0018;
+        public static final int editText1=0x7f0a0003;
+        public static final int email=0x7f0a001c;
+        public static final int green_button=0x7f0a000e;
+        public static final int imageButton1=0x7f0a0002;
+        public static final int imageButton2=0x7f0a0004;
+        public static final int imageButton3=0x7f0a0005;
+        public static final int imageButton4=0x7f0a0008;
+        public static final int imageButton5=0x7f0a0009;
+        public static final int imageButton6=0x7f0a000a;
+        public static final int imageView1=0x7f0a0000;
+        public static final int imageView2=0x7f0a0027;
+        public static final int imageView3=0x7f0a0029;
+        public static final int imageViewTutorial1=0x7f0a001e;
+        public static final int imageViewTutorial2=0x7f0a001f;
+        public static final int imageViewTutorial3=0x7f0a0020;
+        public static final int imageViewTutorial4=0x7f0a0021;
+        public static final int login=0x7f0a001a;
+        public static final int password=0x7f0a0019;
+        public static final int photo=0x7f0a0033;
+        public static final int purple_button=0x7f0a0010;
+        public static final int red_button=0x7f0a000c;
+        public static final int register=0x7f0a001b;
+        public static final int submitDoodle=0x7f0a0012;
+        public static final int textView1=0x7f0a0001;
+        public static final int textView2=0x7f0a0028;
+        public static final int textView3=0x7f0a002a;
+        public static final int textView5=0x7f0a002d;
+        public static final int textView6=0x7f0a002e;
+        public static final int textView7=0x7f0a002f;
+        public static final int textView8=0x7f0a0030;
+        public static final int timeline=0x7f0a0032;
+        public static final int userType=0x7f0a002c;
+        public static final int username=0x7f0a002b;
+        public static final int video=0x7f0a0034;
+        public static final int viewFlipper1=0x7f0a001d;
+        public static final int yellow_button=0x7f0a000d;
     }
     public static final class layout {
         public static final int action_bar_add_comment=0x7f030000;
@@ -144,38 +164,38 @@ public final class R {
         public static final int activity_timeline=0x7f03000a;
     }
     public static final class menu {
-        public static final int add_comment=0x7f080000;
-        public static final int draw_doodle=0x7f080001;
-        public static final int login_page=0x7f080002;
-        public static final int post=0x7f080003;
-        public static final int record_audio=0x7f080004;
-        public static final int record_video=0x7f080005;
-        public static final int register_page=0x7f080006;
-        public static final int share_photo=0x7f080007;
-        public static final int timeline=0x7f080008;
+        public static final int add_comment=0x7f090000;
+        public static final int draw_doodle=0x7f090001;
+        public static final int login_page=0x7f090002;
+        public static final int post=0x7f090003;
+        public static final int record_audio=0x7f090004;
+        public static final int record_video=0x7f090005;
+        public static final int register_page=0x7f090006;
+        public static final int share_photo=0x7f090007;
+        public static final int timeline=0x7f090008;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
-        public static final int add_comment=0x7f060009;
-        public static final int app_name=0x7f060000;
-        public static final int audio=0x7f060004;
-        public static final int draw=0x7f060005;
-        public static final int hello_world=0x7f060008;
-        public static final int photo=0x7f060002;
-        public static final int timeline=0x7f060006;
-        public static final int title_activity_add_comment=0x7f06000a;
-        public static final int title_activity_doodle=0x7f06000b;
-        public static final int title_activity_draw_doodle=0x7f06000c;
-        public static final int title_activity_login_page=0x7f060010;
-        public static final int title_activity_post=0x7f060007;
-        public static final int title_activity_record_audio=0x7f06000f;
-        public static final int title_activity_record_video=0x7f06000e;
-        public static final int title_activity_register_page=0x7f060011;
-        public static final int title_activity_share_photo=0x7f06000d;
-        public static final int video=0x7f060003;
+        public static final int action_settings=0x7f070001;
+        public static final int add_comment=0x7f070009;
+        public static final int app_name=0x7f070000;
+        public static final int audio=0x7f070004;
+        public static final int draw=0x7f070005;
+        public static final int hello_world=0x7f070008;
+        public static final int photo=0x7f070002;
+        public static final int timeline=0x7f070006;
+        public static final int title_activity_add_comment=0x7f07000a;
+        public static final int title_activity_doodle=0x7f07000b;
+        public static final int title_activity_draw_doodle=0x7f07000c;
+        public static final int title_activity_login_page=0x7f070010;
+        public static final int title_activity_post=0x7f070007;
+        public static final int title_activity_record_audio=0x7f07000f;
+        public static final int title_activity_record_video=0x7f07000e;
+        public static final int title_activity_register_page=0x7f070011;
+        public static final int title_activity_share_photo=0x7f07000d;
+        public static final int video=0x7f070003;
     }
     public static final class style {
-        public static final int ActionBarStyle=0x7f070002;
+        public static final int ActionBarStyle=0x7f080002;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -197,9 +217,9 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
     }
 }
