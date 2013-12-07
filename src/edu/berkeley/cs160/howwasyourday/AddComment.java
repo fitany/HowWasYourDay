@@ -1,22 +1,21 @@
 package edu.berkeley.cs160.howwasyourday;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.MeasureSpec;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -28,6 +27,8 @@ public class AddComment extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_comment);
+		Bundle extras = this.getIntent().getExtras();
+		String photoPath = extras.getString("photo");
 		ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
@@ -37,10 +38,10 @@ public class AddComment extends Activity {
         
         //load image
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("letters", Context.MODE_PRIVATE);
+        //File directory = cw.getDir("letters", Context.MODE_PRIVATE);
 	    try {
-	        File f=new File(directory, "mypic.bmp");
-	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+	        //File f=new File(directory, "mypic.bmp");
+	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(photoPath));
 	        ImageView iv = (ImageView) findViewById(R.id.imageView1);
 	        iv.setImageBitmap(b);
 	        iv.getLayoutParams().height = 200;
@@ -57,7 +58,30 @@ public class AddComment extends Activity {
         final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
         final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
         final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
-        final ImageButton buttonPost = (ImageButton) findViewById (R.id.imageButton4);      
+        final ImageButton buttonPost = (ImageButton) findViewById (R.id.imageButton4);
+        
+        buttonRotateClockwise.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	 ImageView image;
+                 Bitmap bMap;
+                 Matrix matrix=new Matrix();
+                 
+                 //Get ImageView from layout xml file
+                 image = (ImageView) findViewById(R.id.imageView1);
+                 image.setDrawingCacheEnabled(true);
+                 image.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), 
+                         MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+             image.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight()); 
+
+             image.buildDrawingCache(true);
+                 //Decode Image using Bitmap factory.
+                 bMap = image.getDrawingCache();
+                 image.buildDrawingCache(false);
+                 matrix.postRotate(45);
+                		 Bitmap bMapRotate = Bitmap.createBitmap(bMap, 0, 0,bMap.getWidth(),bMap.getHeight(), matrix, true);
+                		image.setImageBitmap(bMapRotate);
+            }
+        });
         
         buttonBright.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

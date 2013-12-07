@@ -19,5 +19,6 @@
     <string name="title_activity_record_audio">RecordAudio</string>
     <string name="title_activity_login_page">LoginPage</string>
     <string name="title_activity_register_page">RegisterPage</string>
+    <string name="desc">camera</string>
 
 </resources>
