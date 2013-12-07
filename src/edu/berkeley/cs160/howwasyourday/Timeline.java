@@ -42,6 +42,7 @@ public class Timeline extends Activity {
                 null);
         actionBar.setCustomView (view);
 		
+        
 		if(getIntent().getExtras() != null){
 			Bundle b = getIntent().getExtras();
 			Boolean newPic = b.getBoolean("NEWPIC");
@@ -61,6 +62,18 @@ public class Timeline extends Activity {
 			    }
 			}
 		}
+		
+		//get ArrayList of posts from database, hardcoded for now
+		/*
+		ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
+		posts.add(new PostEntry(1, 1, "doodle", new Bitmap(), null));
+		posts.add(new PostEntry(1, 1, "doodle", new Bitmap(), null));
+		posts.add(new PostEntry(1, 1, "doodle", new Bitmap(), null));
+		posts.add(new PostEntry(1, 1, "doodle", new Bitmap(), null));
+		//end get ArrayList of posts from database
+		
+		//Call addNewPost for every post in the ArrayList
+		*/
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,4 +124,7 @@ public class Timeline extends Activity {
 		startActivity(i);
     }
     
+    private void addNewPost(Post post){
+    	
+    }
 }
