@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -24,6 +25,7 @@ public class RegisterPage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_register_page);
 		
 		db = new DatabaseHelper(this);
@@ -62,6 +64,11 @@ public class RegisterPage extends Activity {
 		User user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
 		LoginPage.setCurUser(user);
 		Intent i = new Intent(this, Timeline.class);
+		startActivity(i);
+	}
+	
+	public void goBack(View v) {
+		Intent i = new Intent(this, LoginPage.class);
 		startActivity(i);
 	}
 

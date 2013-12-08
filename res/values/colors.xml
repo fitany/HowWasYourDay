@@ -12,4 +12,5 @@
    	<color name="purple">#d1a5ea</color>
    	<color name="translucent_purple">#bc94d2</color>
    	<color name="black">#000000</color>
+   	<color name="white">#FFFFFF</color>
 </resources>

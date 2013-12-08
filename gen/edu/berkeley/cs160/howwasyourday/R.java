@@ -31,6 +31,7 @@ public final class R {
         public static final int translucent_purple=0x7f05000a;
         public static final int translucent_red=0x7f050001;
         public static final int translucent_yellow=0x7f050004;
+        public static final int white=0x7f05000c;
         public static final int yellow=0x7f050003;
     }
     public static final class dimen {
@@ -104,8 +105,9 @@ public final class R {
         public static final int Eraser=0x7f0b0014;
         public static final int Pencil=0x7f0b0016;
         public static final int Text=0x7f0b0017;
-        public static final int action_settings=0x7f0b0033;
-        public static final int audio=0x7f0b0037;
+        public static final int action_settings=0x7f0b0036;
+        public static final int audio=0x7f0b003a;
+        public static final int back=0x7f0b002c;
         public static final int black_button=0x7f0b0011;
         public static final int blue_button=0x7f0b000f;
         public static final int button1=0x7f0b0007;
@@ -116,12 +118,12 @@ public final class R {
         public static final int dot3=0x7f0b0024;
         public static final int dot4=0x7f0b0025;
         public static final int dot5=0x7f0b0026;
-        public static final int draw=0x7f0b0038;
+        public static final int draw=0x7f0b003b;
         public static final int drawArea=0x7f0b000b;
         public static final int editText=0x7f0b0018;
         public static final int editText1=0x7f0b0003;
         public static final int email=0x7f0b001c;
-        public static final int firstname=0x7f0b002c;
+        public static final int firstname=0x7f0b002f;
         public static final int green_button=0x7f0b000e;
         public static final int imageButton1=0x7f0b0002;
         public static final int imageButton2=0x7f0b0004;
@@ -136,25 +138,27 @@ public final class R {
         public static final int imageViewTutorial2=0x7f0b001f;
         public static final int imageViewTutorial3=0x7f0b0020;
         public static final int imageViewTutorial4=0x7f0b0021;
-        public static final int info=0x7f0b002b;
-        public static final int lastname=0x7f0b002d;
+        public static final int info=0x7f0b002e;
+        public static final int lastname=0x7f0b0030;
         public static final int login=0x7f0b001a;
         public static final int password=0x7f0b0019;
-        public static final int photo=0x7f0b0035;
+        public static final int photo=0x7f0b0038;
         public static final int purple_button=0x7f0b0010;
         public static final int red_button=0x7f0b000c;
         public static final int register=0x7f0b001b;
+        public static final int register_page=0x7f0b002d;
         public static final int submitDoodle=0x7f0b0012;
         public static final int textView1=0x7f0b0001;
         public static final int textView2=0x7f0b0028;
         public static final int textView3=0x7f0b002a;
-        public static final int textView5=0x7f0b002f;
-        public static final int textView6=0x7f0b0030;
-        public static final int textView7=0x7f0b0031;
-        public static final int textView8=0x7f0b0032;
-        public static final int timeline=0x7f0b0034;
-        public static final int userType=0x7f0b002e;
-        public static final int video=0x7f0b0036;
+        public static final int textView5=0x7f0b0032;
+        public static final int textView6=0x7f0b0033;
+        public static final int textView7=0x7f0b0034;
+        public static final int textView8=0x7f0b0035;
+        public static final int timeline=0x7f0b0037;
+        public static final int title=0x7f0b002b;
+        public static final int userType=0x7f0b0031;
+        public static final int video=0x7f0b0039;
         public static final int viewFlipper1=0x7f0b001d;
         public static final int yellow_button=0x7f0b000d;
     }
