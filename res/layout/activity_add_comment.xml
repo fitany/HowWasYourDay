@@ -4,6 +4,53 @@
     android:layout_margin="10dp"
     android:padding="10dp"
     android:background="@drawable/darkblue_bg" >
+    
+   	<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@color/light_blue"
+	        android:orientation="horizontal"
+	        android:weightSum="10" 
+	        android:id="@+id/title">
+	
+	        <Button
+	            android:id="@+id/back"
+	            android:layout_width="40dp"
+	            android:layout_height="40dp"
+	            android:layout_gravity="center"
+	            android:gravity="center"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginRight="5dp"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="5dp"
+	            android:background="@drawable/ic_action_back" 
+	            android:onClick="goBack"/>
+	
+	        <TextView
+	            android:id="@+id/register_page"
+	            android:layout_width="218dp"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:layout_weight="4"
+	            android:gravity="center"
+	            android:textColor="@color/white"
+	            android:textSize="25sp"
+	            android:textStyle="bold"
+	            android:text="Register" />
+	        
+	        <TextView
+	            android:id="@+id/register_page"
+	            android:layout_width="218dp"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:layout_weight="4"
+	            android:gravity="center"
+	            android:textColor="@color/white"
+	            android:textSize="25sp"
+	            android:textStyle="bold"
+	            android:text="Register" />
+	
+	    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView1"

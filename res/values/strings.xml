@@ -21,8 +21,7 @@
     <string name="title_activity_register_page">RegisterPage</string>
     
     <string-array name="User_Type">
-        <item> Select User Type </item>
-        <item>Kid</item>
+        <item>Children</item>
         <item>Parent</item>
     </string-array>
     

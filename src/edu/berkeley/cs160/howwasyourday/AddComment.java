@@ -29,19 +29,17 @@ public class AddComment extends Activity {
 	DatabaseHelper db;
 	SQLiteDatabase database;
 
-	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_comment);
 		Bundle extras = this.getIntent().getExtras();
 		String photoPath = extras.getString("photo");
-		ActionBar actionBar = getActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		//ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-        View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
-                null);
-        actionBar.setCustomView(view);
+        //View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment, null);
+        //actionBar.setCustomView(view);
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
         

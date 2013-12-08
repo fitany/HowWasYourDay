@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -31,16 +32,16 @@ public class Timeline extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timeline);
          
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
 
-        View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
-                null);
-        actionBar.setCustomView (view);
+        //View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline, null);
+        //actionBar.setCustomView (view);
 		
         
 		if(getIntent().getExtras() != null){
