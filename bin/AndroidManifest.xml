@@ -5,9 +5,12 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="10"
         android:targetSdkVersion="18" />
-
+    <uses-feature android:name="android.hardware.camera" />
+    
+    <uses-permission android:name="android.permission.CAMERA" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -15,8 +18,14 @@
         android:theme="@style/AppTheme"
         android:uiOptions="splitActionBarWhenNarrow" >
         <activity
+<<<<<<< HEAD
             android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
             android:label="@string/title_activity_login_page" >
+=======
+            android:name="edu.berkeley.cs160.howwasyourday.Timeline"
+            android:label="@string/app_name" >
+
+>>>>>>> 7f8094c8ddc0c4bcfdcede00aa6e95d9060fa57e
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Post"
@@ -35,8 +44,15 @@
             android:label="@string/title_activity_draw_doodle" >
         </activity>
         <activity
+            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
+            android:label="@string/title_activity_login_page" >
             android:name="edu.berkeley.cs160.howwasyourday.SharePhoto"
             android:label="@string/title_activity_share_photo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.RecordVideo"
@@ -47,6 +63,7 @@
             android:label="@string/title_activity_record_audio" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name="edu.berkeley.cs160.howwasyourday.Timeline"
             android:label="@string/timeline" >
             <intent-filter>
@@ -54,6 +71,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+=======
+            android:name="edu.berkeley.cs160.howwasyourday.SharePhoto"
+            android:label="@string/title_activity_share_photo" >
+>>>>>>> 7f8094c8ddc0c4bcfdcede00aa6e95d9060fa57e
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.RegisterPage"

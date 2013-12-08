@@ -7,10 +7,54 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SharePhoto" >
+    
+ <!--  <ImageView
+     android:id="@+id/image2"
+     android:layout_width="match_parent"
+     android:layout_height="400dp"
+     android:layout_above="@+id/button2"
+     android:layout_alignParentTop="true"
+     android:background="@android:color/black" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button2"
+            android:layout_below="@+id/button1"
+            android:layout_marginTop="36dp"
+            android:text="Existing Photo"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:layout_above="@+id/textView1"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="22dp"
+            android:onClick="toGallery"
+            android:src="@drawable/photo" />
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="124dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:onClick="toCamera"
+            android:src="@drawable/camera" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignLeft="@+id/button1"
+            android:layout_marginLeft="20dp"
+            android:text="Camera"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnTouchListener;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class LoginPage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login_page);
 		
 		db = new DatabaseHelper(this);
@@ -69,7 +71,7 @@ public class LoginPage extends Activity {
 		} else {
 			String pas = curUser.getString(curUser.getColumnIndex("Password"));
 			if (pas.equals(passwordText)) {
-				user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserName")), curUser.getString(curUser.getColumnIndex("UserType")));
+				user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
 				timeLine();
 			} else {
 				popupWindow("Wrong password, please try again!");
