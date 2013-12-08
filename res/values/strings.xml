@@ -25,5 +25,6 @@
         <item>Parent</item>
     </string-array>
     
+    <string name="desc">camera</string>
 
 </resources>
