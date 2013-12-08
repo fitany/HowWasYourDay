@@ -25,7 +25,6 @@ public class SharePhoto extends Activity {
 	private static final int TAKE_PICTURE_ACTION_CODE = 1;
     private static final int SELECT_PICTURE_ACTION_CODE = 2;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

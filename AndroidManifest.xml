@@ -55,6 +55,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
             android:name="edu.berkeley.cs160.howwasyourday.SharePhoto"
             android:label="@string/title_activity_share_photo" >
         </activity>
