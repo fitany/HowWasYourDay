@@ -1,10 +1,10 @@
 package edu.berkeley.cs160.howwasyourday;
 
 public class User {
-	private long id;
-	private String name;
-	private String type;
-	private long familyId = 1;
+	public long id;
+	public String name;
+	public String type;
+	public long familyId = 1;
 	
 	public User(long id, String name, String userType) {
 		this.id = id;

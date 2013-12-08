@@ -17,9 +17,5 @@
           android:icon="@drawable/ic_action_microphone"
           android:title="@string/audio"
           android:showAsAction="ifRoom" />
-    <item android:id="@+id/draw"
-          android:icon="@drawable/ic_action_edit"
-          android:title="@string/draw"
-          android:showAsAction="ifRoom" />
     
 </menu>
