@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,11 +38,12 @@ public class Timeline extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timeline);
          
-        ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //ActionBar actionBar = getActionBar();
+        //actionBar.setHomeButtonEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
         //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
@@ -80,10 +82,10 @@ public class Timeline extends Activity {
 		Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playing);
         
 		ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
-		posts.add(new PostEntry(1, 1, "doodle", bm, null));
-		posts.add(new PostEntry(2, 1, "doodle", bm, null));
-		posts.add(new PostEntry(1, 1, "doodle", bm, null));
-		posts.add(new PostEntry(2, 1, "doodle", bm, null));
+		posts.add(new PostEntry(1, 1, "doodle", bm, null, null));
+		posts.add(new PostEntry(2, 1, "doodle", bm, null, null));
+		posts.add(new PostEntry(1, 1, "doodle", bm, null, null));
+		posts.add(new PostEntry(2, 1, "doodle", bm, null, null));
 		//end get ArrayList of posts from database
 		
 		//Call addNewPost for every post in the ArrayList

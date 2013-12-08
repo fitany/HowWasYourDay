@@ -87,7 +87,7 @@
         android:layout_height="30sp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/drawArea"
-                android:onClick="done"
+        android:onClick="done"
         android:background="@color/light_grey"
         android:scaleType="fitXY"
         android:src="@drawable/submit" />

@@ -168,14 +168,6 @@ public class DrawDoodle extends Activity {
 		return true;
 	}
 	
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.timeline) {
-			Intent i = new Intent(this, Timeline.class);
-			startActivity(i);
-		}
-		return true;
-	}
-	
 	
 
 }

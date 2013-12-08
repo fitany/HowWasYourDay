@@ -12,7 +12,7 @@
 	    <LinearLayout
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:background="@color/translucent_blue"
+	        android:background="@color/light_blue"
 	        android:orientation="horizontal"
 	        android:weightSum="10" 
 	        android:id="@+id/title">
@@ -113,7 +113,6 @@
 	        android:layout_margin="10dp"
 	        android:paddingLeft="10dp"
 	        android:textColor="#238745"
-	        android:entries="@array/User_Type"
 	        android:background="@drawable/round_edittext_bg" /> 
 	     
 	     </LinearLayout>

@@ -83,19 +83,21 @@ public class SharePhoto extends Activity {
 	}
 	
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
+		System.out.println(requestCode);
+		System.out.println(resultCode);
 		if (requestCode == TAKE_PICTURE_ACTION_CODE && resultCode == RESULT_OK) {
+			System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
 			updateImage();
-		}
-		else if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE_ACTION_CODE) {
+		} else if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE_ACTION_CODE) {
+			System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
             Uri selectedImageUri = data.getData();
             currentPhotoPath = getPath(selectedImageUri);
             updateImage();
-        }
-		
-
-		
+        }	
 	}
+	
 	public String getPath(Uri uri) {
         // just some safety built in 
         if( uri == null ) {
