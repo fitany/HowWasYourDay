@@ -14,7 +14,8 @@ public class RegisterPage extends Activity {
 	
 	private EditText email;
 	private EditText password;
-	private EditText username;
+	private EditText lastName;
+	private EditText firstName;
 	private EditText userType;
 	private DatabaseHelper db;
 	private SQLiteDatabase database;
@@ -29,7 +30,8 @@ public class RegisterPage extends Activity {
 		
 		email = (EditText) findViewById(R.id.email);
 		password= (EditText) findViewById(R.id.password);
-		username = (EditText) findViewById(R.id.username);
+		lastName = (EditText) findViewById(R.id.lastname);
+		lastName = (EditText) findViewById(R.id.firstname);
 		userType= (EditText) findViewById(R.id.userType);
 		
 		Bundle b = getIntent().getExtras();
@@ -50,9 +52,10 @@ public class RegisterPage extends Activity {
 	public void done(View v) {
 		String emailText = email.getText().toString();
 		String passwordText = password.getText().toString();
-		String usernameText = username.getText().toString();
+		String lastNameText = lastName.getText().toString();
+		String firstNameText = firstName.getText().toString();
 		String userTypeText = userType.getText().toString();
-		db.createUser(database, emailText, passwordText,usernameText, userTypeText);
+		db.createUser(database, emailText, passwordText,lastNameText, userTypeText);
 		Cursor curUser = db.findUser(database, emailText);
 		curUser.moveToFirst();
 		User user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserName")), curUser.getString(curUser.getColumnIndex("UserType")));
