@@ -35,11 +35,14 @@ public class AddComment extends Activity {
 		setContentView(R.layout.activity_add_comment);
 		Bundle extras = this.getIntent().getExtras();
 		String photoPath = extras.getString("photo");
-		//ActionBar actionBar = getActionBar();
-        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-        //View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment, null);
-        //actionBar.setCustomView(view);
+		ActionBar actionBar = getActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setHomeButtonEnabled(true);
+
+        View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
+                null);
+        actionBar.setCustomView(view);
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
         
@@ -193,7 +196,7 @@ public class AddComment extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		//Inflate the menu; this adds items to the action bar if it is present
 		getMenuInflater().inflate(R.menu.add_comment, menu);
 		return true;
 	}

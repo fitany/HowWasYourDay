@@ -21,9 +21,14 @@
 	<style name="ActionBarStyle" parent="android:style/Widget.Holo.Light.ActionBar">     
 	    <item name="android:colorBackground">#FFFFFF</item>
 	    <item name="android:background">#0099ff</item>
-	    <item name="android:textColor">@android:color/black</item>
+	    <item name="android:backgroundSplit">#0099ff</item>
+	    <item name="android:textColor">@android:color/white</item>
 	    <item name="android:textStyle">bold</item>
 	    <item name="android:textSize">16sp</item>
 	</style>
+	
+	<style name="TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    	<item name="android:textColor">@android:color/white</item>
+  	</style>
 
 </resources>
