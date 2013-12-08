@@ -69,7 +69,7 @@ public class LoginPage extends Activity {
 		} else {
 			String pas = curUser.getString(curUser.getColumnIndex("Password"));
 			if (pas.equals(passwordText)) {
-				user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserName")), curUser.getString(curUser.getColumnIndex("UserType")));
+				user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
 				timeLine();
 			} else {
 				popupWindow("Wrong password, please try again!");

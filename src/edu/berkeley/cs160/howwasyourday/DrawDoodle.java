@@ -2,8 +2,11 @@ package edu.berkeley.cs160.howwasyourday;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -141,8 +144,12 @@ public class DrawDoodle extends Activity {
 	public void done(View v){
 		ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("letters", Context.MODE_PRIVATE);
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/howwasyourday/");
+		storageDir.mkdirs();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mypath=new File(directory,"mypic.bmp");
         FileOutputStream fos = null;
+        
         try {           
             fos = new FileOutputStream(mypath);
             drawArea.saveBitmap(fos);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class RegisterPage extends Activity {
 	
@@ -16,7 +17,7 @@ public class RegisterPage extends Activity {
 	private EditText password;
 	private EditText lastName;
 	private EditText firstName;
-	private EditText userType;
+	private Spinner userType;
 	private DatabaseHelper db;
 	private SQLiteDatabase database;
 
@@ -31,8 +32,8 @@ public class RegisterPage extends Activity {
 		email = (EditText) findViewById(R.id.email);
 		password= (EditText) findViewById(R.id.password);
 		lastName = (EditText) findViewById(R.id.lastname);
-		lastName = (EditText) findViewById(R.id.firstname);
-		userType= (EditText) findViewById(R.id.userType);
+		firstName = (EditText) findViewById(R.id.firstname);
+		userType= (Spinner) findViewById(R.id.userType);
 		
 		Bundle b = getIntent().getExtras();
 		String emailText = b.getString("emailText");
@@ -54,11 +55,11 @@ public class RegisterPage extends Activity {
 		String passwordText = password.getText().toString();
 		String lastNameText = lastName.getText().toString();
 		String firstNameText = firstName.getText().toString();
-		String userTypeText = userType.getText().toString();
-		db.createUser(database, emailText, passwordText,lastNameText, userTypeText);
+		String userTypeText = userType.getSelectedItem().toString();
+		db.createUser(database, emailText, passwordText,firstNameText, lastNameText, userTypeText);
 		Cursor curUser = db.findUser(database, emailText);
 		curUser.moveToFirst();
-		User user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserName")), curUser.getString(curUser.getColumnIndex("UserType")));
+		User user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
 		LoginPage.setCurUser(user);
 		Intent i = new Intent(this, Timeline.class);
 		startActivity(i);

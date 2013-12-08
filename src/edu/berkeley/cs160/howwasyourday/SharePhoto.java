@@ -52,9 +52,7 @@ public class SharePhoto extends Activity {
 		return true;
 	}
 
-	public void toCamera(View view) {
-		
-		
+	public void toCamera(View view) {	
 		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		File f = createImageFile();
 		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));

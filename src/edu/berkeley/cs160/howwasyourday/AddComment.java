@@ -3,10 +3,14 @@ package edu.berkeley.cs160.howwasyourday;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
+
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -22,7 +26,10 @@ import android.widget.ImageView;
 public class AddComment extends Activity {
 	
 	private Bitmap src;
+	DatabaseHelper db;
+	SQLiteDatabase database;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,12 +42,13 @@ public class AddComment extends Activity {
         View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
                 null);
         actionBar.setCustomView(view);
+        db = new DatabaseHelper(this);
+		database = db.getWritableDatabase();
         
         //load image
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         //File directory = cw.getDir("letters", Context.MODE_PRIVATE);
 	    try {
-	        //File f=new File(directory, "mypic.bmp");
 	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(photoPath));
 	        ImageView iv = (ImageView) findViewById(R.id.imageView1);
 	        iv.setImageBitmap(b);
@@ -86,7 +94,7 @@ public class AddComment extends Activity {
         buttonBright.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	ImageView iv = (ImageView) findViewById(R.id.imageView1);
-                Bitmap src = Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);//i is imageview whch u want to convert in bitmap
+                Bitmap src = Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);//i is imageview which u want to convert in bitmap
                 Canvas canvas = new Canvas(src);
 
                 iv.draw(canvas);
@@ -193,6 +201,7 @@ public class AddComment extends Activity {
 	}
 	
 	   public void newTimeline(View v) {
+		   
 		   Intent intent=new Intent(this,Timeline.class);
 		   intent.putExtra("NEWPIC", true);
 		   startActivity(intent);

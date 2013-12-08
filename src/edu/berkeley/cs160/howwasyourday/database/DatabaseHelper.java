@@ -1,6 +1,7 @@
 package edu.berkeley.cs160.howwasyourday.database;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,7 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String userTable="Users";
 	static final String UserId="UserId";
 	static final String UserEmail="UserEmail";
-	static final String UserName="UserName";
+	static final String UserFirstName="UserFirstName";
+	static final String UserLastName="UserLastName";
 	static final String UserPassword="Password";
 	static final String UserType="UserType";
 	static final String UserFamilyId="UserFamilyId";
@@ -42,10 +44,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostFeeling="Feeling";
 	static final String PostTime="PostTime";
 	
-	private Date date = new Date();
-	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 5); 
+		super(context, dbName, null, 6); 
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		  
 		  db.execSQL("CREATE TABLE "+familyTable+" ("+FamilyId+ " INTEGER PRIMARY KEY , "+FamilyName+ " TEXT UNIQUE)");
 		  
-		  db.execSQL("CREATE TABLE "+userTable+" ("+UserId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ UserEmail +" TEXT NOT NULL UNIQUE, "+ UserPassword +" TEXT NOT NULL, " + UserName +" TEXT, " +UserType+ " TEXT, " + UserFamilyId + " INTEGER ,FOREIGN KEY ("+UserFamilyId+") REFERENCES "+familyTable+" ("+FamilyId+"));");
+		  db.execSQL("CREATE TABLE "+userTable+" ("+UserId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ UserEmail +" TEXT NOT NULL UNIQUE, "+ UserPassword +" TEXT NOT NULL, " + UserFirstName +" TEXT, " + UserLastName +" TEXT, " +UserType+ " TEXT, " + UserFamilyId + " INTEGER ,FOREIGN KEY ("+UserFamilyId+") REFERENCES "+familyTable+" ("+FamilyId+"));");
 		  
 		  db.execSQL("CREATE TABLE "+PostTable+" ("+PostId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ PostUserId +" INTEGER NOT NULL, "+PostDiscription+" TEXT, " + PostFeeling +" TEXT, " +PostTime+ " INTEGER NOT NULL, " + PostPic + " BLOB, " + PostAudio + " BLOB, " + PostVideo + " BLOB, " + PostDoodle + " INTEGER ,FOREIGN KEY ("+PostUserId+") REFERENCES "+userTable+" ("+UserId+"));");
 		  
@@ -70,17 +70,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    onCreate(db);
 	}
 	
-	public void createUser(SQLiteDatabase db, String email, String password, String username, String userType) {
+	public void createUser(SQLiteDatabase db, String email, String password, String firstname, String lastname, String userType) {
 		ContentValues cv=new ContentValues();
 	    cv.put(UserEmail, email);
 	    cv.put(UserPassword, password);
-	    cv.put(UserName, username);
+	    cv.put(UserFirstName, firstname);
+	    cv.put(UserLastName, lastname);
 	    cv.put(UserType, userType);
 	    db.insert(userTable, null, cv);
 	}
 	
 	public Cursor findUser(SQLiteDatabase db, String email) {
-		Cursor c = db.query(userTable, new String[] {UserId, UserPassword, UserName, UserType}, UserEmail+"=?", new String[]{email}, null,null, null);
+		Cursor c = db.query(userTable, new String[] {UserId, UserPassword, UserFirstName, UserLastName,UserType}, UserEmail+"=?", new String[]{email}, null,null, null);
 	    return c;
 	}
 	
@@ -101,7 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);
 		cv.put(PostFeeling, feeling);
-		cv.put(PostTime, date.getTime());
+		cv.put(PostTime, new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()));
 		db.insert(PostTable, null, cv);
 	}
 	
@@ -116,13 +117,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, String[] ids) {
 		Cursor c = db.query(userTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle}, PostUserId+"=?", ids, null,null, PostTime);
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
-	    
+	     
 	    while(c.moveToNext()) {
 	    	byte[] pic = c.getBlob(0);
 	    	Bitmap picPic = BitmapFactory.decodeByteArray(pic , 0, pic.length);
 	    	byte[] doodle = c.getBlob(1);
 	    	Bitmap doodlePic = BitmapFactory.decodeByteArray(doodle , 0, doodle.length);
-	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), picPic, doodlePic);
+	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), picPic, doodlePic, c.getString(1));
 	    	posts.add(post);
 	    }
 	    

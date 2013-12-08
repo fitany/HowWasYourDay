@@ -66,22 +66,9 @@
             android:background="@drawable/round_edittext_bg" 
             android:inputType="textCapSentences"
             android:textColorHint="#238745"/>
-        
-     <EditText
-         android:id="@+id/userType"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_margin="10dp"
-         android:paddingLeft="10dp"
-         android:hint="userType" 
-         android:singleLine="true"
-         android:shape="rectangle"
-         android:background="@drawable/round_edittext_bg" 
-         android:inputType="text"
-         android:textColorHint="#238745"/>
-     
+       
      <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/userType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
