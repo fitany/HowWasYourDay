@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/blue_bg"
     tools:context=".Timeline" >
-    
+    <!--
     <TextView
        android:id="@+id/register_page"
        android:layout_width="fill_parent"
@@ -21,7 +21,7 @@
        android:textStyle="bold"
        android:text="TimeLine" 
        android:background="@color/light_blue"/>
-
+	-->
    <ScrollView
        android:layout_width="fill_parent"
        android:layout_height="fill_parent"

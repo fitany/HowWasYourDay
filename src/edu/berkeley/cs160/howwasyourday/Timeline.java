@@ -38,13 +38,13 @@ public class Timeline extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timeline);
          
-        //ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getActionBar();
         //actionBar.setHomeButtonEnabled(true);
         //actionBar.setDisplayHomeAsUpEnabled(true);
-        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
         //userType = currentUser.type; hardcoded for now
@@ -53,9 +53,9 @@ public class Timeline extends Activity {
         //else
         //	isChild = false;
         
-        //View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
-        //         null);
-        //actionBar.setCustomView (view);
+        View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
+                 null);
+        actionBar.setCustomView (view);
 		
         //get rid of this method eventually
 		if(getIntent().getExtras() != null){
