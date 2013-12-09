@@ -89,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		ContentValues cv=new ContentValues();
 		//ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		//bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		System.out.println("hello1");
 		cv.put(PostPic, path);
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);
@@ -102,7 +103,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public String[] findFamily(SQLiteDatabase db,long id) {
+		System.out.println(id);
 		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
+		System.out.println("Test get count in findFamily:"+c.getCount());
 		String[] result = new String[c.getCount()];
 		int index = 0;
 		while(c.moveToNext()) {
@@ -114,15 +117,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, long familyId) {
 		String[] ids = findFamily(db, familyId);
-		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle}, PostUserId+"=?", ids, null,null, PostTime);
+		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, PostUserId+"=?", ids, null,null, PostTime);
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
-	    	byte[] pic = c.getBlob(0);
-	    	Bitmap picPic = BitmapFactory.decodeByteArray(pic , 0, pic.length);
-	    	byte[] doodle = c.getBlob(1);
-	    	Bitmap doodlePic = BitmapFactory.decodeByteArray(doodle , 0, doodle.length);
-	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), picPic, doodlePic, c.getString(1));
+	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5));
 	    	posts.add(post);
 	    }
 	    
