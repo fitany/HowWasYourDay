@@ -3,33 +3,16 @@ package edu.berkeley.cs160.howwasyourday;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.net.ParseException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 public class RecordAudio extends Activity {
@@ -39,23 +22,14 @@ public class RecordAudio extends Activity {
     private File mRecAudioPath; // 录制的音频文件路徑
     private MediaRecorder mMediaRecorder;// MediaRecorder对象
     private String strTempFile = "recaudio_";// 零时文件的前缀
-    private ListView mList;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.activity_record_audio);
             initRecAudioPath();
-            initList();
             initButton();
-    }
-
-    private void initList() {
-            mList = (ListView) findViewById(R.id.simplelist);
-            
-            setListEmptyView();
-            setOnItemClickListener();
-            musicList();
     }
 
     private void initButton() {
@@ -128,14 +102,18 @@ public class RecordAudio extends Activity {
     }
 
     private void stopRecord() {
+    	System.out.println(mRecAudioFile.getAbsolutePath());
+        System.out.println(mRecAudioPath.getAbsolutePath());
             if (mRecAudioFile != null) {
                     /* 按钮状态 */
                     mAudioStartBtn.setEnabled(true);
                     mAudioStopBtn.setEnabled(false);
                     /* ⑤停止录音 */
                     mMediaRecorder.stop();
-                    /* 将录音文件添加到List中 */
-                    addItem(mRecAudioFile);
+//                    /* 将录音文件添加到List中 */
+//                    addItem(mRecAudioFile);
+                    System.out.println(mRecAudioFile.getAbsolutePath());
+                    System.out.println(mRecAudioPath.getAbsolutePath());
                     /* ⑥释放MediaRecorder */
                     mMediaRecorder.release();
                     mMediaRecorder = null;
@@ -159,134 +137,32 @@ public class RecordAudio extends Activity {
             };
     };
 
-    /* 播放录音文件 */
-    private void playMusic(File file) {
-            Intent intent = new Intent();
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setAction(android.content.Intent.ACTION_VIEW);
-            /* 设置文件类型 */
-            intent.setDataAndType(Uri.fromFile(file), "audio");
-            startActivity(intent);
-    }
+//    /* 播放录音文件 */
+//    private void playMusic(File file) {
+//            Intent intent = new Intent();
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setAction(android.content.Intent.ACTION_VIEW);
+//            /* 设置文件类型 */
+//            intent.setDataAndType(Uri.fromFile(file), "audio");
+//            startActivity(intent);
+//    }
 
-    /* 播放列表 */
-    public void musicList() {
-            List<Map<String, Object>> listdata = getData();
-            setListAdapter(listdata);
-            mList.setTag(listdata);
-    }
-
-    private void addItem(File item) {
-            @SuppressWarnings("unchecked")
-            List<Map<String, Object>> tag = (List<Map<String, Object>>) mList
-                            .getTag();
-            List<Map<String, Object>> listdata = tag;
-            listdata.add(getOneItem(item));
-            setListAdapter(listdata);
-    }
-
-    public void deleteItem(int position) {
-            @SuppressWarnings("unchecked")
-            List<Map<String, Object>> listdata = (List<Map<String, Object>>) mList
-                            .getTag();
-            listdata.remove(position);
-            setListAdapter(listdata);
-    }
-
-    private void setListAdapter(List<Map<String, Object>> listdata) {
-            SimpleAdapter adapter = new SimpleAdapter(getBaseContext(), listdata,
-                            R.layout.simple_item, new String[] { "text","text_length","text_time" },
-                            new int[] { R.id.text,R.id.text_length,R.id.text_time });
-            mList.setAdapter(adapter);
-    }
-
-    private MusicFilter mFilter = new MusicFilter();
-
-    private List<Map<String, Object>> getData() {
-            List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-            File home = mRecAudioPath;
-            if (home != null) {
-                    File[] files = home.listFiles(mFilter);
-                    if (files != null && files.length > 0) {
-                            for (File file : files) {
-                                    list.add(getOneItem(file));
-                            }
-                    }
-            }
-            return list;
-    }
-    
-    private String GetFilePlayTime(File file){  
-            java.util.Date date;
-            SimpleDateFormat sy1;
-            String dateFormat = "error";
-            
-            try {
-                    sy1 = new SimpleDateFormat("HH:mm:ss");//设置为时分秒的格式
-                     
-                //使用媒体库获取播放时间
-                    MediaPlayer mediaPlayer;
-                    mediaPlayer = MediaPlayer.create(getBaseContext(), Uri.parse(file.toString()));
-    
-                    //使用Date格式化播放时间mediaPlayer.getDuration()
-                    date = sy1.parse("00:00:00");
-                    date.setTime(mediaPlayer.getDuration() + date.getTime());//用消除date.getTime()时区差
-                    dateFormat = sy1.format(date);
-            
-            mediaPlayer.release();
-            
-            } catch (ParseException e) {
-                    e.printStackTrace();
-            } catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    return dateFormat;
-    }
-    
-    private Map<String, Object> getOneItem(File file) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            DecimalFormat df = new DecimalFormat();
-
-            df.applyPattern("###,###,###,###,###");
-            
-            map.put("text", file.getName());
-            map.put("text_length", df.format(file.length()));
-            map.put("text_time", GetFilePlayTime(file));
-            return map;
-    }
-
-    private void setListEmptyView() {
-            /*
-             * TextView emptyView = new TextView(getBaseContext());
-             * emptyView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-             * LayoutParams.FILL_PARENT));
-             * emptyView.setText("This appears when the list is empty");
-             * emptyView.setVisibility(View.GONE);
-             * ((ViewGroup)mList.getParent()).addView(emptyView);
-             * mList.setEmptyView(emptyView);
-             */
-            View emptyView = findViewById(R.id.empty);
-            mList.setEmptyView(emptyView);
-    }
-
-    private void setOnItemClickListener() {
-            mList.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
-                            List<Map<String, Object>> listdata = (List<Map<String, Object>>) mList
-                                            .getTag();
-                            Map<String, Object> map = listdata.get(position);
-                            String name = (String) map.get("text");
-                            /* 得到被点击的文件 */
-                            File playfile = new File(mRecAudioPath.getAbsolutePath()
-                                            + File.separator + name);
-                            /* 播放 */
-                            playMusic(playfile);
-                    }
-            });
-    }
+//    private void setOnItemClickListener() {
+//            mList.setOnItemClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> l, View v, int position,
+//                                    long id) {
+//                            List<Map<String, Object>> listdata = (List<Map<String, Object>>) mList.getTag();
+//                            Map<String, Object> map = listdata.get(position);
+//                            String name = (String) map.get("text");
+//                            /* 得到被点击的文件 */
+//                            File playfile = new File(mRecAudioPath.getAbsolutePath()
+//                                            + File.separator + name);
+//                            /* 播放 */
+//                            playMusic(playfile);
+//                    }
+//            });
+//    }
 
     private boolean sdcardIsValid() {
             if (Environment.getExternalStorageState().equals(

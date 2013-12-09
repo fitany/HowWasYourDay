@@ -5,11 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,8 +15,6 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
 
 public class SharePhoto extends Activity {
 	
@@ -61,15 +57,27 @@ public class SharePhoto extends Activity {
 	
 	private String currentPhotoPath;
 	private File createImageFile() {
-		File storageDir = new File(Environment.getExternalStorageDirectory() + "/howwasyourday/");
-		storageDir.mkdirs();
-	    String timeStamp = 
-	            new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPG_" + timeStamp;
+		String path = Environment.getExternalStorageDirectory().toString() + File.separator + "Camera";
+		File storageDir = new File(path);
+		if (!storageDir.exists()) {
+			storageDir.mkdirs();
+		}
+	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "HWYD_" + timeStamp + ".JPG";
         File image = new File(storageDir, imageFileName);
         currentPhotoPath = image.getAbsolutePath();
         return image;
 	}
+	
+	private void scanPhoto(String imgFileName) {
+        Intent mediaScanIntent = new Intent(
+        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File file = new File(imgFileName);
+        Uri contentUri = Uri.fromFile(file);
+        mediaScanIntent.setData(contentUri);
+        getApplicationContext().sendBroadcast(mediaScanIntent);
+	}
+
 	
 	private void updateImage() {
 		/*BitmapFactory.Options options = new BitmapFactory.Options();
@@ -78,20 +86,16 @@ public class SharePhoto extends Activity {
 		final ImageView imgView = (ImageView)findViewById(R.id.image2);
 		imgView.setImageDrawable(new BitmapDrawable(image));*/
 		Intent i = new Intent(this, AddComment.class);
+		scanPhoto(currentPhotoPath);
 		i.putExtra("photo", currentPhotoPath);
 		startActivity(i);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
-		System.out.println(requestCode);
-		System.out.println(resultCode);
 		if (requestCode == TAKE_PICTURE_ACTION_CODE && resultCode == RESULT_OK) {
-			System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
 			updateImage();
 		} else if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE_ACTION_CODE) {
-			System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
             Uri selectedImageUri = data.getData();
             currentPhotoPath = getPath(selectedImageUri);
             updateImage();
