@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,12 +17,12 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecordAudio extends Activity {
-	private Button mAudioStartBtn;
-    private Button mAudioStopBtn;
+    private ImageButton mAudioRecordBtn;
     private File mRecAudioFile; // 录制的音频文件
     private File mRecAudioPath; // 录制的音频文件路徑
     private MediaRecorder mMediaRecorder;// MediaRecorder对象
@@ -29,6 +30,7 @@ public class RecordAudio extends Activity {
     public int seconds = 0;
     public int minutes = 0;
     public Timer t;
+    private int count = 0;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,33 +43,27 @@ public class RecordAudio extends Activity {
     }
 
     private void initButton() {
-            mAudioStartBtn = (Button) findViewById(R.id.mediarecorder1_AudioStartBtn);
-            mAudioStopBtn = (Button) findViewById(R.id.mediarecorder1_AudioStopBtn);
-
+            mAudioRecordBtn = (ImageButton) findViewById(R.id.record);
+            
             /* 开始按钮事件监听 */
-            mAudioStartBtn.setOnClickListener(new Button.OnClickListener() {
+            mAudioRecordBtn.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
                             /* 按钮状态 */
-                            mAudioStartBtn.setEnabled(false);
-                            mAudioStopBtn.setEnabled(true);
-                            mHandler.sendEmptyMessage(MSG_RECORD);
+                    		if (count == 0) {
+                    			mAudioRecordBtn.setImageResource(R.drawable.stop_icon);
+                    			mAudioRecordBtn.setBackgroundColor(Color.TRANSPARENT);
+                    			mHandler.sendEmptyMessage(MSG_RECORD);
+                    			count++;
+                    		} else {
+                    			mHandler.sendEmptyMessage(MSG_STOP);
+                    			count = 0;
+                    		}
                     }
             });
-            /* 停止按钮事件监听 */
-            mAudioStopBtn.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                            /* 按钮状态 */
-                            mAudioStartBtn.setEnabled(true);
-                            mAudioStopBtn.setEnabled(false);
-                            mHandler.sendEmptyMessage(MSG_STOP);
-                    }
-            });
-
-            /* 按钮状态 */
-            mAudioStartBtn.setEnabled(true);
-            mAudioStopBtn.setEnabled(false);
+            
+            mAudioRecordBtn.setImageResource(R.drawable.record_icon);
+            mAudioRecordBtn.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private void startRecord() {
@@ -108,8 +104,8 @@ public class RecordAudio extends Activity {
                     
                     
                     /* 按钮状态 */
-                    mAudioStartBtn.setEnabled(false);
-                    mAudioStopBtn.setEnabled(true);
+//                    mAudioStartBtn.setEnabled(false);
+//                    mAudioStopBtn.setEnabled(true);
                     
                     /* ①Initial：实例化MediaRecorder对象 */
                     mMediaRecorder = new MediaRecorder();
@@ -148,8 +144,8 @@ public class RecordAudio extends Activity {
             		seconds = 0;
             		minutes = 0;
                     /* 按钮状态 */
-                    mAudioStartBtn.setEnabled(true);
-                    mAudioStopBtn.setEnabled(false);
+//                    mAudioStartBtn.setEnabled(true);
+//                    mAudioStopBtn.setEnabled(false);
                     /* ⑤停止录音 */
                     mMediaRecorder.stop();
 //                    /* 将录音文件添加到List中 */
