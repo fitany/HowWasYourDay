@@ -122,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public Cursor findKids(SQLiteDatabase db,long id) {
-		Cursor c = db.rawQuery("select UserId, UserFirstName from Users where UserId = ? AND UserType = ?", new String[] { id+"", "Children" });
+		Cursor c = db.rawQuery("select UserId, UserFirstName from Users where UserFamilyId = ? AND UserType = ?", new String[] { id+"", "Children" });
 		return c;
 	}
 	
