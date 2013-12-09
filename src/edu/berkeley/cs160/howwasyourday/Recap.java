@@ -16,7 +16,7 @@ public class Recap extends Activity{
     
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_draw_doodle);
+		setContentView(R.layout.activity_recap);
 		
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		// Create an ArrayAdapter using the string array and a default spinner layout
