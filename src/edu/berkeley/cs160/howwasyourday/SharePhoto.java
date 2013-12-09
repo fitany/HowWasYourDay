@@ -94,11 +94,16 @@ public class SharePhoto extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == TAKE_PICTURE_ACTION_CODE && resultCode == RESULT_OK) {
-			updateImage();
+			Intent i = new Intent(this, AddComment.class);
+			scanPhoto(currentPhotoPath);
+			i.putExtra("photo", currentPhotoPath);
+			startActivity(i);
 		} else if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE_ACTION_CODE) {
             Uri selectedImageUri = data.getData();
             currentPhotoPath = getPath(selectedImageUri);
-            updateImage();
+            Intent i = new Intent(this, AddComment.class);
+    		i.putExtra("photo", currentPhotoPath);
+    		startActivity(i);
         }	
 	}
 	
@@ -121,8 +126,6 @@ public class SharePhoto extends Activity {
         // this is our fallback here
         return uri.getPath();
 	}
-	
-	
 	
 
 }
