@@ -6,7 +6,14 @@
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:entries="@array/kids_array" />
+
+    <Button
+        android:id="@+id/spinner_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spinner_text" />
 
     <LinearLayout
         android:id="@+id/pane"
@@ -15,5 +22,6 @@
         android:layout_weight="0.50"
         android:orientation="vertical" >
     </LinearLayout>
+    
 
 </LinearLayout>
