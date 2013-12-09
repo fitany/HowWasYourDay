@@ -12,7 +12,7 @@
 		android:paddingTop="@dimen/activity_vertical_margin"
 		android:layout_marginBottom="1dp">
 	
-				<ViewFlipper
+		<ViewFlipper
 		    android:id="@+id/viewFlipper1"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"

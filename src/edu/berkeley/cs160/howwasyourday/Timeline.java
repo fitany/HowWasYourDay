@@ -61,7 +61,6 @@ public class Timeline extends Activity {
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
 		ArrayList<PostEntry> posts = db.getAllPost(database,currentUser.familyId);
-		System.out.println(posts.size());
 		/*
 		Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playing);
 		ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
@@ -175,21 +174,9 @@ public class Timeline extends Activity {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         //Lparams.addRule(RelativeLayout.BELOW, R.id.RL_default);
         //Fetch user profile pic and update (hardcoded for now)
-		try {
-			String filename = post.pic;
-	        File f=new File(filename);
-	        Bitmap bm;
-			bm = BitmapFactory.decodeStream(new FileInputStream(f));
-			ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
-	        profile_pic.setImageBitmap(bm);
-	        profile_pic.setBackgroundColor(Color.WHITE);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-        /*
         ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
         profile_pic.setImageResource(R.drawable.tom);
-        */
+        
         //Fetch name from db and update (hardcoded)
         TextView name = (TextView) child1.findViewById(R.id.name);
         name.setText("Tom"+i);
@@ -203,8 +190,25 @@ public class Timeline extends Activity {
         TextView description = (TextView) child1.findViewById(R.id.description);
         description.setText("Look at this awesome photo, Mom!");
         //Fetch content
+        try {
+			String filename = post.pic;
+			System.out.println("filename:"+filename);
+	        File f=new File(filename);
+	        Bitmap bm;
+			bm = BitmapFactory.decodeStream(new FileInputStream(f));
+			ImageView content = (ImageView) child1.findViewById(R.id.content);
+	        content.setImageBitmap(bm);
+	        content.setAdjustViewBounds(true);
+	        //content.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 500));
+	        content.getLayoutParams().height = 500;
+	        content.setBackgroundColor(getResources().getColor(R.color.very_light_blue));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        /*
         ImageView content = (ImageView) child1.findViewById(R.id.content);
         content.setImageResource(R.drawable.playing);
+        */
         //Fetch num_comments
         TextView num_comments = (TextView) child1.findViewById(R.id.num_comments);
         num_comments.setText("3"+" comments");

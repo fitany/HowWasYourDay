@@ -94,8 +94,7 @@ public class AddComment extends Activity implements OnItemClickListener {
 		        iv.getLayoutParams().height = 400;
 		        iv.getLayoutParams().width = 400;
 		        iv.setBackgroundColor(Color.WHITE);
-		        
-		    } 
+		    }
 		    catch (FileNotFoundException e) 
 		    {
 		        e.printStackTrace();

@@ -72,6 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    cv.put(UserFirstName, firstname);
 	    cv.put(UserLastName, lastname);
 	    cv.put(UserType, userType);
+	    cv.put(UserFamilyId, 1);
 	    db.insert(userTable, null, cv);
 	}
 	
@@ -82,6 +83,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public void savePic(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
 		ContentValues cv=new ContentValues();
+		//ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		//bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		cv.put(PostPic, path);
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);

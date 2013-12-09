@@ -26,7 +26,7 @@ public final class R {
         public static final int dark_blue=0x7f05000e;
         public static final int green=0x7f050005;
         public static final int light_blue=0x7f05000d;
-        public static final int light_green_blue=0x7f05000f;
+        public static final int light_green_blue=0x7f050010;
         public static final int light_grey=0x7f050002;
         public static final int opaque_red=0x7f050000;
         public static final int purple=0x7f050009;
@@ -35,6 +35,7 @@ public final class R {
         public static final int translucent_purple=0x7f05000a;
         public static final int translucent_red=0x7f050001;
         public static final int translucent_yellow=0x7f050004;
+        public static final int very_light_blue=0x7f05000f;
         public static final int white=0x7f05000c;
         public static final int yellow=0x7f050003;
     }
@@ -123,8 +124,8 @@ public final class R {
         public static final int button1=0x7f0b000a;
         public static final int button2=0x7f0b000e;
         public static final int clearDoodle=0x7f0b0018;
-        public static final int content=0x7f0b0041;
-        public static final int description=0x7f0b0040;
+        public static final int content=0x7f0b0040;
+        public static final int description=0x7f0b0041;
         public static final int discription=0x7f0b0008;
         public static final int dot1=0x7f0b0023;
         public static final int dot2=0x7f0b0024;
@@ -136,7 +137,7 @@ public final class R {
         public static final int editText=0x7f0b001d;
         public static final int editText1=0x7f0b0030;
         public static final int email=0x7f0b0028;
-        public static final int emotion=0x7f0b0042;
+        public static final int emotion=0x7f0b0043;
         public static final int feeling=0x7f0b000f;
         public static final int feelingsText=0x7f0b0009;
         public static final int firstname=0x7f0b0037;
@@ -159,7 +160,7 @@ public final class R {
         public static final int lastname=0x7f0b0038;
         public static final int login=0x7f0b002b;
         public static final int name=0x7f0b003e;
-        public static final int num_comments=0x7f0b0043;
+        public static final int num_comments=0x7f0b0042;
         public static final int pane=0x7f0b0033;
         public static final int password=0x7f0b0029;
         public static final int photo=0x7f0b0045;
