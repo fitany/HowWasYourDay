@@ -2,7 +2,10 @@ package edu.berkeley.cs160.howwasyourday;
 
 import java.util.ArrayList;
 
+import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
+
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +24,20 @@ public class Recap extends Activity{
     ArrayList<Integer> aLIst = new ArrayList<Integer>();
     private Button button;
     Spinner spinner;
+	DatabaseHelper db;
+	SQLiteDatabase database;
+	
+	int numOfPic = 0;
+	int numOfDoodle = 0;
+	int numOfAudio = 0;
+	int numOfVideo = 0;
     
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recap);
+		
+        db = new DatabaseHelper(this);
+		database = db.getWritableDatabase();
 		
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		// Create an ArrayAdapter using the string array and a default spinner layout
@@ -71,7 +84,7 @@ public class Recap extends Activity{
         // Another interface callback
     }
     
-    public void getKidStats(String kidName){
+    public void getKidStats(long kidId){
     	/** TODO: get the number of emos and types of the posts made by the kid "kidName"
     	int happy = get the number of happy emos;
     	int sad = get the number of happy emos;
@@ -80,8 +93,19 @@ public class Recap extends Activity{
 //    	aLIst.add(happy);
 //	    aLIst.add(sad);
 //	    aLIst.add(angry);
+    	ArrayList<PostEntry> posts = db.getAllPostFromIndividual(database, kidId);
     	
-    			
+    	for (PostEntry post : posts) {
+    		if (!post.pic.equals("")) {
+    			numOfPic++;
+    		} else if (!post.doodle.equals("")) {
+    			numOfDoodle++;
+    		} else if (!post.audio.equals("")) {
+    			numOfAudio++;
+    		} else {
+    			numOfVideo++;
+    		}
+    	}
     }
 	
 		

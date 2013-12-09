@@ -121,9 +121,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return result;
 	}
 	
+	public Cursor findKids(SQLiteDatabase db,long id) {
+		Cursor c = db.rawQuery("select UserId, UserFirstName from Users where UserId = ? AND UserType = ?", new String[] { id+"", "Children" });
+		return c;
+	}
+	
 	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, long familyId) {
 		String[] ids = findFamily(db, familyId);
 		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, PostUserId+"=?", ids, null,null, PostTime);
+	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
+	     
+	    while(c.moveToNext()) {
+	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5));
+	    	posts.add(post);
+	    }
+	    
+	    return posts;
+	}
+	
+	public ArrayList<PostEntry> getAllPostFromIndividual(SQLiteDatabase db, long id) {
+		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, PostUserId+"=?", new String[]{id+""}, null,null,null);
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
