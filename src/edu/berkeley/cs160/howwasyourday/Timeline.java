@@ -1,5 +1,8 @@
 package edu.berkeley.cs160.howwasyourday;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
@@ -8,8 +11,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
 public class Timeline extends Activity {
 	
@@ -29,6 +35,8 @@ public class Timeline extends Activity {
 	MenuItem photo;
 	User currentUser;
 	Boolean isChild=true;
+	DatabaseHelper db;
+	SQLiteDatabase database;
 
     @SuppressLint("NewApi")
 	@Override
@@ -50,14 +58,19 @@ public class Timeline extends Activity {
         actionBar.setCustomView (view);
 		
 		//get ArrayList of posts from database, hardcoded for now
+        db = new DatabaseHelper(this);
+		database = db.getWritableDatabase();
+		ArrayList<PostEntry> posts = db.getAllPost(database,currentUser.familyId);
+		System.out.println(posts.size());
+		/*
 		Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playing);
-        
 		ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 		posts.add(new PostEntry(1, 1, "doodle", bm, null, null));
 		posts.add(new PostEntry(2, 1, "doodle", bm, null, null));
 		posts.add(new PostEntry(1, 1, "doodle", bm, null, null));
 		posts.add(new PostEntry(2, 1, "doodle", bm, null, null));
 		//end get ArrayList of posts from database
+		*/
 		
 		//Call addNewPost for every post in the ArrayList
 		for(int i = 0; i < posts.size(); i++){
@@ -151,16 +164,6 @@ public class Timeline extends Activity {
     }
     
     private void addNewPost(PostEntry post, int i){
-    	/*
-    	RelativeLayout rl = new RelativeLayout(this);
-        rl.setId(i);
-        RelativeLayout.LayoutParams Lparams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //Lparams.addRule(RelativeLayout.BELOW, R.id.RL_default);
-        Lparams.setMargins(3, 5, 3, 0);
-        rl.setLayoutParams(Lparams);
-        */
         //add this post to the scrolling linear layout
         LinearLayout posts = (LinearLayout)findViewById(R.id.posts);
         
@@ -172,8 +175,21 @@ public class Timeline extends Activity {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         //Lparams.addRule(RelativeLayout.BELOW, R.id.RL_default);
         //Fetch user profile pic and update (hardcoded for now)
+		try {
+			String filename = post.pic;
+	        File f=new File(filename);
+	        Bitmap bm;
+			bm = BitmapFactory.decodeStream(new FileInputStream(f));
+			ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
+	        profile_pic.setImageBitmap(bm);
+	        profile_pic.setBackgroundColor(Color.WHITE);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        /*
         ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
         profile_pic.setImageResource(R.drawable.tom);
+        */
         //Fetch name from db and update (hardcoded)
         TextView name = (TextView) child1.findViewById(R.id.name);
         name.setText("Tom"+i);
