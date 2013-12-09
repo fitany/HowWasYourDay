@@ -99,7 +99,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, String path) {
-		savePic(db, userID, discription, feeling, path);
+		ContentValues cv=new ContentValues();
+		cv.put(PostDoodle, path);
+		cv.put(PostUserId, userID);
+		cv.put(PostDiscription, discription);
+		cv.put(PostFeeling, feeling);
+		cv.put(PostTime, new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()));
+		db.insert(PostTable, null, cv);
+	}
+	
+	public void saveAudio(SQLiteDatabase db, int userID, String discription, int feeling, String path) {
+		ContentValues cv=new ContentValues();
+		cv.put(PostAudio, path);
+		cv.put(PostUserId, userID);
+		cv.put(PostDiscription, discription);
+		cv.put(PostFeeling, feeling);
+		cv.put(PostTime, new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()));
+		db.insert(PostTable, null, cv);
 	}
 	
 	public String[] findFamily(SQLiteDatabase db,long id) {

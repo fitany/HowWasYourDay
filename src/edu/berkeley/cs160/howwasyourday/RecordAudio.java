@@ -3,6 +3,8 @@ package edu.berkeley.cs160.howwasyourday;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecordAudio extends Activity {
@@ -23,6 +26,9 @@ public class RecordAudio extends Activity {
     private File mRecAudioPath; // 录制的音频文件路徑
     private MediaRecorder mMediaRecorder;// MediaRecorder对象
     private String strTempFile = "recaudio_";// 零时文件的前缀
+    public int seconds = 0;
+    public int minutes = 0;
+    public Timer t;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,7 @@ public class RecordAudio extends Activity {
             setContentView(R.layout.activity_record_audio);
             initRecAudioPath();
             initButton();
+            
     }
 
     private void initButton() {
@@ -68,6 +75,38 @@ public class RecordAudio extends Activity {
                     if (!initRecAudioPath()) {
                             return;
                     }
+                    
+                    /* Set the timer */
+                    t = new Timer();
+                    //Set the schedule function and rate
+                    t.scheduleAtFixedRate(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    TextView tv = (TextView) findViewById(R.id.timer);
+                                    tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+                                    seconds += 1;
+
+                                    if(seconds == 60)
+                                    {
+                                        tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+
+                                        seconds=0;
+                                        minutes=minutes+1;
+
+                                    }
+                                }
+
+                            });
+                        }
+
+                    }, 0, 1000);
+                    
+                    
                     /* 按钮状态 */
                     mAudioStartBtn.setEnabled(false);
                     mAudioStopBtn.setEnabled(true);
@@ -104,6 +143,10 @@ public class RecordAudio extends Activity {
 
     private void stopRecord() {
             if (mRecAudioFile != null) {
+            		/* Stop Timer */
+            		t.cancel();
+            		seconds = 0;
+            		minutes = 0;
                     /* 按钮状态 */
                     mAudioStartBtn.setEnabled(true);
                     mAudioStopBtn.setEnabled(false);
