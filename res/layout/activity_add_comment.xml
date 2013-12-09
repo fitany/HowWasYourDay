@@ -54,10 +54,7 @@
 	<RelativeLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:layout_margin="10dp"
-	    android:padding="10dp"
-	    android:background="@drawable/light_blue_border" 
-	    android:layout_below="@+id/title">
+	    android:background="@color/light_green_blue" >
 	    
 	    <ImageView
 	        android:id="@+id/imageView1"

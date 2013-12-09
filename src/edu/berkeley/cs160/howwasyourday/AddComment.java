@@ -91,8 +91,8 @@ public class AddComment extends Activity implements OnItemClickListener {
 		    try {
 		        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(currentPath));
 		        iv.setImageBitmap(b);
-		        iv.getLayoutParams().height = 100;
-		        iv.getLayoutParams().width = 100;
+		        iv.getLayoutParams().height = 400;
+		        iv.getLayoutParams().width = 400;
 		        iv.setBackgroundColor(Color.WHITE);
 		        
 		    } 

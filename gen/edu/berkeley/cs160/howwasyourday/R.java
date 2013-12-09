@@ -26,6 +26,7 @@ public final class R {
         public static final int dark_blue=0x7f05000e;
         public static final int green=0x7f050005;
         public static final int light_blue=0x7f05000d;
+        public static final int light_green_blue=0x7f05000f;
         public static final int light_grey=0x7f050002;
         public static final int opaque_red=0x7f050000;
         public static final int purple=0x7f050009;
