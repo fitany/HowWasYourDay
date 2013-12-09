@@ -29,6 +29,7 @@ public class AddComment extends Activity {
 	DatabaseHelper db;
 	SQLiteDatabase database;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,9 +47,6 @@ public class AddComment extends Activity {
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
         
-        //load image
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        //File directory = cw.getDir("letters", Context.MODE_PRIVATE);
 	    try {
 	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(photoPath));
 	        ImageView iv = (ImageView) findViewById(R.id.imageView1);
@@ -201,11 +199,21 @@ public class AddComment extends Activity {
 		return true;
 	}
 	
-	   public void newTimeline(View v) {
-		   
-		   Intent intent=new Intent(this,Timeline.class);
-		   intent.putExtra("NEWPIC", true);
-		   startActivity(intent);
-	   }
+   public void newTimeline(View v) {
+	   
+	   Intent intent=new Intent(this,Timeline.class);
+	   intent.putExtra("NEWPIC", true);
+	   startActivity(intent);
+   }
+   
+	public void home(View v) {   
+	   Intent intent=new Intent(this,Timeline.class);
+	   startActivity(intent);
+	}
+	
+	public void goBack(View v) {   
+		Intent intent=new Intent(this,Timeline.class);
+		startActivity(intent);
+	}
 
 }
