@@ -65,7 +65,7 @@
 	        android:singleLine="true"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:inputType="textEmailAddress"
-	        android:textColorHint="#238745"/>
+	        android:textColorHint="@color/opaque_red"/>
 	    
 	    <EditText
 	        android:id="@+id/password"
@@ -78,7 +78,7 @@
 	        android:shape="rectangle"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:inputType="textPassword"
-	        android:textColorHint="#238745"/>
+	        android:textColorHint="@color/opaque_red"/>
 	    
 	    <EditText
 	        android:id="@+id/firstname"
@@ -91,7 +91,7 @@
 	        android:shape="rectangle"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:inputType="textCapSentences"
-	        android:textColorHint="#238745"/>
+	        android:textColorHint="@color/opaque_red"/>
 	    
 	    <EditText
 	            android:id="@+id/lastname"
@@ -104,7 +104,7 @@
 	            android:shape="rectangle"
 	            android:background="@drawable/round_edittext_bg" 
 	            android:inputType="textCapSentences"
-	            android:textColorHint="#238745"/>
+	            android:textColorHint="@color/opaque_red"/>
 	       
 	     <Spinner
 	        android:id="@+id/userType"
@@ -112,7 +112,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_margin="10dp"
 	        android:paddingLeft="10dp"
-	        android:textColor="#238745"
+	        android:textColor="@color/opaque_red"
 	        android:background="@drawable/round_edittext_bg" /> 
 	     
 	     </LinearLayout>
