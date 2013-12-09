@@ -91,19 +91,6 @@ public class SharePhoto extends Activity {
         mediaScanIntent.setData(contentUri);
         getApplicationContext().sendBroadcast(mediaScanIntent);
 	}
-
-	
-	private void updateImage() {
-		/*BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize = 8;
-		Bitmap image = BitmapFactory.decodeFile(currentPhotoPath, options);
-		final ImageView imgView = (ImageView)findViewById(R.id.image2);
-		imgView.setImageDrawable(new BitmapDrawable(image));*/
-		Intent i = new Intent(this, AddComment.class);
-		scanPhoto(currentPhotoPath);
-		i.putExtra("photo", currentPhotoPath);
-		startActivity(i);
-	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,12 +98,14 @@ public class SharePhoto extends Activity {
 			Intent i = new Intent(this, AddComment.class);
 			scanPhoto(currentPhotoPath);
 			i.putExtra("photo", currentPhotoPath);
+			i.putExtra("type", "photo");
 			startActivity(i);
 		} else if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE_ACTION_CODE) {
             Uri selectedImageUri = data.getData();
             currentPhotoPath = getPath(selectedImageUri);
             Intent i = new Intent(this, AddComment.class);
     		i.putExtra("photo", currentPhotoPath);
+    		i.putExtra("type", "photo");
     		startActivity(i);
         }	
 	}
@@ -130,12 +119,12 @@ public class SharePhoto extends Activity {
         // try to retrieve the image from the media store first
         // this will only work for images selected from gallery
         String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
         if( cursor != null ){
-            int column_index = cursor
-            .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
+        	cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(projection[0]);
+            String filePath = cursor.getString(columnIndex);
+            return filePath;
         }
         // this is our fallback here
         return uri.getPath();

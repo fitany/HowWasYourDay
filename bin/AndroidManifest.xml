@@ -23,8 +23,8 @@
         android:theme="@style/AppTheme"
         android:uiOptions="splitActionBarWhenNarrow" >
         <activity
-            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
-            android:label="@string/title_activity_login_page" >
+            android:name="edu.berkeley.cs160.howwasyourday.Timeline"
+            android:label="@string/timeline" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Post"
@@ -51,8 +51,8 @@
             android:label="@string/title_activity_record_audio" >
         </activity>
         <activity
-            android:name="edu.berkeley.cs160.howwasyourday.Timeline"
-            android:label="@string/timeline" >
+            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
+            android:label="@string/title_activity_login_page" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

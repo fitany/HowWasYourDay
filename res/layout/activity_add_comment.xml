@@ -58,8 +58,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_margin="10dp"
 	    android:padding="10dp"
-	    android:background="@drawable/darkblue_bg" 
-	    android:layout_below="@+id/title">
+	    android:background="@drawable/darkblue_bg" >
 	    
 	    <ImageView
 	        android:id="@+id/imageView1"
@@ -74,8 +73,8 @@
 	        android:id="@+id/imageButton1"
 	        android:layout_width="25dp"
 	        android:layout_height="25dp"
-	        android:layout_alignLeft="@+id/editText1"
-	        android:layout_below="@+id/editText1"
+	        android:layout_alignLeft="@+id/discription"
+	        android:layout_below="@+id/discription"
 	        android:src="@drawable/ic_action_emotion" />
 	
 	    <ImageButton
@@ -98,7 +97,7 @@
 	        android:id="@+id/button2"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignRight="@+id/editText1"
+	        android:layout_alignRight="@+id/discription"
 	        android:layout_below="@+id/imageButton3"
 	        android:background="@drawable/button"
 	        android:layout_marginTop="10dp"
@@ -119,11 +118,11 @@
 	        android:id="@+id/imageButton4"
 	        android:layout_width="25dp"
 	        android:layout_height="25dp"
-	        android:layout_alignLeft="@+id/editText1"
+	        android:layout_alignLeft="@+id/discription"
 	        android:layout_below="@+id/imageView1"
 	        android:src="@drawable/ic_action_rotate_right" />
 	    <EditText
-	        android:id="@+id/editText1"
+	        android:id="@+id/discription"
 	        android:layout_width="wrap_content"
 	        android:layout_height="100dp"
 	        android:layout_below="@+id/imageButton5"
@@ -141,8 +140,8 @@
 	        android:id="@+id/imageButton6"
 	        android:layout_width="25dp"
 	        android:layout_height="25dp"
-	        android:layout_above="@+id/editText1"
-	        android:layout_alignRight="@+id/editText1"
+	        android:layout_above="@+id/discription"
+	        android:layout_alignRight="@+id/discription"
 	        android:src="@drawable/ic_action_brightness_high" />
 	
 	    <ImageButton

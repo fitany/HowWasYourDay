@@ -3,12 +3,9 @@ package edu.berkeley.cs160.howwasyourday;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -20,14 +17,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
 public class AddComment extends Activity {
 	
-	private Bitmap src;
 	DatabaseHelper db;
 	SQLiteDatabase database;
+	String currentPath;
+	String type;
+	EditText discription;
+	User currentUser;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -35,7 +37,9 @@ public class AddComment extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_comment);
 		Bundle extras = this.getIntent().getExtras();
-		String photoPath = extras.getString("photo");
+		currentPath = extras.getString("photo");
+		type = extras.getString("type");
+		
 
 		ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -46,26 +50,32 @@ public class AddComment extends Activity {
         actionBar.setCustomView(view);
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
-        
-	    try {
-	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(photoPath));
-	        ImageView iv = (ImageView) findViewById(R.id.imageView1);
-	        iv.setImageBitmap(b);
-	        iv.getLayoutParams().height = 200;
-	        iv.getLayoutParams().width = 200;
-	        iv.setBackgroundColor(Color.WHITE);
-	        
-	    } 
-	    catch (FileNotFoundException e) 
-	    {
-	        e.printStackTrace();
-	    }
+		discription = (EditText) findViewById(R.id.discription);
+		currentUser = LoginPage.getCurUser();
+		
+        if (type.equals("photo") || type.equals("doodle")) {
+		    try {
+		        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(currentPath));
+		        ImageView iv = (ImageView) findViewById(R.id.imageView1);
+		        iv.setImageBitmap(b);
+		        iv.getLayoutParams().height = 200;
+		        iv.getLayoutParams().width = 200;
+		        iv.setBackgroundColor(Color.WHITE);
+		        
+		    } 
+		    catch (FileNotFoundException e) 
+		    {
+		        e.printStackTrace();
+		    }
+        } else if (type.equals("audio")) {
+        	
+        }
         
         
         final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
         final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
         final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
-        final ImageButton buttonPost = (ImageButton) findViewById (R.id.imageButton4);
+        
         
         buttonRotateClockwise.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -200,9 +210,8 @@ public class AddComment extends Activity {
 	}
 	
    public void newTimeline(View v) {
-	   
+	   db.savePic(database, currentUser.id, discription.getText().toString(), 1, currentPath);
 	   Intent intent=new Intent(this,Timeline.class);
-	   intent.putExtra("NEWPIC", true);
 	   startActivity(intent);
    }
    
