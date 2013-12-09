@@ -1,10 +1,12 @@
 package edu.berkeley.cs160.howwasyourday;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,11 +15,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.View.MeasureSpec;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,6 +36,7 @@ public class AddComment extends Activity {
 	String type;
 	EditText discription;
 	User currentUser;
+	ImageView iv;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -39,7 +45,7 @@ public class AddComment extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_add_comment);
 		Bundle extras = this.getIntent().getExtras();
-		currentPath = extras.getString("photo");
+		currentPath = extras.getString("path");
 		type = extras.getString("type");
 		
 
@@ -54,11 +60,11 @@ public class AddComment extends Activity {
 		database = db.getWritableDatabase();
 		discription = (EditText) findViewById(R.id.discription);
 		currentUser = LoginPage.getCurUser();
+		iv = (ImageView) findViewById(R.id.imageView1);
 		
         if (type.equals("photo") || type.equals("doodle")) {
 		    try {
 		        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(currentPath));
-		        ImageView iv = (ImageView) findViewById(R.id.imageView1);
 		        iv.setImageBitmap(b);
 		        iv.getLayoutParams().height = 400;
 		        iv.getLayoutParams().width = 400;
@@ -70,7 +76,15 @@ public class AddComment extends Activity {
 		        e.printStackTrace();
 		    }
         } else if (type.equals("audio")) {
+        	iv.setImageResource(R.drawable.play_icon);
         	
+        	iv.setOnClickListener(new View.OnClickListener() {
+        	    @Override
+        	    public void onClick(View v) {
+        	    	File playfile = new File(currentPath);
+                	playMusic(playfile);
+        	    }
+        	});
         }
         
         final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
@@ -225,5 +239,15 @@ public class AddComment extends Activity {
 		Intent intent=new Intent(this,Timeline.class);
 		startActivity(intent);
 	}
+	
+  /* 播放录音文件 */
+  private void playMusic(File file) {
+          Intent intent = new Intent();
+          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          intent.setAction(android.content.Intent.ACTION_VIEW);
+          /* 设置文件类型 */
+          intent.setDataAndType(Uri.fromFile(file), "audio");
+          startActivity(intent);
+  }
 
 }

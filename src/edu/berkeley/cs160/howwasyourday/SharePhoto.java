@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,7 +13,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 public class SharePhoto extends Activity {
 	
@@ -98,14 +96,14 @@ public class SharePhoto extends Activity {
 		if (requestCode == TAKE_PICTURE_ACTION_CODE && resultCode == RESULT_OK) {
 			Intent i = new Intent(this, AddComment.class);
 			scanPhoto(currentPhotoPath);
-			i.putExtra("photo", currentPhotoPath);
+			i.putExtra("path", currentPhotoPath);
 			i.putExtra("type", "photo");
 			startActivity(i);
 		} else if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE_ACTION_CODE) {
             Uri selectedImageUri = data.getData();
             currentPhotoPath = getPath(selectedImageUri);
             Intent i = new Intent(this, AddComment.class);
-    		i.putExtra("photo", currentPhotoPath);
+    		i.putExtra("path", currentPhotoPath);
     		i.putExtra("type", "photo");
     		startActivity(i);
         } else{

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -30,6 +31,7 @@ public class DrawDoodle extends Activity {
 	
 	DrawArea drawArea;
 	OnTouchListener touchListener;
+	String currentPath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,22 +144,28 @@ public class DrawDoodle extends Activity {
 	}
 	
 	public void done(View v){
-		ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("letters", Context.MODE_PRIVATE);
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/howwasyourday/");
-		storageDir.mkdirs();
+		String path = Environment.getExternalStorageDirectory().toString() + File.separator + "Doodle";
+		File storageDir = new File(path);
+		if (!storageDir.exists()) {
+			storageDir.mkdirs();
+		}
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mypath=new File(directory,"mypic.bmp");
+        String imageFileName = "HWYD_" + timeStamp + ".PNG";
+        File image = new File(storageDir, imageFileName);
+        currentPath = image.getAbsolutePath();
         FileOutputStream fos = null;
         
         try {           
-            fos = new FileOutputStream(mypath);
+            fos = new FileOutputStream(image);
             drawArea.saveBitmap(fos);
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
 		Intent i = new Intent(this, AddComment.class);
+		i.putExtra("path", currentPath);
+		i.putExtra("type", "doodle");
 		startActivity(i);
 	}
 

@@ -1,6 +1,5 @@
 package edu.berkeley.cs160.howwasyourday.database;
 
-import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,10 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import edu.berkeley.cs160.howwasyourday.PostEntry;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -87,9 +82,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public void savePic(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
 		ContentValues cv=new ContentValues();
-		//ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		//bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		System.out.println("hello1");
 		cv.put(PostPic, path);
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);
@@ -119,9 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public String[] findFamily(SQLiteDatabase db,long id) {
-		System.out.println(id);
 		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
-		System.out.println("Test get count in findFamily:"+c.getCount());
 		String[] result = new String[c.getCount()];
 		int index = 0;
 		while(c.moveToNext()) {

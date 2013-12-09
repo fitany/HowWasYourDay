@@ -159,7 +159,7 @@ public class RecordAudio extends Activity {
     
     private void renderAddComment() {
     	Intent i = new Intent(this, AddComment.class);
-		i.putExtra("photo", mRecAudioFile.getAbsolutePath());
+		i.putExtra("path", mRecAudioFile.getAbsolutePath());
 		i.putExtra("type", "audio");
 		startActivity(i);
     }
@@ -180,33 +180,6 @@ public class RecordAudio extends Activity {
                     }
             };
     };
-
-//    /* 播放录音文件 */
-//    private void playMusic(File file) {
-//            Intent intent = new Intent();
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.setAction(android.content.Intent.ACTION_VIEW);
-//            /* 设置文件类型 */
-//            intent.setDataAndType(Uri.fromFile(file), "audio");
-//            startActivity(intent);
-//    }
-
-//    private void setOnItemClickListener() {
-//            mList.setOnItemClickListener(new OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> l, View v, int position,
-//                                    long id) {
-//                            List<Map<String, Object>> listdata = (List<Map<String, Object>>) mList.getTag();
-//                            Map<String, Object> map = listdata.get(position);
-//                            String name = (String) map.get("text");
-//                            /* 得到被点击的文件 */
-//                            File playfile = new File(mRecAudioPath.getAbsolutePath()
-//                                            + File.separator + name);
-//                            /* 播放 */
-//                            playMusic(playfile);
-//                    }
-//            });
-//    }
 
     private boolean sdcardIsValid() {
             if (Environment.getExternalStorageState().equals(
