@@ -3,7 +3,7 @@
     android:layout_height="fill_parent" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -14,10 +14,11 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_centerInParent="true"
-        android:text="TimeLine"
-        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_centerHorizontal="true"
+        
+        android:text="Timeline"
+        android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

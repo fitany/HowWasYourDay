@@ -8,18 +8,23 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,6 +65,7 @@ public class Timeline extends Activity {
         actionBar.setCustomView (view);
 		
         //get rid of this method eventually
+        /*
 		if(getIntent().getExtras() != null){
 			Bundle b = getIntent().getExtras();
 			Boolean newPic = b.getBoolean("NEWPIC");
@@ -79,6 +85,7 @@ public class Timeline extends Activity {
 			    }
 			}
 		}
+		*/
 		
 		//get ArrayList of posts from database, hardcoded for now
 		Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playing);
@@ -164,8 +171,11 @@ public class Timeline extends Activity {
     }
     
     private void sharePhoto() {
+    	/*
     	Intent i = new Intent(this, SharePhoto.class);
 		startActivity(i);
+		*/
+    	popupWindow();
     }
     
     private void recordAudio() {
@@ -225,4 +235,47 @@ public class Timeline extends Activity {
         //child1.setLayoutParams(Lparams);
         posts.addView(child1);
     }
+    private class CameraOnClickListener implements OnClickListener
+    {
+
+      Context myContext;
+      public CameraOnClickListener(Context context) {
+           this.myContext = context;
+      }
+
+      @Override
+      public void onClick(View v)
+      {		
+    	  Intent i = new Intent();
+    	  i.setClass(myContext, SharePhoto.class);
+    	  i.putExtra("toCamera",true);
+    	  startActivity(i);
+      }
+
+    };
+    private class GalleryOnClickListener implements OnClickListener
+    {
+
+      Context myContext;
+      public GalleryOnClickListener(Context context) {
+           this.myContext = context;
+      }
+
+      @Override
+      public void onClick(View v)
+      {
+    	  Intent i = new Intent(myContext, SharePhoto.class);
+    	  i.putExtra("toCamera",false);
+    	  startActivity(i);
+      }
+
+    };
+    private void popupWindow() {
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    	View view = View.inflate(getApplicationContext(), R.layout.activity_share_photo,null);
+    	(view.findViewById(R.id.button1)).setOnClickListener(new CameraOnClickListener(this));
+    	(view.findViewById(R.id.button2)).setOnClickListener(new GalleryOnClickListener(this));
+    	alert.setView(view);
+    	alert.show();
+	}
 }
