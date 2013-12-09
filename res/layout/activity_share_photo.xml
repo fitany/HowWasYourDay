@@ -16,23 +16,12 @@
      android:layout_alignParentTop="true"
      android:background="@android:color/black" />-->
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_below="@+id/button1"
-            android:layout_marginTop="36dp"
-            android:text="Existing Photo"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
         <ImageButton
             android:id="@+id/button2"
-            android:layout_width="120sp"
-            android:layout_height="120sp"
-            android:layout_above="@+id/textView1"
+            android:layout_width="110sp"
+            android:layout_height="110sp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="22dp"
+            android:layout_alignParentTop="true"
             android:onClick="toGallery"
             android:src="@drawable/photo" />
 
@@ -40,9 +29,8 @@
             android:id="@+id/button1"
             android:layout_width="120sp"
             android:layout_height="120sp"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="124dp"
-            android:layout_toRightOf="@+id/textView1"
             android:onClick="toCamera"
             android:src="@drawable/camera" />
 
@@ -53,8 +41,17 @@
             android:layout_alignBaseline="@+id/textView1"
             android:layout_alignBottom="@+id/textView1"
             android:layout_alignLeft="@+id/button1"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="32dp"
             android:text="Camera"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button2"
+            android:layout_below="@+id/button1"
+            android:text="Existing Photo"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

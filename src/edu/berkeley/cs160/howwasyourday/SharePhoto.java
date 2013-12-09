@@ -28,6 +28,20 @@ public class SharePhoto extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle b = getIntent().getExtras();
+		Boolean toCamera = b.getBoolean("toCamera");
+		View view = View.inflate(getApplicationContext(), R.layout.activity_share_photo,null);
+		if(toCamera){
+			toCamera(view);
+			setContentView(R.layout.activity_share_photo);
+		}else{
+			Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Select Picture"), SELECT_PICTURE_ACTION_CODE);
+		}
+		/*
 		setContentView(R.layout.activity_share_photo);
 		(findViewById(R.id.button2)).setOnClickListener(new OnClickListener() {
 
@@ -42,6 +56,7 @@ public class SharePhoto extends Activity {
                         "Select Picture"), SELECT_PICTURE_ACTION_CODE);
             }
         });
+        */
 	}
 
 	@Override
