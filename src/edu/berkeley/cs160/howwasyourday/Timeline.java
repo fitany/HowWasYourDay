@@ -45,12 +45,9 @@ public class Timeline extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timeline);
          
         ActionBar actionBar = getActionBar();
-        //actionBar.setHomeButtonEnabled(true);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
@@ -60,32 +57,8 @@ public class Timeline extends Activity {
         //else
         //	isChild = false;
         
-        View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline,
-                 null);
+        View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline, null);
         actionBar.setCustomView (view);
-		
-        //get rid of this method eventually
-        /*
-		if(getIntent().getExtras() != null){
-			Bundle b = getIntent().getExtras();
-			Boolean newPic = b.getBoolean("NEWPIC");
-			if(newPic){
-				ContextWrapper cw = new ContextWrapper(getApplicationContext());
-		        File directory = cw.getDir("letters", Context.MODE_PRIVATE);
-			    try {
-			        File f=new File(directory, "mypic.bmp");
-			        Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(f));
-			        ImageButton iv = (ImageButton) findViewById(R.id.imageButton1);
-			        iv.setImageBitmap(bm);
-			        iv.setBackgroundColor(Color.WHITE);
-			    } 
-			    catch (FileNotFoundException e) 
-			    {
-			        e.printStackTrace();
-			    }
-			}
-		}
-		*/
 		
 		//get ArrayList of posts from database, hardcoded for now
 		Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playing);
@@ -237,7 +210,7 @@ public class Timeline extends Activity {
     }
     private class CameraOnClickListener implements OnClickListener
     {
-
+    	
       Context myContext;
       public CameraOnClickListener(Context context) {
            this.myContext = context;

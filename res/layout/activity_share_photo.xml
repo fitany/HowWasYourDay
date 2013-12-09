@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/light_blue_border"
     tools:context=".SharePhoto" >
     
  <!--  <ImageView
@@ -42,6 +43,7 @@
             android:layout_alignBottom="@+id/textView1"
             android:layout_alignLeft="@+id/button1"
             android:layout_marginLeft="32dp"
+            android:textColor="#000000"
             android:text="Camera"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -52,6 +54,7 @@
             android:layout_alignLeft="@+id/button2"
             android:layout_below="@+id/button1"
             android:text="Existing Photo"
+            android:textColor="#000000"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

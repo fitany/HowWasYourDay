@@ -37,6 +37,7 @@ public class SharePhoto extends Activity {
             startActivityForResult(Intent.createChooser(intent,
                     "Select Picture"), SELECT_PICTURE_ACTION_CODE);
 		}
+		//finish();
 		/*
 		setContentView(R.layout.activity_share_photo);
 		(findViewById(R.id.button2)).setOnClickListener(new OnClickListener() {
@@ -107,7 +108,9 @@ public class SharePhoto extends Activity {
     		i.putExtra("photo", currentPhotoPath);
     		i.putExtra("type", "photo");
     		startActivity(i);
-        }	
+        } else{
+        	finish();
+        }
 	}
 	
 	public String getPath(Uri uri) {
