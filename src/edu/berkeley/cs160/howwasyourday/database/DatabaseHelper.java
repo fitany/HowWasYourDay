@@ -132,7 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
-	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5));
+	    	PostEntry post = new PostEntry(c.getInt(c.getColumnIndex("PostUserId")), c.getInt(c.getColumnIndex("Feeling")), c.getString(c.getColumnIndex("PostDiscription")), c.getString(c.getColumnIndex("PostPic")),c.getString(c.getColumnIndex("PostDoodle")),c.getString(c.getColumnIndex("PostTime")),c.getString(c.getColumnIndex("PostAudio")),c.getString(c.getColumnIndex("PostVideo")));
 	    	posts.add(post);
 	    }
 	    
@@ -144,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
-	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5));
+	    	PostEntry post = new PostEntry(c.getInt(c.getColumnIndex("PostUserId")), c.getInt(c.getColumnIndex("Feeling")), c.getString(c.getColumnIndex("PostDiscription")), c.getString(c.getColumnIndex("PostPic")),c.getString(c.getColumnIndex("PostDoodle")),c.getString(c.getColumnIndex("PostTime")),c.getString(c.getColumnIndex("PostAudio")),c.getString(c.getColumnIndex("PostVideo")));
 	    	posts.add(post);
 	    }
 	    
