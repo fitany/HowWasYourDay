@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 6); 
+		super(context, dbName, null, 7); 
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		  
 		  db.execSQL("CREATE TABLE "+userTable+" ("+UserId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ UserEmail +" TEXT NOT NULL UNIQUE, "+ UserPassword +" TEXT NOT NULL, " + UserFirstName +" TEXT, " + UserLastName +" TEXT, " +UserType+ " TEXT, " + UserFamilyId + " INTEGER ,FOREIGN KEY ("+UserFamilyId+") REFERENCES "+familyTable+" ("+FamilyId+"));");
 		  
-		  db.execSQL("CREATE TABLE "+PostTable+" ("+PostId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ PostUserId +" INTEGER NOT NULL, "+PostDiscription+" TEXT, " + PostFeeling +" TEXT, " +PostTime+ " INTEGER NOT NULL, " + PostPic + " BLOB, " + PostAudio + " BLOB, " + PostVideo + " BLOB, " + PostDoodle + " INTEGER ,FOREIGN KEY ("+PostUserId+") REFERENCES "+userTable+" ("+UserId+"));");
+		  db.execSQL("CREATE TABLE "+PostTable+" ("+PostId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ PostUserId +" INTEGER NOT NULL, "+PostDiscription+" TEXT, " + PostFeeling +" TEXT, " +PostTime+ " TEXT NOT NULL, " + PostPic + " TEXT, " + PostAudio + " TEXT, " + PostVideo + " TEXT, " + PostDoodle + " TEXT ,FOREIGN KEY ("+PostUserId+") REFERENCES "+userTable+" ("+UserId+"));");
 		  
 	}
 
@@ -85,20 +85,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    return c;
 	}
 	
-	public void savePic(SQLiteDatabase db, int userID, String discription, int feeling, Drawable pic) {
+	public void savePic(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
 		ContentValues cv=new ContentValues();
-		Bitmap bitmap = ((BitmapDrawable)pic).getBitmap();
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		cv.put(PostPic, stream.toByteArray());
-		db.insert(PostTable, null, cv);
-	}
-	
-	public void savePic(SQLiteDatabase db, int userID, String discription, int feeling, Bitmap bitmap) {
-		ContentValues cv=new ContentValues();
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		cv.put(PostPic, stream.toByteArray());
+		//ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		//bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		cv.put(PostPic, path);
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);
 		cv.put(PostFeeling, feeling);
@@ -106,16 +97,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.insert(PostTable, null, cv);
 	}
 	
-	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, Bitmap bitmap) {
-		savePic(db, userID, discription, feeling, bitmap);
+	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, String path) {
+		savePic(db, userID, discription, feeling, path);
 	}
 	
-	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, Drawable pic) {
-		savePic(db, userID, discription, feeling, pic);
+	public String[] findFamily(SQLiteDatabase db,long id) {
+		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
+		String[] result = new String[c.getCount()];
+		int index = 0;
+		while(c.moveToNext()) {
+			result[index] = c.getInt(0)+"";
+		}
+		
+		return result;
 	}
 	
-	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, String[] ids) {
-		Cursor c = db.query(userTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle}, PostUserId+"=?", ids, null,null, PostTime);
+	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, long familyId) {
+		String[] ids = findFamily(db, familyId);
+		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle}, PostUserId+"=?", ids, null,null, PostTime);
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {

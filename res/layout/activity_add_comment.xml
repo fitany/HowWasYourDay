@@ -72,10 +72,9 @@
 	        android:id="@+id/imageButton1"
 	        android:layout_width="25dp"
 	        android:layout_height="25dp"
-	        android:layout_alignLeft="@+id/editText1"
-	        android:layout_below="@+id/editText1"
+	        android:layout_alignLeft="@+id/discription"
+	        android:layout_below="@+id/discription"
 	        android:src="@drawable/ic_action_emotion" />
-	
 	    <Button
 	        android:id="@+id/button1"
 	        android:layout_width="wrap_content"
@@ -91,12 +90,12 @@
 	        android:id="@+id/imageButton4"
 	        android:layout_width="25dp"
 	        android:layout_height="25dp"
-	        android:layout_alignLeft="@+id/editText1"
+	        android:layout_alignLeft="@+id/discription"
 	        android:layout_below="@+id/imageView1"
 	        android:src="@drawable/ic_action_rotate_right" />
 	    <EditText
-	        android:id="@+id/editText1"
 	        android:layout_width="fill_parent"
+	        android:id="@+id/discription"
 	        android:layout_height="100dp"
 	        android:layout_below="@+id/imageButton5"
 	        android:layout_centerHorizontal="true"
@@ -115,8 +114,8 @@
 	        android:id="@+id/imageButton6"
 	        android:layout_width="25dp"
 	        android:layout_height="25dp"
-	        android:layout_above="@+id/editText1"
-	        android:layout_alignRight="@+id/editText1"
+	        android:layout_above="@+id/discription"
+	        android:layout_alignRight="@+id/discription"
 	        android:src="@drawable/ic_action_brightness_high" />
 	
 	    <ImageButton
@@ -133,7 +132,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBaseline="@+id/button1"
 	        android:layout_alignBottom="@+id/button1"
-	        android:layout_alignRight="@+id/editText1"
+	        android:layout_alignRight="@+id/discription"
 	        android:background="@drawable/button"
 	        android:onClick="newTimeline"
 	        android:text="Post"

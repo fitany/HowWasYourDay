@@ -4,11 +4,11 @@ import android.graphics.Bitmap;
 
 public class PostEntry {
 	
-	private String discription;
-	private int userID;
-	private int feeling;
-	private Bitmap pic;
-	private Bitmap doodle;
+	public String discription;
+	public int userID;
+	public int feeling;
+	public Bitmap pic;
+	public Bitmap doodle;
 	public String time;
 	
 	public PostEntry(int userID, int feeling, String discription, Bitmap pic, Bitmap doodle, String time) {

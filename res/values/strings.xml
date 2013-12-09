@@ -25,6 +25,13 @@
         <item>Parent</item>
     </string-array>
     
+    <string-array name="planets_array">
+        <item>Jane</item>
+        <item>Mark</item>
+        <item>Tiffany</item>
+        <item>Toby</item>
+    </string-array>
+    
     <string name="desc">camera</string>
 
 </resources>

@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -102,8 +103,6 @@ public class RecordAudio extends Activity {
     }
 
     private void stopRecord() {
-    	System.out.println(mRecAudioFile.getAbsolutePath());
-        System.out.println(mRecAudioPath.getAbsolutePath());
             if (mRecAudioFile != null) {
                     /* 按钮状态 */
                     mAudioStartBtn.setEnabled(true);
@@ -112,12 +111,18 @@ public class RecordAudio extends Activity {
                     mMediaRecorder.stop();
 //                    /* 将录音文件添加到List中 */
 //                    addItem(mRecAudioFile);
-                    System.out.println(mRecAudioFile.getAbsolutePath());
-                    System.out.println(mRecAudioPath.getAbsolutePath());
                     /* ⑥释放MediaRecorder */
                     mMediaRecorder.release();
                     mMediaRecorder = null;
+                    renderAddComment();
             }
+    }
+    
+    private void renderAddComment() {
+    	Intent i = new Intent(this, AddComment.class);
+		i.putExtra("photo", mRecAudioFile.getAbsolutePath());
+		i.putExtra("type", "audio");
+		startActivity(i);
     }
 
     private static final int MSG_RECORD = 0;
