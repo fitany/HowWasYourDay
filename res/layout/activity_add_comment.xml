@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
+	    android:background="@drawable/blue_bg"
 	    android:orientation="vertical">
 	    
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_blue"
+        android:background="@color/dark_blue"
         android:orientation="horizontal"
         android:weightSum="10" 
         android:id="@+id/title">
@@ -29,24 +30,21 @@
             android:id="@+id/register_page"
             android:layout_width="218dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_weight="4"
             android:gravity="center"
+            android:layout_gravity="center"
+    		android:layout_marginLeft="40dp"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:text="Add Discription" />
+            android:text="Add Description" />
         
         <Button
-            android:id="@+id/back"
+            android:id="@+id/home"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="40dp"
             android:background="@drawable/home" 
             android:onClick="home"/>
 
@@ -55,19 +53,19 @@
 
 	<RelativeLayout
 	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_height="fill_parent"
 	    android:layout_margin="10dp"
 	    android:padding="10dp"
-	    android:background="@drawable/darkblue_bg" 
+	    android:background="@drawable/light_blue_border" 
 	    android:layout_below="@+id/title">
 	    
 	    <ImageView
 	        android:id="@+id/imageView1"
-	        android:layout_width="200dp"
+	        android:layout_width="100dp"
+	        android:layout_height="100dp"
 	        android:layout_alignParentTop="true"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="10dp"
-	        android:layout_height="150dp"
 	        android:background="@android:color/black"/>
 	
 	    <ImageButton
@@ -78,33 +76,6 @@
 	        android:layout_below="@+id/editText1"
 	        android:src="@drawable/ic_action_emotion" />
 	
-	    <ImageButton
-	        android:id="@+id/imageButton2"
-	        android:layout_width="25dp"
-	        android:layout_height="25dp"
-	        android:layout_alignTop="@+id/imageButton1"
-	        android:layout_toRightOf="@+id/imageButton1"
-	        android:src="@drawable/ic_action_place" />
-	
-	    <ImageButton
-	        android:id="@+id/imageButton3"
-	        android:layout_width="25dp"
-	        android:layout_height="25dp"
-	        android:layout_alignTop="@+id/imageButton2"
-	        android:layout_toRightOf="@+id/imageButton2"
-	        android:src="@drawable/ic_action_microphone2" />
-	
-	    <Button
-	        android:id="@+id/button2"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignRight="@+id/editText1"
-	        android:layout_below="@+id/imageButton3"
-	        android:background="@drawable/button"
-	        android:layout_marginTop="10dp"
-			android:onClick="newTimeline"
-	        android:text="Post" />
-	
 	    <Button
 	        android:id="@+id/button1"
 	        android:layout_width="wrap_content"
@@ -113,6 +84,7 @@
 	        android:layout_below="@+id/imageButton1"
 	        android:background="@drawable/button"
 	        android:layout_marginTop="10dp"
+	        android:textColor="@color/white"
 	        android:text="Cancel" />
 	
 	    <ImageButton
@@ -124,12 +96,14 @@
 	        android:src="@drawable/ic_action_rotate_right" />
 	    <EditText
 	        android:id="@+id/editText1"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="100dp"
 	        android:layout_below="@+id/imageButton5"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="3dp"
 	        android:layout_marginBottom="3dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
 	        android:background="@drawable/border"
 	        android:gravity="top"
 	        android:ems="10"
@@ -152,6 +126,18 @@
 	        android:layout_below="@+id/imageView1"
 	        android:layout_toLeftOf="@+id/imageButton6"
 	        android:src="@drawable/ic_action_brightness_low" />
+
+	    <Button
+	        android:id="@+id/button2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/button1"
+	        android:layout_alignBottom="@+id/button1"
+	        android:layout_alignRight="@+id/editText1"
+	        android:background="@drawable/button"
+	        android:onClick="newTimeline"
+	        android:text="Post"
+	        android:textColor="@color/white" />
 	
 	</RelativeLayout>
 </LinearLayout>

@@ -19,6 +19,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.View.MeasureSpec;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,17 +34,18 @@ public class AddComment extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_add_comment);
 		Bundle extras = this.getIntent().getExtras();
 		String photoPath = extras.getString("photo");
 
-		ActionBar actionBar = getActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setHomeButtonEnabled(true);
-
-        View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
-                null);
-        actionBar.setCustomView(view);
+		//ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //actionBar.setHomeButtonEnabled(true);
+        
+        //View view = View.inflate(getApplicationContext(), R.layout.action_bar_add_comment,
+        //        null);
+        //actionBar.setCustomView(view);
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
         
@@ -51,10 +53,9 @@ public class AddComment extends Activity {
 	        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(photoPath));
 	        ImageView iv = (ImageView) findViewById(R.id.imageView1);
 	        iv.setImageBitmap(b);
-	        iv.getLayoutParams().height = 200;
-	        iv.getLayoutParams().width = 200;
-	        iv.setBackgroundColor(Color.WHITE);
-	        
+	        iv.getLayoutParams().height = 400;
+	        iv.getLayoutParams().width = 400;
+	        iv.setBackgroundColor(Color.WHITE);      
 	    } 
 	    catch (FileNotFoundException e) 
 	    {

@@ -11,7 +11,7 @@
     <string name="title_activity_post">Post</string>
     <string name="hello_world">Hello world!</string>
     <string name="add_comment">Comment</string>
-    <string name="title_activity_add_comment">Add Comment</string>
+    <string name="title_activity_add_comment">Add Description</string>
     <string name="title_activity_doodle">Doodle</string>
     <string name="title_activity_draw_doodle">DrawDoodle</string>
     <string name="title_activity_share_photo">SharePhoto</string>
