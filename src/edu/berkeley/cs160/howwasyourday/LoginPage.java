@@ -7,134 +7,128 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.View.OnTouchListener;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.ViewFlipper;
 import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
 public class LoginPage extends Activity {
-	
-	EditText email;
-	EditText password;
-	DatabaseHelper db;
-	SQLiteDatabase database;
-	private static User user = null;
-	private ViewFlipper viewFlipper;
+        
+        EditText email;
+        EditText password;
+        DatabaseHelper db;
+        SQLiteDatabase database;
+        private static User user = null;
+        private ViewFlipper viewFlipper;
     private float lastX;
     private ImageView[] dots;
     private int currDotIndex;
     private int numDots;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_login_page);
-		
-		db = new DatabaseHelper(this);
-		database = db.getWritableDatabase();
-		
-		email = (EditText) findViewById(R.id.email);
-		password= (EditText) findViewById(R.id.password);
-		
-		viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
-		numDots = 5;
-		dots = new ImageView[5];
-		dots[0]=(ImageView) findViewById(R.id.dot1);
-		dots[1]=(ImageView) findViewById(R.id.dot2);
-		dots[2]=(ImageView) findViewById(R.id.dot3);
-		dots[3]=(ImageView) findViewById(R.id.dot4);
-		dots[4]=(ImageView) findViewById(R.id.dot5);
-		selectDot(dots[0]);
-		currDotIndex = 0;
-	}
-	
-	public void login(View v) {
-		String emailText = email.getText().toString();
-		String passwordText = password.getText().toString();
-		Cursor curUser = db.findUser(database, emailText);
-		
-		
-		if (curUser.moveToFirst() == false) {
-			popupWindow("No Email Found, Please register first!");
-		} else {
-			String pas = curUser.getString(curUser.getColumnIndex("Password"));
-			if (pas.equals(passwordText)) {
-				user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
-				timeLine();
-			} else {
-				popupWindow("Wrong password, please try again!");
-			}
-		}
-	}
-	
-	public void register(View v) {
-		String emailText = email.getText().toString();
-		Cursor curUser = db.findUser(database, emailText);
-		if (curUser.getCount() > 0) {
-			popupWindow("Email already existed!");
-		} else {
-			Intent i = new Intent(this, RegisterPage.class);
-			i.putExtra("emailText", emailText);
-			startActivity(i);
-		}
-	}
-	
-	private void popupWindow(String message) {
-		
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		
-		alertDialogBuilder
-		.setMessage(message)
-		.setCancelable(false)
-		.setNegativeButton("OK",new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog,int id) {
-				// if this button is clicked, just close
-				// the dialog box and do nothing
-				dialog.cancel();
-			}
-		});
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                setContentView(R.layout.activity_login_page);
+                
+                db = new DatabaseHelper(this);
+                database = db.getWritableDatabase();
+                
+                email = (EditText) findViewById(R.id.email);
+                password= (EditText) findViewById(R.id.password);
+                
+                viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
+                numDots = 5;
+                dots = new ImageView[5];
+                dots[0]=(ImageView) findViewById(R.id.dot1);
+                dots[1]=(ImageView) findViewById(R.id.dot2);
+                dots[2]=(ImageView) findViewById(R.id.dot3);
+                dots[3]=(ImageView) findViewById(R.id.dot4);
+                dots[4]=(ImageView) findViewById(R.id.dot5);
+                selectDot(dots[0]);
+                currDotIndex = 0;
+        }
+        
+        public void login(View v) {
+                String emailText = email.getText().toString();
+                String passwordText = password.getText().toString();
+                Cursor curUser = db.findUser(database, emailText);
+                
+                
+                if (curUser.moveToFirst() == false) {
+                        popupWindow("No Email Found, Please register first!");
+                } else {
+                        String pas = curUser.getString(curUser.getColumnIndex("Password"));
+                        if (pas.equals(passwordText)) {
+                                user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
+                                timeLine();
+                        } else {
+                                popupWindow("Wrong password, please try again!");
+                        }
+                }
+        }
+        
+        public void register(View v) {
+                String emailText = email.getText().toString();
+                Cursor curUser = db.findUser(database, emailText);
+                if (curUser.getCount() > 0) {
+                        popupWindow("Email already existed!");
+                } else {
+                        Intent i = new Intent(this, RegisterPage.class);
+                        i.putExtra("emailText", emailText);
+                        startActivity(i);
+                }
+        }
+        
+        private void popupWindow(String message) {
+                
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                
+                alertDialogBuilder
+                .setMessage(message)
+                .setCancelable(false)
+                .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                        }
+                });
 
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
 
-		// show it
-		alertDialog.show();
-		
-	}
-	
-	private void timeLine() {
-		Intent i = new Intent(this, Timeline.class);
-		startActivity(i);
-	}
-	
-	public static User getCurUser() {
-		return user;
-	}
-	
-	public static void setCurUser(User newUser) {
-		user = newUser;
-	}
+                // show it
+                alertDialog.show();
+                
+        }
+        
+        private void timeLine() {
+                Intent i = new Intent(this, Timeline.class);
+                startActivity(i);
+        }
+        
+        public static User getCurUser() {
+                return user;
+        }
+        
+        public static void setCurUser(User newUser) {
+                user = newUser;
+        }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login_page, menu);
-		return true;
-	}
-	
-	 // Method to handle touch event like left to right swap and right to left swap
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+                // Inflate the menu; this adds items to the action bar if it is present.
+                getMenuInflater().inflate(R.menu.login_page, menu);
+                return true;
+        }
+        
+         // Method to handle touch event like left to right swap and right to left swap
     public boolean onTouchEvent(MotionEvent touchevent) 
     {
                  switch (touchevent.getAction())
@@ -164,7 +158,7 @@ public class LoginPage extends Activity {
                                  viewFlipper.showNext();
                                  unselectDot(dots[currDotIndex]);
                                  if(currDotIndex > 0)
-                                	 currDotIndex--;
+                                         currDotIndex--;
                                  selectDot(dots[currDotIndex]);
                              }
                              
@@ -181,7 +175,7 @@ public class LoginPage extends Activity {
                                  viewFlipper.showPrevious();
                                  unselectDot(dots[currDotIndex]);
                                  if(currDotIndex < numDots)
-                                	 currDotIndex++;
+                                         currDotIndex++;
                                  selectDot(dots[currDotIndex]);
                              }
                              break;
@@ -190,10 +184,10 @@ public class LoginPage extends Activity {
                  return false;
     }
     public void selectDot(ImageView dot){
-    	dot.setColorFilter(Color.BLUE);
+            dot.setColorFilter(Color.BLUE);
     }
     public void unselectDot(ImageView dot){
-    	dot.setColorFilter(Color.TRANSPARENT);
+            dot.setColorFilter(Color.TRANSPARENT);
     }
     
 

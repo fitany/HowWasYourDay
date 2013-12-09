@@ -191,7 +191,7 @@ public class Timeline extends Activity {
         description.setText("Look at this awesome photo, Mom!");
         //Fetch content
         try {
-			String filename = post.time;
+			String filename = post.pic;
 			System.out.println("filename:"+filename);
 	        File f=new File(filename);
 	        Bitmap bm;

@@ -1,129 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    tools:context=".LoginPage" >
-	    
-	<RelativeLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:paddingBottom="@dimen/activity_vertical_margin"
-		android:paddingLeft="@dimen/activity_horizontal_margin"
-		android:paddingRight="@dimen/activity_horizontal_margin"
-		android:paddingTop="@dimen/activity_vertical_margin"
-		android:layout_marginBottom="1dp">
-	
-		<ViewFlipper
-		    android:id="@+id/viewFlipper1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerHorizontal="true" >
-	
-			<LinearLayout android:layout_width="match_parent"
-				android:layout_height="match_parent" android:orientation="horizontal">
-				<ImageView
-				    android:id="@+id/imageViewTutorial1"
-				    android:layout_width="wrap_content"
-				    android:layout_height="match_parent"
-				    android:src="@drawable/tutorial1" />
-			</LinearLayout>
-	
-			<LinearLayout android:layout_width="match_parent"
-				android:layout_height="match_parent" android:orientation="horizontal">
-				<ImageView android:id="@+id/imageViewTutorial2"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:src="@drawable/tutorial2" />
-			</LinearLayout>
-	
-			<LinearLayout android:layout_width="match_parent"
-				android:layout_height="match_parent" android:orientation="horizontal">
-				<ImageView android:id="@+id/imageViewTutorial3"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:src="@drawable/tutorial3" />
-			</LinearLayout>
-			
-			<LinearLayout android:layout_width="match_parent"
-				android:layout_height="match_parent" android:orientation="horizontal">
-				<ImageView android:id="@+id/imageViewTutorial4"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:src="@drawable/tutorial2" />
-			</LinearLayout>
-			
-			<LinearLayout android:layout_width="match_parent"
-				android:layout_height="match_parent" android:orientation="horizontal">
-				<ImageView android:id="@+id/imageViewTutorial4"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:src="@drawable/tutorial1" />
-			</LinearLayout>
-		</ViewFlipper>
-		
-		<ImageView
-		    android:id="@+id/dot1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_toLeftOf="@+id/dot2"
-		    android:layout_margin="5dp"
-		    android:layout_below="@+id/viewFlipper1"
-		    android:src="@drawable/dot" />
-	
-		<ImageView
-		    android:id="@+id/dot2"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_toLeftOf="@+id/dot3"
-		    android:layout_margin="5dp"
-		    android:layout_below="@+id/viewFlipper1"
-		    android:src="@drawable/dot" />
-	
-		<ImageView
-		    android:id="@+id/dot3"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerHorizontal="true"
-		    android:layout_below="@+id/viewFlipper1"
-		    android:layout_margin="5dp"
-		    android:src="@drawable/dot" />
-	
-		<ImageView
-		    android:id="@+id/dot4"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@+id/dot3"
-		    android:layout_margin="5dp"
-		    android:layout_below="@+id/viewFlipper1"
-		    android:src="@drawable/dot" />
-	
-		<ImageView
-		    android:id="@+id/dot5"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_margin="5dp"
-		    android:layout_toRightOf="@+id/dot4"
-		    android:layout_below="@+id/viewFlipper1"
-		    android:src="@drawable/dot" />
-		
-		<EditText android:id="@+id/email" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_below="@+id/dot5"
-			android:layout_margin="10dp" android:background="@drawable/round_edittext_bg" 
-			android:ems="10" android:hint="Email" android:inputType="textEmailAddress"
-			android:paddingLeft="10dp" android:shape="rectangle"
-			android:singleLine="true" android:textColorHint="@color/opaque_red"/>
-		
-		<EditText android:id="@+id/password" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_below="@+id/email"
-			android:layout_alignParentLeft="true" android:layout_margin="10dp"
-			android:layout_marginBottom="20dp" android:background="@drawable/round_edittext_bg" 
-			android:ems="10" android:hint="Password" android:inputType="textPassword"
-			android:paddingLeft="10dp" android:shape="rectangle"
-			android:singleLine="true" android:textColorHint="@color/opaque_red"/>
-		
-		<Button android:id="@+id/register" android:layout_width="100dp"
-			android:layout_height="wrap_content" android:onClick="register" android:layout_below="@+id/login"
-			android:text="Register" android:layout_centerHorizontal="true" android:layout_marginTop="10dp" />
-		
-		<Button android:id="@+id/login" android:layout_width="100dp"
-			android:layout_height="wrap_content" android:layout_below="@+id/password" android:layout_centerHorizontal="true" 
-			android:onClick="login" android:text="Login" />
-		
-	
-	</RelativeLayout>
-</ScrollView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" android:paddingBottom="@dimen/activity_vertical_margin"
+	android:paddingLeft="@dimen/activity_horizontal_margin"
+	android:paddingRight="@dimen/activity_horizontal_margin"
+	android:paddingTop="@dimen/activity_vertical_margin"
+	android:layout_marginBottom="1dp" tools:context=".LoginPage">
+
+	<ViewFlipper android:id="@+id/viewFlipper1"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true">
+
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="match_parent" android:orientation="horizontal">
+			<ImageView android:id="@+id/imageViewTutorial1"
+				android:layout_width="wrap_content" android:layout_height="match_parent"
+				android:src="@drawable/tutorial1" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="match_parent" android:orientation="horizontal">
+			<ImageView android:id="@+id/imageViewTutorial2"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:src="@drawable/tutorial2" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="match_parent" android:orientation="horizontal">
+			<ImageView android:id="@+id/imageViewTutorial3"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:src="@drawable/tutorial3" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="match_parent" android:orientation="horizontal">
+			<ImageView android:id="@+id/imageViewTutorial4"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:src="@drawable/tutorial2" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="match_parent" android:orientation="horizontal">
+			<ImageView android:id="@+id/imageViewTutorial5"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:src="@drawable/tutorial1" />
+		</LinearLayout>
+	</ViewFlipper>
+
+	<ImageView android:id="@+id/dot1" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_toLeftOf="@+id/dot2"
+		android:layout_margin="5dp" android:layout_below="@+id/viewFlipper1"
+		android:src="@drawable/dot" />
+
+	<ImageView android:id="@+id/dot2" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_toLeftOf="@+id/dot3"
+		android:layout_margin="5dp" android:layout_below="@+id/viewFlipper1"
+		android:src="@drawable/dot" />
+
+	<ImageView android:id="@+id/dot3" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_centerHorizontal="true"
+		android:layout_below="@+id/viewFlipper1" android:layout_margin="5dp"
+		android:src="@drawable/dot" />
+
+	<ImageView android:id="@+id/dot4" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_toRightOf="@+id/dot3"
+		android:layout_margin="5dp" android:layout_below="@+id/viewFlipper1"
+		android:src="@drawable/dot" />
+
+	<ImageView android:id="@+id/dot5" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_margin="5dp"
+		android:layout_toRightOf="@+id/dot4" android:layout_below="@+id/viewFlipper1"
+		android:src="@drawable/dot" />
+
+	<EditText android:id="@+id/email" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_below="@+id/dot5"
+		android:layout_margin="10dp" android:background="@drawable/round_edittext_bg"
+		android:ems="10" android:hint="Email" android:inputType="textEmailAddress"
+		android:paddingLeft="10dp" android:shape="rectangle"
+		android:singleLine="true" android:textColorHint="@color/opaque_red" />
+
+	<EditText android:id="@+id/password" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_below="@+id/email"
+		android:layout_alignParentLeft="true" android:layout_margin="10dp"
+		android:layout_marginBottom="20dp" android:background="@drawable/round_edittext_bg"
+		android:ems="10" android:hint="Password" android:inputType="textPassword"
+		android:paddingLeft="10dp" android:shape="rectangle"
+		android:singleLine="true" android:textColorHint="@color/opaque_red" />
+
+	<Button android:id="@+id/register" android:layout_width="100dp"
+		android:layout_height="wrap_content" android:onClick="register"
+		android:layout_below="@+id/login" android:text="Register"
+		android:layout_centerHorizontal="true" android:layout_marginTop="10dp" />
+
+	<Button android:id="@+id/login" android:layout_width="100dp"
+		android:layout_height="wrap_content" android:layout_below="@+id/password"
+		android:layout_centerHorizontal="true" android:onClick="login"
+		android:text="Login" />
+
+
+</RelativeLayout>
+
