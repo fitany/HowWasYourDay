@@ -34,6 +34,7 @@ public final class R {
         public static final int translucent_purple=0x7f05000a;
         public static final int translucent_red=0x7f050001;
         public static final int translucent_yellow=0x7f050004;
+        public static final int very_light_blue=0x7f05000f;
         public static final int white=0x7f05000c;
         public static final int yellow=0x7f050003;
     }
@@ -119,8 +120,8 @@ public final class R {
         public static final int button1=0x7f0b0009;
         public static final int button2=0x7f0b000d;
         public static final int clearDoodle=0x7f0b0016;
-        public static final int content=0x7f0b003d;
-        public static final int description=0x7f0b003c;
+        public static final int content=0x7f0b003c;
+        public static final int description=0x7f0b003d;
         public static final int discription=0x7f0b0008;
         public static final int dot1=0x7f0b0021;
         public static final int dot2=0x7f0b0022;
@@ -132,7 +133,7 @@ public final class R {
         public static final int editText=0x7f0b001b;
         public static final int editText1=0x7f0b002e;
         public static final int email=0x7f0b0026;
-        public static final int emotion=0x7f0b003e;
+        public static final int emotion=0x7f0b003f;
         public static final int firstname=0x7f0b0035;
         public static final int green_button=0x7f0b0011;
         public static final int home=0x7f0b0007;
@@ -154,7 +155,7 @@ public final class R {
         public static final int mediarecorder1_AudioStartBtn=0x7f0b0031;
         public static final int mediarecorder1_AudioStopBtn=0x7f0b0032;
         public static final int name=0x7f0b003a;
-        public static final int num_comments=0x7f0b003f;
+        public static final int num_comments=0x7f0b003e;
         public static final int pane=0x7f0b0030;
         public static final int password=0x7f0b0027;
         public static final int photo=0x7f0b0041;

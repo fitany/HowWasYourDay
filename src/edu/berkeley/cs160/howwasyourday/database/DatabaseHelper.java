@@ -77,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    cv.put(UserFirstName, firstname);
 	    cv.put(UserLastName, lastname);
 	    cv.put(UserType, userType);
+	    cv.put(UserFamilyId, 1);
 	    db.insert(userTable, null, cv);
 	}
 	
@@ -89,7 +90,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		ContentValues cv=new ContentValues();
 		//ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		//bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		System.out.println("hello1");
 		cv.put(PostPic, path);
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);
@@ -121,7 +121,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public String[] findFamily(SQLiteDatabase db,long id) {
 		System.out.println(id);
 		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
-		System.out.println("Test get count in findFamily:"+c.getCount());
 		String[] result = new String[c.getCount()];
 		int index = 0;
 		while(c.moveToNext()) {
@@ -137,6 +136,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
+	    	System.out.println("0:"+c.getString(0));
+	    	System.out.println("1:"+c.getString(1));
+	    	System.out.println("2:"+c.getString(2));
+	    	System.out.println("3:"+c.getString(3));
+	    	System.out.println("4:"+c.getString(4));
+	    	System.out.println("5:"+c.getString(5));
 	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5));
 	    	posts.add(post);
 	    }

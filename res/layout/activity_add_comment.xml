@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-	    android:background="@drawable/blue_bg"
+	    android:background="@color/very_light_blue"
 	    android:orientation="vertical">
 	    
     <LinearLayout
@@ -55,8 +55,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_margin="10dp"
-	    android:padding="10dp"
-	    android:background="@drawable/light_blue_border" 
+	    android:padding="10dp" 
 	    android:layout_below="@+id/title">
 	    
 	    <ImageView
@@ -70,8 +69,8 @@
 	
 	    <ImageButton
 	        android:id="@+id/imageButton1"
-	        android:layout_width="25dp"
-	        android:layout_height="25dp"
+	        android:layout_width="35dp"
+	        android:layout_height="35dp"
 	        android:layout_alignLeft="@+id/discription"
 	        android:layout_below="@+id/discription"
 	        android:src="@drawable/ic_action_emotion" />
@@ -88,8 +87,8 @@
 	
 	    <ImageButton
 	        android:id="@+id/imageButton4"
-	        android:layout_width="25dp"
-	        android:layout_height="25dp"
+	        android:layout_width="35dp"
+	        android:layout_height="35dp"
 	        android:layout_alignLeft="@+id/discription"
 	        android:layout_below="@+id/imageView1"
 	        android:src="@drawable/ic_action_rotate_right" />
@@ -112,16 +111,16 @@
 	
 	    <ImageButton
 	        android:id="@+id/imageButton6"
-	        android:layout_width="25dp"
-	        android:layout_height="25dp"
+	        android:layout_width="35dp"
+	        android:layout_height="35dp"
 	        android:layout_above="@+id/discription"
 	        android:layout_alignRight="@+id/discription"
 	        android:src="@drawable/ic_action_brightness_high" />
 	
 	    <ImageButton
 	        android:id="@+id/imageButton5"
-	        android:layout_width="25dp"
-	        android:layout_height="25dp"
+	        android:layout_width="35dp"
+	        android:layout_height="35dp"
 	        android:layout_below="@+id/imageView1"
 	        android:layout_toLeftOf="@+id/imageButton6"
 	        android:src="@drawable/ic_action_brightness_low" />
