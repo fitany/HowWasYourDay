@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="6dp"
-    android:textSize="20sp"
-    android:textStyle="bold" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:orientation="vertical"
+ android:padding="3dip"
+>
+    <ImageView
+         android:id="@+id/image"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"/>
+     <TextView
+         android:layout_toRightOf="@+id/image"
+         android:padding="2dip"
+         android:layout_marginLeft="5dip"
+         android:id="@+id/sub"
+         android:text="Happy"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"/>
+</RelativeLayout>

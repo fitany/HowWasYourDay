@@ -14,4 +14,5 @@ public class User {
 		this.type = userType;
 		this.familyId = 1;
 	}
+	
 }

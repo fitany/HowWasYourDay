@@ -34,5 +34,6 @@
     </string-array>
     
     <string name="desc">camera</string>
+    <string name="prompt">  Select your Feelings  </string>
 
 </resources>
