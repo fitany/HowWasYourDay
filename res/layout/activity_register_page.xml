@@ -111,9 +111,9 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="10dp"
-	        android:paddingLeft="10dp"
 	        android:textColor="@color/opaque_red"
-	        android:background="@drawable/round_edittext_bg" /> 
+	        android:background="@drawable/round_edittext_bg" 
+	        android:spinnerMode="dialog"/> 
 	     
 	     </LinearLayout>
 	
