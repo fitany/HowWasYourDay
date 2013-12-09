@@ -56,7 +56,8 @@
 	    android:layout_height="fill_parent"
 	    android:layout_margin="10dp"
 	    android:padding="10dp" 
-	    android:layout_below="@+id/title">
+	    android:layout_below="@+id/title"
+	    android:background="@color/light_green_blue" >
 	    
 	    <ImageView
 	        android:id="@+id/imageView1"
@@ -74,6 +75,19 @@
 	        android:layout_alignLeft="@+id/discription"
 	        android:layout_below="@+id/discription"
 	        android:src="@drawable/ic_action_emotion" />
+	    
+	    
+	    <TextView
+	        android:id="@+id/feelingsText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignTop="@+id/imageButton1"
+	        android:layout_alignBottom="@+id/imageButton1"
+	        android:layout_marginLeft="18dp"
+	        android:layout_toRightOf="@+id/imageButton1"
+	        android:textSize="18dp" />
+	    
+	    
 	    <Button
 	        android:id="@+id/button1"
 	        android:layout_width="wrap_content"

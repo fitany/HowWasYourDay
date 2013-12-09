@@ -1,6 +1,5 @@
 package edu.berkeley.cs160.howwasyourday.database;
 
-import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,10 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import edu.berkeley.cs160.howwasyourday.PostEntry;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -119,7 +114,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public String[] findFamily(SQLiteDatabase db,long id) {
-		System.out.println(id);
 		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
 		String[] result = new String[c.getCount()];
 		int index = 0;
@@ -130,19 +124,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return result;
 	}
 	
+	public Cursor findKids(SQLiteDatabase db,long id) {
+		Cursor c = db.rawQuery("select UserId, UserFirstName from Users where UserId = ? AND UserType = ?", new String[] { id+"", "Children" });
+		return c;
+	}
+	
 	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, long familyId) {
 		String[] ids = findFamily(db, familyId);
 		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, PostUserId+"=?", ids, null,null, PostTime);
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
-	    	System.out.println("0:"+c.getString(0));
-	    	System.out.println("1:"+c.getString(1));
-	    	System.out.println("2:"+c.getString(2));
-	    	System.out.println("3:"+c.getString(3));
-	    	System.out.println("4:"+c.getString(4));
-	    	System.out.println("5:"+c.getString(5));
-	    	PostEntry post = new PostEntry(c.getInt(0), c.getInt(1), c.getString(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5));
+	    	PostEntry post = new PostEntry(c.getInt(c.getColumnIndex("PostUserId")), c.getInt(c.getColumnIndex("Feeling")), c.getString(c.getColumnIndex("PostDiscription")), c.getString(c.getColumnIndex("PostPic")),c.getString(c.getColumnIndex("PostDoodle")),c.getString(c.getColumnIndex("PostTime")),c.getString(c.getColumnIndex("PostAudio")),c.getString(c.getColumnIndex("PostVideo")));
+	    	posts.add(post);
+	    }
+	    
+	    return posts;
+	}
+	
+	public ArrayList<PostEntry> getAllPostFromIndividual(SQLiteDatabase db, long id) {
+		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, PostUserId+"=?", new String[]{id+""}, null,null,null);
+	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
+	     
+	    while(c.moveToNext()) {
+	    	PostEntry post = new PostEntry(c.getInt(c.getColumnIndex("PostUserId")), c.getInt(c.getColumnIndex("Feeling")), c.getString(c.getColumnIndex("PostDiscription")), c.getString(c.getColumnIndex("PostPic")),c.getString(c.getColumnIndex("PostDoodle")),c.getString(c.getColumnIndex("PostTime")),c.getString(c.getColumnIndex("PostAudio")),c.getString(c.getColumnIndex("PostVideo")));
 	    	posts.add(post);
 	    }
 	    

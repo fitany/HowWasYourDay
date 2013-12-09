@@ -1,6 +1,5 @@
 package edu.berkeley.cs160.howwasyourday;
 
-import android.graphics.Bitmap;
 
 public class PostEntry {
 	
