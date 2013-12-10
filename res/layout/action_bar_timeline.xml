@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/icon"
         android:layout_toRightOf="@+id/icon"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginBottom="3dp"
         android:text="Timeline"
         android:textColor="@color/white"

@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import edu.berkeley.cs160.howwasyourday.PostEntry;
+import edu.berkeley.cs160.howwasyourday.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -40,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 8); 
+		super(context, dbName, null, 9); 
 	}
 
 	@Override
@@ -163,6 +164,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    return posts;
 	}
 	
+	public User findUser(SQLiteDatabase db, long id) {
+		Cursor curUser = db.query(userTable, new String[] {UserId, UserPassword, UserFirstName, UserLastName,UserType}, UserId+"=?", new String[]{id+""}, null,null, null);
+		if (curUser.moveToFirst()) {
+			User user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
+			return user;
+		} else {
+			return null;
+		}
+	}
 }
 	
 	

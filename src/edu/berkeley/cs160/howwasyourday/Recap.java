@@ -71,11 +71,11 @@ public class Recap extends Activity{
 		
 		
 		final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		spinner.setAdapter(new MyAdapter(this, R.layout.recap, username));
+		//spinner.setAdapter(new MyAdapter(this, R.layout.recap, username));
 		// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
-		spinner.setAdapter(adapter);
+		//spinner.setAdapter(adapter);
 		/**
 		final Spinner mySpinner = (Spinner)findViewById(R.id.feeling);
         mySpinner.setAdapter(new MyAdapter(this, R.layout.feeling_list, feelings));
@@ -115,7 +115,7 @@ public class Recap extends Activity{
 		getKidStats(kidId);
 		
 		pane = (LinearLayout) findViewById(R.id.pane);
-		pane2 = (LinearLayout) findViewById(R.id.pane2);
+		//pane2 = (LinearLayout) findViewById(R.id.pane2);
 
 	    pvemo = new PieView(this, aLIst);
 	    pvtype = new PieView(this, type);
@@ -167,7 +167,7 @@ public class Recap extends Activity{
     	
     	for (PostEntry post : posts) {
     		if (post.feeling == 0) {
-				numOfNone++;
+				//numOfNone++;
     		} else if (post.feeling == 1) {
     			numOfHappy++;
     		} else if (post.feeling == 2) {

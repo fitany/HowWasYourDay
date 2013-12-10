@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -41,6 +43,7 @@ public class Timeline extends Activity {
 	Boolean isChild=true;
 	DatabaseHelper db;
 	SQLiteDatabase database;
+	String[] feelings={"Normal", "Happy", "Sad", "Shocked","Tears","Blush", "Delighted", "Meep", "Smart", "Cool", "Mad"};
 
     @SuppressLint("NewApi")
 	@Override
@@ -52,13 +55,14 @@ public class Timeline extends Activity {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
-        String userType = currentUser.type;
-        if(currentUser.type.equals("Children"))
+        if(currentUser.type != null && currentUser.type.equals("Children"))
         	isChild = true;
         else
         	isChild = false;
         
         View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline, null);
+        TextView family = (TextView) view.findViewById(R.id.textView1);
+        family.setText("The "+currentUser.lastname+" Family");
         actionBar.setCustomView (view);
 		
 		//get ArrayList of posts from database, hardcoded for now
@@ -76,7 +80,7 @@ public class Timeline extends Activity {
 		*/
 		
 		//Call addNewPost for every post in the ArrayList
-		for(int i = 0; i < posts.size(); i++){
+		for(int i = posts.size()-1; i > -1; i--){
 			PostEntry p = posts.get(i);
 			addNewPost(p,i);
 		}
@@ -114,8 +118,13 @@ public class Timeline extends Activity {
 		    	  recordAudio();
 		    	  return true;
 		      case R.id.video:
-		    	  recordVideo();
+		    	  CharSequence text = "Buy the full app for this feature!";
+		    	  int duration = Toast.LENGTH_SHORT;
+		    	  Toast toast = Toast.makeText(this, text, duration);
+		    	  toast.show();
 		    	  return true;
+		    	  //recordVideo();
+		    	  //return true;
 		      case R.id.photo:
 		    	  sharePhoto();
 		    	  return true;
@@ -128,10 +137,9 @@ public class Timeline extends Activity {
 		    	  //do nothing, because we are already in timeline
 		    	  return true;
 		      case R.id.new_event:
-		    	  Context context = getApplicationContext();
 		    	  CharSequence text = "Buy the full app for this feature!";
 		    	  int duration = Toast.LENGTH_SHORT;
-		    	  Toast toast = Toast.makeText(context, text, duration);
+		    	  Toast toast = Toast.makeText(this, text, duration);
 		    	  toast.show();
 		    	  return true;
 		      case R.id.stats:
@@ -182,22 +190,28 @@ public class Timeline extends Activity {
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         //Lparams.addRule(RelativeLayout.BELOW, R.id.RL_default);
-        //Fetch user profile pic and update (hardcoded for now)
+        //Fetch user profile pic and update, hardcoded to switch off between tom and ana
         ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
-        profile_pic.setImageResource(R.drawable.tom);
-        
-        //Fetch name from db and update (hardcoded)
+        if(post.userID%2==0)
+        	profile_pic.setImageResource(R.drawable.ana);
+        else
+        	profile_pic.setImageResource(R.drawable.tom);
+        //Fetch name from db and update
         TextView name = (TextView) child1.findViewById(R.id.name);
-        name.setText("Tom"+i);
-        //Fetch time from db and update (hardcoded)
+        User post_user = db.findUser(database, (long)post.userID);
+        name.setText(post_user.firstname);
+        //name.setText("Tom"+i);
+        //Fetch time from db and update
         TextView time = (TextView) child1.findViewById(R.id.time);
-        time.setText("2 Hours Ago");
+        time.setText(getTimeAgo(post.time));
         //Fetch emotion
         TextView emotion = (TextView) child1.findViewById(R.id.emotion);
-        emotion.setText("is feeling "+"sad");
+        int feeling = post.feeling;
+        emotion.setText("is feeling "+feelings[feeling]);
         //Fetch description
         TextView description = (TextView) child1.findViewById(R.id.description);
-        description.setText("Look at this awesome photo, Mom!");
+        description.setText(post.discription);
+        //description.setText("Look at this awesome photo, Mom!");
         //Fetch content
         try {
 			String filename = post.pic;
@@ -218,9 +232,9 @@ public class Timeline extends Activity {
         ImageView content = (ImageView) child1.findViewById(R.id.content);
         content.setImageResource(R.drawable.playing);
         */
-        //Fetch num_comments
-        TextView num_comments = (TextView) child1.findViewById(R.id.num_comments);
-        num_comments.setText("3"+" comments");
+        //Fetch num_comments, 0 for now
+        //TextView num_comments = (TextView) child1.findViewById(R.id.num_comments);
+        //num_comments.setText(0+" comments");
         
         //Lparams.setMargins(0, 0, 0, 10);
         //child1.setLayoutParams(Lparams);
@@ -269,4 +283,33 @@ public class Timeline extends Activity {
     	alert.setView(view);
     	alert.show();
 	}
+    private String getTimeAgo(String time){
+    	int post_day = Integer.parseInt(time.substring(time.indexOf('_')-2,time.indexOf('_')));
+        int post_hours = Integer.parseInt(time.substring(time.indexOf('_')+1,time.indexOf('_')+3));
+        int post_minutes = Integer.parseInt(time.substring(time.indexOf('_')+3,time.indexOf('_')+5));
+        Calendar c = Calendar.getInstance(); 
+        int minutes = c.get(Calendar.MINUTE);
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+        int days = c.get(Calendar.DAY_OF_MONTH);
+        
+        if(days-post_day==0){
+        	if(hours-post_hours==0){
+        		if(minutes-post_minutes==0){
+        			return "Just Now";
+        		}
+        		if(minutes-post_minutes==1)
+        			return minutes-post_minutes + " minute ago";
+        		else
+        			return minutes-post_minutes + " minutes ago";
+        	}
+        	if(hours-post_hours==1)
+        		return hours-post_hours + " hour ago";
+        	else
+        		return hours-post_hours + " hours ago";
+        }
+        if(days-post_day==1)
+        	return days-post_day + " day ago";
+        else
+        	return days-post_day + " days ago";
+    }
 }
