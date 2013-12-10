@@ -7,14 +7,16 @@
 >
     <ImageView
          android:id="@+id/image"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"/>
+         android:layout_width="45dp"
+         android:layout_height="45dp"
+         android:src = "@drawable/happy"/>
      <TextView
          android:layout_toRightOf="@+id/image"
          android:padding="2dip"
-         android:layout_marginLeft="5dip"
-         android:id="@+id/sub"
+         android:layout_marginLeft="20dp"
+         android:id="@+id/feelingItem"
          android:text="Happy"
+         android:textSize="30sp"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"/>
 </RelativeLayout>

@@ -159,5 +159,5 @@
 		    android:layout_height="wrap_content"
 		    android:drawSelectorOnTop="true"
 		    android:prompt="@string/prompt"
-	     />
+		    android:spinnerMode="dialog"/>
 </LinearLayout>

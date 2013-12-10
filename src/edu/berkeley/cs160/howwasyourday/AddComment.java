@@ -5,8 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -16,10 +16,12 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,10 +30,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListPopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
-public class AddComment extends Activity implements OnItemClickListener {
+public class AddComment extends Activity {
 	
 	DatabaseHelper db;
 	SQLiteDatabase database;
@@ -41,8 +44,9 @@ public class AddComment extends Activity implements OnItemClickListener {
 	User currentUser;
 	ImageView iv;
 	ListPopupWindow mListPopupWindow;
-	String[] feelings={"Feelings Good", "Feelings Sad", "Feelings Excited","Feelings Nervous","Feelings Sick"};
-	int feeling;
+	String[] feelings={"Normal", "Happy", "Sad", "Shocked","Tears","Blush", "Delighted", "Meep", "Smart", "Cool", "Mad"};
+	int[] images={R.drawable.ic_action_emotion, R.drawable.happy, R.drawable.sad, R.drawable.shocked, R.drawable.tears, R.drawable.blush, R.drawable.delighted,R.drawable.meep,R.drawable.smart,R.drawable.cool,R.drawable.mad};
+	int feeling = 0;
 	ImageButton feelingBtn;
 	TextView feelingsText;
 
@@ -73,49 +77,36 @@ public class AddComment extends Activity implements OnItemClickListener {
 		feelingsText = (TextView) findViewById(R.id.feelingsText);
 		
 		
-		mListPopupWindow = new ListPopupWindow(AddComment.this);
-        mListPopupWindow.setAdapter(new ArrayAdapter<String>(AddComment.this, android.R.layout.simple_spinner_dropdown_item, feelings));
-        mListPopupWindow.setAnchorView(feelingBtn);
-        mListPopupWindow.setWidth(500);
-        mListPopupWindow.setHeight(400);
-        mListPopupWindow.setModal(true);
-        mListPopupWindow.setOnItemClickListener(this);
-        feelingBtn.setOnClickListener(new OnClickListener() {
-                public void onClick(View v) {
-                	System.out.println("hello");
-                    mListPopupWindow.show();
-                }
-            });
-		
-        if (type.equals("photo") || type.equals("doodle")) {
-		    try {
-		        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(currentPath));
-		        iv.setImageBitmap(b);
-		        iv.getLayoutParams().height = 400;
-		        iv.getLayoutParams().width = 400;
-		        iv.setBackgroundColor(Color.WHITE);
-		    }
-		    catch (FileNotFoundException e) 
-		    {
-		        e.printStackTrace();
-		    }
-        } else if (type.equals("audio")) {
-        	iv.setImageResource(R.drawable.play_icon);
-        	
-        	iv.setOnClickListener(new View.OnClickListener() {
-        	    @Override
-        	    public void onClick(View v) {
-        	    	File playfile = new File(currentPath);
-                	playMusic(playfile);
-        	    }
-        	});
-        }
+		final Spinner mySpinner = (Spinner)findViewById(R.id.feeling);
+        mySpinner.setAdapter(new MyAdapter(this, R.layout.feeling_list, feelings));
         
         final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
         final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
         final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
         
+        feelingBtn.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+           	 	mySpinner.performClick();
+           }
+        });
         
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View v, int position, long id) {
+				// TODO Auto-generated method stub
+				feeling = position;
+				feelingBtn.setImageResource(images[position]);
+				feelingsText.setText("Feeling " + feelings[position]);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });
+
         buttonRotateClockwise.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	 ImageView image;
@@ -190,56 +181,78 @@ public class AddComment extends Activity implements OnItemClickListener {
         });
 
 	
-	buttonDark.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            	ImageView iv = (ImageView) findViewById(R.id.imageView1);
-                Bitmap src = Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);//i is imageview whch u want to convert in bitmap
-                Canvas canvas = new Canvas(src);
-                iv.draw(canvas);
-        	    // image size
-        	    int width = src.getWidth();
-        	    int height = src.getHeight();
-        	    // create output bitmap
-        	    Bitmap bmOut = Bitmap.createBitmap(width, height, src.getConfig());
-        	    // color information
-        	    int A, R, G, B;
-        	    int pixel;
-        	 
-        	    // scan through all pixels
-        	    for(int x = 0; x < width; ++x) {
-        	        for(int y = 0; y < height; ++y) {
-        	            // get pixel color
-        	            pixel = src.getPixel(x, y);
-        	            A = Color.alpha(pixel);
-        	            R = Color.red(pixel);
-        	            G = Color.green(pixel);
-        	            B = Color.blue(pixel);
-        	 
-        	            // increase/decrease each channel
-        	            R -= 5;
-        	            if(R > 255) { R = 255; }
-        	            else if(R < 0) { R = 0; }
-        	 
-        	            G -= 5;
-        	            if(G > 255) { G = 255; }
-        	            else if(G < 0) { G = 0; }
-        	 
-        	            B -= 5;
-        	            if(B > 255) { B = 255; }
-        	            else if(B < 0) { B = 0; }
-        	 
-        	            // apply new pixel color to output bitmap
-        	            bmOut.setPixel(x, y, Color.argb(A, R, G, B));
-        	        }
+		buttonDark.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	            	ImageView iv = (ImageView) findViewById(R.id.imageView1);
+	                Bitmap src = Bitmap.createBitmap(iv.getWidth(),iv.getHeight(),Bitmap.Config.ARGB_8888);//i is imageview whch u want to convert in bitmap
+	                Canvas canvas = new Canvas(src);
+	                iv.draw(canvas);
+	        	    // image size
+	        	    int width = src.getWidth();
+	        	    int height = src.getHeight();
+	        	    // create output bitmap
+	        	    Bitmap bmOut = Bitmap.createBitmap(width, height, src.getConfig());
+	        	    // color information
+	        	    int A, R, G, B;
+	        	    int pixel;
+	        	 
+	        	    // scan through all pixels
+	        	    for(int x = 0; x < width; ++x) {
+	        	        for(int y = 0; y < height; ++y) {
+	        	            // get pixel color
+	        	            pixel = src.getPixel(x, y);
+	        	            A = Color.alpha(pixel);
+	        	            R = Color.red(pixel);
+	        	            G = Color.green(pixel);
+	        	            B = Color.blue(pixel);
+	        	 
+	        	            // increase/decrease each channel
+	        	            R -= 5;
+	        	            if(R > 255) { R = 255; }
+	        	            else if(R < 0) { R = 0; }
+	        	 
+	        	            G -= 5;
+	        	            if(G > 255) { G = 255; }
+	        	            else if(G < 0) { G = 0; }
+	        	 
+	        	            B -= 5;
+	        	            if(B > 255) { B = 255; }
+	        	            else if(B < 0) { B = 0; }
+	        	 
+	        	            // apply new pixel color to output bitmap
+	        	            bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+	        	        }
+	        	    }
+	        	 
+	        	    // return final image
+	        	    src = bmOut;
+	        	    iv.setImageBitmap(src);
+	        	}
+	    });
+		
+        if (type.equals("photo") || type.equals("doodle")) {
+		    try {
+		        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(currentPath));
+		        iv.setImageBitmap(b);
+		        iv.getLayoutParams().height = 100;
+		        iv.getLayoutParams().width = 100;
+		        iv.setBackgroundColor(Color.WHITE);
+		    } catch (FileNotFoundException e) {
+		        e.printStackTrace();
+		    }
+        } else if (type.equals("audio")) {
+        	iv.setImageResource(R.drawable.play_icon);
+        	
+        	iv.setOnClickListener(new View.OnClickListener() {
+        	    @Override
+        	    public void onClick(View v) {
+        	    	File playfile = new File(currentPath);
+                	playMusic(playfile);
         	    }
-        	 
-        	    // return final image
-        	    src = bmOut;
-        	    iv.setImageBitmap(src);
-        	}
-    });
+        	});	
+        }
     
-}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -273,13 +286,35 @@ public class AddComment extends Activity implements OnItemClickListener {
           intent.setDataAndType(Uri.fromFile(file), "audio");
           startActivity(intent);
   }
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		feeling = position;
-		feelingsText.setText(feelings[position]);
-	    mListPopupWindow.dismiss();
-	}
+	
+	public class MyAdapter extends ArrayAdapter<String>{
+		 
+        public MyAdapter(Context context, int textViewResourceId, String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+ 
+        @Override
+        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+ 
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+ 
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater=getLayoutInflater();
+            View row=inflater.inflate(R.layout.feeling_list, parent, false);
+            TextView label=(TextView)row.findViewById(R.id.feelingItem);
+            label.setText(feelings[position]);
+ 
+            ImageView icon=(ImageView)row.findViewById(R.id.image);
+            icon.setImageResource(images[position]);
+ 
+            return row;
+            
+        }
+   }
 
 }
