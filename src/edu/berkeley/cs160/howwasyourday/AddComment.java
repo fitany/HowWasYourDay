@@ -96,6 +96,7 @@ public class AddComment extends Activity {
 			public void onItemSelected(AdapterView<?> arg0, View v, int position, long id) {
 				// TODO Auto-generated method stub
 				feeling = position;
+				feelingBtn.setAdjustViewBounds(true);
 				feelingBtn.setImageResource(images[position]);
 				feelingsText.setText("Feeling " + feelings[position]);
 			}

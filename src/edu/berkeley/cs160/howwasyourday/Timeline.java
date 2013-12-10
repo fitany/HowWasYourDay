@@ -17,12 +17,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -207,7 +209,44 @@ public class Timeline extends Activity {
         //Fetch emotion
         TextView emotion = (TextView) child1.findViewById(R.id.emotion);
         int feeling = post.feeling;
-        emotion.setText("is feeling "+feelings[feeling]);
+        ImageView face = (ImageView) child1.findViewById(R.id.face);
+        if(feeling==0){
+        	emotion.setText("");    	
+        	face.setVisibility(View.INVISIBLE);
+        }
+        else{
+        	switch(feeling){
+	        	case 1://happy
+	        		face.setImageResource(R.drawable.happy);
+	        	case 2://sad
+	        		face.setImageResource(R.drawable.sad);
+	        		break;
+	        	case 3://shocked
+	        		face.setImageResource(R.drawable.shocked);
+	        		break;
+	        	case 4://tears
+	        		face.setImageResource(R.drawable.tears);
+	        		break;
+	        	case 5://blush
+	        		face.setImageResource(R.drawable.blush);
+	        		break;
+	        	case 6://delighted
+	        		face.setImageResource(R.drawable.delighted);
+	        		break;
+	        	case 7://meep
+	        		face.setImageResource(R.drawable.meep);
+	        		break;
+	        	case 8://smart
+	        		face.setImageResource(R.drawable.smart);
+	        		break;
+	        	case 9://cool
+	        		face.setImageResource(R.drawable.cool);
+	        		break;
+	        	case 10://mad
+	        		face.setImageResource(R.drawable.mad);
+	        		break;
+        	}
+        }
         //Fetch description
         TextView description = (TextView) child1.findViewById(R.id.description);
         description.setText(post.discription);
@@ -216,15 +255,29 @@ public class Timeline extends Activity {
         try {
 			String filename = post.pic;
 			System.out.println("filename:"+filename);
-	        File f=new File(filename);
-	        Bitmap bm;
-			bm = BitmapFactory.decodeStream(new FileInputStream(f));
-			ImageView content = (ImageView) child1.findViewById(R.id.content);
-	        content.setImageBitmap(bm);
-	        content.setAdjustViewBounds(true);
-	        //content.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 500));
-	        content.getLayoutParams().height = 500;
-	        content.setBackgroundColor(getResources().getColor(R.color.very_light_blue));
+			if(!filename.equals("") && filename.indexOf(".amr")==-1){
+		        File f=new File(filename);
+		        Bitmap bm;
+				bm = BitmapFactory.decodeStream(new FileInputStream(f));
+				ImageView content = (ImageView) child1.findViewById(R.id.content);
+		        content.setImageBitmap(bm);
+		        content.setAdjustViewBounds(true);
+		        //content.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 500));
+		        content.getLayoutParams().height = 500;
+		        if(filename.indexOf("/Doodle/") != -1){
+		        	content.getLayoutParams().width = 500;
+		        	content.setBackgroundColor(getResources().getColor(R.color.white));
+		        }
+		        else
+		        	content.setBackgroundColor(getResources().getColor(R.color.very_light_blue));
+			} else if(!filename.equals("")){
+				ImageButton content = (ImageButton) child1.findViewById(R.id.content);
+		        content.setImageResource(R.drawable.play_icon);
+		        content.setAdjustViewBounds(true);
+		        content.getLayoutParams().height = 500;
+		        content.getLayoutParams().width = 500;
+	        	content.setOnClickListener(new AudioOnClickListener(post.pic));
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -311,5 +364,23 @@ public class Timeline extends Activity {
         	return days-post_day + " day ago";
         else
         	return days-post_day + " days ago";
+    }
+    private void playMusic(File file) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "audio");
+        startActivity(intent);
+    }
+    private class AudioOnClickListener implements OnClickListener{
+    	String myAudioFile;
+    	public AudioOnClickListener(String audioFile){
+    		myAudioFile=audioFile;
+    	}
+    	@Override
+	    public void onClick(View v) {
+	    	File playfile = new File(myAudioFile);
+        	playMusic(playfile);
+	    }
     }
 }

@@ -27,7 +27,7 @@
 
 	<TextView android:id="@+id/description" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_below="@+id/profile_pic"
-		android:layout_alignLeft="@+id/content"
+		android:layout_alignLeft="@+id/profile_pic"
 		android:text="Look at this awesome picture, Mom!" />
 	
 	<ImageButton android:id="@+id/content"
@@ -49,6 +49,15 @@
 	    android:layout_marginLeft="5dp"
 	    android:layout_marginBottom="2dp"
 	    android:layout_toRightOf="@+id/name"
-	    android:text="feeling terrible" />
+	    android:text="is feeling " />
+
+	<ImageView
+	    android:id="@+id/face"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBottom="@+id/emotion"
+	    android:layout_marginLeft="-22dp"
+	    android:layout_toRightOf="@+id/emotion"
+	    android:src="@drawable/happy" />
 
 </RelativeLayout>
