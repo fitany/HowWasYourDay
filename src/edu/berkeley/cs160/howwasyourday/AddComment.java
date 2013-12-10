@@ -262,7 +262,7 @@ public class AddComment extends Activity {
 	}
 	
    public void newTimeline(View v) {
-	   db.savePic(database, currentUser.id, discription.getText().toString(), 1, currentPath);
+	   db.savePic(database, currentUser.id, discription.getText().toString(), feeling, currentPath);
 	   Intent intent=new Intent(this,Timeline.class);
 	   startActivity(intent);
    }
