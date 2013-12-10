@@ -7,14 +7,13 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import edu.berkeley.cs160.howwasyourday.AddComment.MyAdapter;
+import android.widget.Toast;
 import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
 public class Recap extends Activity{
@@ -102,25 +101,34 @@ public class Recap extends Activity{
 			}
         	
         });**/
-		
-		addListenerOnButton();
-		addListenerOnSpinnerItemSelection();
-		kidName = spinner.getSelectedItem().toString();
-		
 		int[] useridarray = convertArrayList(userid);
 		String[] usernamearray = convertArrayListS(username);
-		int index = username.indexOf(kidName);
-		int kidId = useridarray[index];
+		if (usernamearray.length != 0){
+			addListenerOnButton();
+			addListenerOnSpinnerItemSelection();
+			Log.e("MK", "kidName start to selected" + kidName);
+			kidName = spinner.getSelectedItem().toString();
+			Log.e("MK", "kidName selected");
+			int kidId = 0;
+			
 		
-		getKidStats(kidId);
+			int index = getIndex(kidName, usernamearray);
+			kidId = useridarray[index];
+			
+			getKidStats(kidId);
+			
+			pane = (LinearLayout) findViewById(R.id.pane);
+			//pane2 = (LinearLayout) findViewById(R.id.pane2);
+	
+		    pvemo = new PieView(this, aLIst);
+		    pvtype = new PieView(this, type);
+		    pane.addView(pvemo);
+		    pane2.addView(pvtype);
+		} else {
+			Toast.makeText(Recap.this,
+					"You have no child registered for the family", Toast.LENGTH_SHORT).show();
+		}
 		
-		pane = (LinearLayout) findViewById(R.id.pane);
-		//pane2 = (LinearLayout) findViewById(R.id.pane2);
-
-	    pvemo = new PieView(this, aLIst);
-	    pvtype = new PieView(this, type);
-	    pane.addView(pvemo);
-	    pane2.addView(pvtype);
 	}
 	
 	public void addListenerOnButton() {
@@ -212,6 +220,16 @@ public class Recap extends Activity{
             ret[i] = iterator.next().toString();
         }
         return ret;
+    }
+    
+    public static int getIndex(String a, String[] array) {
+    	int index = 0;
+    	for (int i=0;i<array.length-1;i++) {
+    		if (array[i] == a) {
+    			index = i;
+    		}
+    	}
+    	return index;
     }
 	
 		

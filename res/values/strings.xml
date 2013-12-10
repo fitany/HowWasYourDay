@@ -19,6 +19,7 @@
     <string name="title_activity_record_audio">RecordAudio</string>
     <string name="title_activity_login_page">LoginPage</string>
     <string name="title_activity_register_page">RegisterPage</string>
+    <string name="title_activity_recap">Recap</string>
     <string name="spinner_text">Select</string>
     <string name="new_event">New Event</string>
     <string name="stats">Stats</string>
