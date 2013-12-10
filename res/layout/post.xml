@@ -34,18 +34,20 @@
 		android:layout_width="match_parent" android:layout_height="700dp"
 		android:layout_below="@+id/description" android:layout_marginTop="0dp"
 		android:layout_centerHorizontal="true" android:src="@drawable/drawing" />
-
+	
+	<!--Buy the full version for comments lolol
 	<TextView android:id="@+id/num_comments" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_alignLeft="@+id/profile_pic"
 		android:layout_below="@+id/content" android:layout_marginTop="3dp"
 		android:text="2 Comments" />
-
+	-->
 	<TextView
 	    android:id="@+id/emotion"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignBottom="@+id/name"
 	    android:layout_marginLeft="5dp"
+	    android:layout_marginBottom="2dp"
 	    android:layout_toRightOf="@+id/name"
 	    android:text="feeling terrible" />
 

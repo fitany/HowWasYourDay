@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import edu.berkeley.cs160.howwasyourday.Family;
 import edu.berkeley.cs160.howwasyourday.PostEntry;
+import edu.berkeley.cs160.howwasyourday.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -182,6 +183,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return result;
     }
 	
+	public User findUser(SQLiteDatabase db, long id) {
+		Cursor curUser = db.query(userTable, new String[] {UserId, UserPassword, UserFirstName, UserLastName,UserType}, UserId+"=?", new String[]{id+""}, null,null, null);
+		if (curUser.moveToFirst()) {
+			User user = new User(curUser.getInt(curUser.getColumnIndex("UserId")), curUser.getString(curUser.getColumnIndex("UserFirstName")), curUser.getString(curUser.getColumnIndex("UserLastName")), curUser.getString(curUser.getColumnIndex("UserType")));
+			return user;
+		} else {
+			return null;
+		}
+	}
 }
 	
 	

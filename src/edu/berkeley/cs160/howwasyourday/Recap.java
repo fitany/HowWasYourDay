@@ -1,36 +1,57 @@
 package edu.berkeley.cs160.howwasyourday;
 
 import java.util.ArrayList;
-
-import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
+import java.util.Iterator;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
+import edu.berkeley.cs160.howwasyourday.AddComment.MyAdapter;
+import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
 public class Recap extends Activity{
 	LinearLayout pieContainer;
     LinearLayout pane;
-    private PieView pv;
+    LinearLayout pane2;
+    private PieView pvemo;
+    private PieView pvtype;
     ArrayList<Integer> aLIst = new ArrayList<Integer>();
     private Button button;
     Spinner spinner;
 	DatabaseHelper db;
 	SQLiteDatabase database;
+	ArrayList<Integer> type = new ArrayList<Integer>();
+	String[] kidNameArray;
+	String kidName;
+	User currentUser;
+	ArrayList<Integer> userid = new ArrayList<Integer>();
+	ArrayList<String> username = new ArrayList<String>();
 	
 	int numOfPic = 0;
 	int numOfDoodle = 0;
 	int numOfAudio = 0;
 	int numOfVideo = 0;
+	
+	int numOfNormal = 0;
+	int numOfHappy = 0;
+	int numOfSad = 0;
+	int numOfShocked = 0;
+	int numOfTears = 0;
+	int numOfBlush = 0;
+	int numOfDelighted = 0;
+	int numOfMeep = 0;
+	int numOfSmart = 0;
+	int numOfCool = 0;
+	int numOfMad = 0;
+	
     
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,24 +60,67 @@ public class Recap extends Activity{
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
 		
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		        R.array.kids_array, android.R.layout.simple_spinner_item);
+		currentUser = LoginPage.getCurUser();
+		Cursor kids = db.findKids(database, currentUser.familyId);
+		while(kids.moveToNext()) {
+	    	int id = kids.getInt(kids.getColumnIndex("UserId"));
+	    	userid.add(id);
+	    	String name = kids.getString(kids.getColumnIndex("UserFirstName"));
+	    	username.add(name);
+	    }
+		
+		
+		final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		//spinner.setAdapter(new MyAdapter(this, R.layout.recap, username));
 		// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
-		spinner.setAdapter(adapter);
+		//spinner.setAdapter(adapter);
+		/**
+		final Spinner mySpinner = (Spinner)findViewById(R.id.feeling);
+        mySpinner.setAdapter(new MyAdapter(this, R.layout.feeling_list, feelings));
+        
+        feelingBtn.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+           	 	mySpinner.performClick();
+           }
+        });
+        
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View v, int position, long id) {
+				// TODO Auto-generated method stub
+				feeling = position;
+				feelingBtn.setImageResource(images[position]);
+				feelingsText.setText("Feeling " + feelings[position]);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });**/
 		
 		addListenerOnButton();
 		addListenerOnSpinnerItemSelection();
-
+		kidName = spinner.getSelectedItem().toString();
 		
+		int[] useridarray = convertArrayList(userid);
+		String[] usernamearray = convertArrayListS(username);
+		int index = username.indexOf(kidName);
+		int kidId = useridarray[index];
+		
+		getKidStats(kidId);
 		
 		pane = (LinearLayout) findViewById(R.id.pane);
+		//pane2 = (LinearLayout) findViewById(R.id.pane2);
 
-	    pv = new PieView(this, aLIst);
-	    pane.addView(pv);
+	    pvemo = new PieView(this, aLIst);
+	    pvtype = new PieView(this, type);
+	    pane.addView(pvemo);
+	    pane2.addView(pvtype);
 	}
 	
 	public void addListenerOnButton() {
@@ -71,18 +135,9 @@ public class Recap extends Activity{
 
 	public void addListenerOnSpinnerItemSelection() {
 		    spinner = (Spinner) findViewById(R.id.spinner1);
-		    //spinner.setOnItemSelectedListener(new OnItemSelectedListener());
+		    spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
 		  }
 
-	public void onItemSelected(AdapterView<?> parent, View view, 
-            int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }
     
     public void getKidStats(long kidId){
     	/** TODO: get the number of emos and types of the posts made by the kid "kidName"
@@ -94,7 +149,6 @@ public class Recap extends Activity{
 //	    aLIst.add(sad);
 //	    aLIst.add(angry);
     	ArrayList<PostEntry> posts = db.getAllPostFromIndividual(database, kidId);
-    	
     	for (PostEntry post : posts) {
     		if (!post.pic.equals("")) {
     			numOfPic++;
@@ -106,6 +160,58 @@ public class Recap extends Activity{
     			numOfVideo++;
     		}
     	}
+    	type.add(numOfPic);
+    	type.add(numOfDoodle);
+    	type.add(numOfAudio);
+    	type.add(numOfVideo);
+    	
+    	for (PostEntry post : posts) {
+    		if (post.feeling == 0) {
+				//numOfNone++;
+    		} else if (post.feeling == 1) {
+    			numOfHappy++;
+    		} else if (post.feeling == 2) {
+    			numOfShocked++;
+    		} else if (post.feeling == 3) {
+    			numOfTears++;
+    		} else if (post.feeling == 4) {
+    			numOfBlush++;
+    		} else if (post.feeling == 5) {
+    			numOfDelighted++;
+    		}	else if (post.feeling == 6) {
+    			numOfMeep++;
+    		} else if (post.feeling == 7) {
+    			numOfSmart++;
+    		} else if (post.feeling == 8) {
+    			numOfSad++;
+    		} else if (post.feeling == 9) {
+    			numOfCool++;
+    		} else {
+    			numOfMad++;
+    		}
+    	}
+    }
+    
+    public static int[] convertArrayList(ArrayList<Integer> integers)
+    {
+        int[] ret = new int[integers.size()];
+        Iterator<Integer> iterator = integers.iterator();
+        for (int i = 0; i < ret.length; i++)
+        {
+            ret[i] = iterator.next().intValue();
+        }
+        return ret;
+    }
+    
+    public static String[] convertArrayListS(ArrayList<String> integers)
+    {
+        String[] ret = new String[integers.size()];
+        Iterator<String> iterator = integers.iterator();
+        for (int i = 0; i < ret.length; i++)
+        {
+            ret[i] = iterator.next().toString();
+        }
+        return ret;
     }
 	
 		

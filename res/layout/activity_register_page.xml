@@ -3,6 +3,7 @@
 	    xmlns:tools="http://schemas.android.com/tools"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
+	    android:background="@color/very_light_blue"
 	    tools:context=".RegisterPage" >
 	    
 	<RelativeLayout
@@ -12,7 +13,7 @@
 	    <LinearLayout
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:background="@color/light_blue"
+	        android:background="@color/dark_blue"
 	        android:orientation="horizontal"
 	        android:weightSum="10" 
 	        android:id="@+id/title">
@@ -65,7 +66,7 @@
 	        android:singleLine="true"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:inputType="textEmailAddress"
-	        android:textColorHint="@color/opaque_red"/>
+	        android:textColorHint="@color/light_blue"/>
 	    
 	    <EditText
 	        android:id="@+id/password"
@@ -78,7 +79,7 @@
 	        android:shape="rectangle"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:inputType="textPassword"
-	        android:textColorHint="@color/opaque_red"/>
+	        android:textColorHint="@color/light_blue"/>
 	    
 	    <EditText
 	        android:id="@+id/firstname"
@@ -91,7 +92,7 @@
 	        android:shape="rectangle"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:inputType="textCapSentences"
-	        android:textColorHint="@color/opaque_red"/>
+	        android:textColorHint="@color/light_blue"/>
 	    
 	    <EditText
 	            android:id="@+id/lastname"
@@ -104,14 +105,14 @@
 	            android:shape="rectangle"
 	            android:background="@drawable/round_edittext_bg" 
 	            android:inputType="textCapSentences"
-	            android:textColorHint="@color/opaque_red"/>
+	            android:textColorHint="@color/light_blue"/>
 	       
 	     <Spinner
 	        android:id="@+id/userType"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="10dp"
-	        android:textColor="@color/opaque_red"
+	        android:textColor="@color/light_blue"
 	        android:background="@drawable/round_edittext_bg" 
 	        android:spinnerMode="dialog"/> 
 	        
@@ -142,6 +143,8 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/info"
 	        android:layout_margin="10dp"
+	        android:background="@drawable/button"
+	        android:textColor="@color/white"
 	        android:text="Register" />
 	
 	</RelativeLayout>
