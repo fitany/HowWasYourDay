@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
 public class Timeline extends Activity {
@@ -33,6 +34,9 @@ public class Timeline extends Activity {
 	MenuItem audio;
 	MenuItem video;
 	MenuItem photo;
+	MenuItem timeline;
+	MenuItem new_event;
+	MenuItem stats;
 	User currentUser;
 	Boolean isChild=true;
 	DatabaseHelper db;
@@ -48,11 +52,11 @@ public class Timeline extends Activity {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
-        //userType = currentUser.type; hardcoded for now
-        //if(currentUser.type.equals("kid"))
-        //	isChild = true;
-        //else
-        //	isChild = false;
+        String userType = currentUser.type;
+        if(currentUser.type.equals("Children"))
+        	isChild = true;
+        else
+        	isChild = false;
         
         View view = View.inflate(getApplicationContext(), R.layout.action_bar_timeline, null);
         actionBar.setCustomView (view);
@@ -80,7 +84,6 @@ public class Timeline extends Activity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	//isChild = false;
     	if(isChild){
 	    	getMenuInflater().inflate(R.menu.timeline, menu);
 	    	doodle = menu.findItem(R.id.draw);
@@ -90,12 +93,12 @@ public class Timeline extends Activity {
 	    	return super.onCreateOptionsMenu(menu);
     	} else{
     		getMenuInflater().inflate(R.menu.timeline_parent, menu);
-	    	photo = menu.findItem(R.id.photo);
-	    	audio = menu.findItem(R.id.audio);
-	    	video = menu.findItem(R.id.video);
+	    	timeline = menu.findItem(R.id.timeline);
+	    	new_event = menu.findItem(R.id.new_event);
+	    	stats = menu.findItem(R.id.stats);
 	    	//use this code to change the icon/appearance of menu item
-	    	//MenuItem menuItem = menu.getItem(0);
-	    	//menuItem.setIcon(R.drawable.ic_action_copy);
+	    	MenuItem menuItem = menu.getItem(0);
+	    	menuItem.setIcon(R.drawable.timeline_selected);
 	    	return super.onCreateOptionsMenu(menu);
     	}
     }
@@ -121,23 +124,29 @@ public class Timeline extends Activity {
 		      }
     	} else{
     		switch (item.getItemId()) {
-		      case R.id.draw:
-		    	  drawDoodle();
+		      case R.id.timeline:
+		    	  //do nothing, because we are already in timeline
 		    	  return true;
-		      case R.id.audio:
-		    	  recordAudio();
+		      case R.id.new_event:
+		    	  Context context = getApplicationContext();
+		    	  CharSequence text = "Buy the full app for this feature!";
+		    	  int duration = Toast.LENGTH_SHORT;
+		    	  Toast toast = Toast.makeText(context, text, duration);
+		    	  toast.show();
 		    	  return true;
-		      case R.id.video:
-		    	  recordVideo();
-		    	  return true;
-		      case R.id.photo:
-		    	  sharePhoto();
+		      case R.id.stats:
+		    	  recap();
 		    	  return true;
 		      default:
 		            return super.onOptionsItemSelected(item);
 		      }
     	}
 	}
+    
+    private void recap(){
+    	Intent i = new Intent(this, Recap.class);
+		startActivity(i);
+    }
     
     private void drawDoodle() {
     	Intent i = new Intent(this, DrawDoodle.class);
