@@ -19,7 +19,7 @@ public class PieView extends View {
 	int bar_height;
 	int bar_height1;
 	int c[] = { Color.RED, Color.BLUE, Color.CYAN, Color.GREEN, Color.MAGENTA,
-	        Color.YELLOW };
+	         Color.DKGRAY, Color.LTGRAY, Color.BLACK, Color.rgb(230, 300, 250)};
 
 	public PieView(Context context, ArrayList<Integer> data) {
 	    super(context);
