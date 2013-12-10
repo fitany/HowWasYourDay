@@ -67,6 +67,10 @@
             android:name="edu.berkeley.cs160.howwasyourday.RegisterPage"
             android:label="@string/title_activity_register_page" >
         </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.Recap"
+            android:label="@string/title_activity_recap" >
+        </activity>
     </application>
 
 </manifest>

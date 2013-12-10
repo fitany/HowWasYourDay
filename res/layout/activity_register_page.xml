@@ -124,7 +124,7 @@
 			android:completionThreshold="2"
 			android:hint="Family Name"
 			android:background="@drawable/round_edittext_bg" 
-			android:textColorHint="@color/opaque_red"
+			android:textColorHint="@color/light_blue"
 			android:inputType="textCapSentences"/>
 
 	     <TextView

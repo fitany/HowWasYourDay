@@ -111,6 +111,7 @@ public class LoginPage extends Activity {
         private void timeLine() {
                 Intent i = new Intent(this, Timeline.class);
                 startActivity(i);
+                finish();
         }
         
         public static User getCurUser() {

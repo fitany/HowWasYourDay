@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -103,24 +104,24 @@ public class Recap extends Activity{
         	
         });**/
 		
-		addListenerOnButton();
-		addListenerOnSpinnerItemSelection();
-		kidName = spinner.getSelectedItem().toString();
-		
+		//addListenerOnButton(); 
+		//addListenerOnSpinnerItemSelection();
+		//kidName = String.valueOf(spinner.getSelectedItem());
+		kidName = "Ana";
 		int[] useridarray = convertArrayList(userid);
 		String[] usernamearray = convertArrayListS(username);
 		int index = username.indexOf(kidName);
 		int kidId = useridarray[index];
-		
 		getKidStats(kidId);
 		
 		pane = (LinearLayout) findViewById(R.id.pane);
 		//pane2 = (LinearLayout) findViewById(R.id.pane2);
-
+		LinearLayout pane = (LinearLayout)findViewById(R.id.pane);
 	    pvemo = new PieView(this, aLIst);
 	    pvtype = new PieView(this, type);
 	    pane.addView(pvemo);
-	    pane2.addView(pvtype);
+	    //pane2.addView(pvtype);
+	    
 	}
 	
 	public void addListenerOnButton() {
@@ -140,6 +141,7 @@ public class Recap extends Activity{
 
     
     public void getKidStats(long kidId){
+    	System.out.println("In getKidStats");
     	/** TODO: get the number of emos and types of the posts made by the kid "kidName"
     	int happy = get the number of happy emos;
     	int sad = get the number of happy emos;
@@ -166,6 +168,7 @@ public class Recap extends Activity{
     	type.add(numOfVideo);
     	
     	for (PostEntry post : posts) {
+    		System.out.println("Feeling:"+post.feeling);
     		if (post.feeling == 0) {
 				//numOfNone++;
     		} else if (post.feeling == 1) {
@@ -182,6 +185,7 @@ public class Recap extends Activity{
     			numOfMeep++;
     		} else if (post.feeling == 7) {
     			numOfSmart++;
+    			System.out.println("NumOfSmart:"+numOfSmart);
     		} else if (post.feeling == 8) {
     			numOfSad++;
     		} else if (post.feeling == 9) {
@@ -190,6 +194,17 @@ public class Recap extends Activity{
     			numOfMad++;
     		}
     	}
+    	aLIst.add(numOfHappy);
+    	aLIst.add(numOfShocked);
+    	aLIst.add(numOfTears);
+    	aLIst.add(numOfBlush);
+    	aLIst.add(numOfDelighted);
+    	aLIst.add(numOfMeep);
+    	aLIst.add(numOfSmart);
+    	aLIst.add(numOfSad);
+    	aLIst.add(numOfCool);
+    	aLIst.add(numOfMad);
+    	
     }
     
     public static int[] convertArrayList(ArrayList<Integer> integers)

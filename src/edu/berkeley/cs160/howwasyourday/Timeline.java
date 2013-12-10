@@ -57,7 +57,7 @@ public class Timeline extends Activity {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
         currentUser = LoginPage.getCurUser();
-        if(currentUser.type != null && currentUser.type.equals("Children"))
+        if(currentUser.type != null && currentUser.type.equals("Child"))
         	isChild = true;
         else
         	isChild = false;

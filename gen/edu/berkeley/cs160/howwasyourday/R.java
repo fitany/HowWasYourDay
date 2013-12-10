@@ -127,7 +127,8 @@ public final class R {
         public static final int tutorial1=0x7f02004a;
         public static final int tutorial2=0x7f02004b;
         public static final int tutorial3=0x7f02004c;
-        public static final int yellow_button=0x7f02004d;
+        public static final int tutorial4=0x7f02004d;
+        public static final int yellow_button=0x7f02004e;
     }
     public static final class id {
         public static final int Brush=0x7f0b001a;
@@ -245,21 +246,22 @@ public final class R {
         public static final int add_comment=0x7f070009;
         public static final int app_name=0x7f070000;
         public static final int audio=0x7f070004;
-        public static final int createFamily=0x7f070017;
-        public static final int desc=0x7f070015;
+        public static final int createFamily=0x7f070018;
+        public static final int desc=0x7f070016;
         public static final int draw=0x7f070005;
         public static final int hello_world=0x7f070008;
-        public static final int new_event=0x7f070013;
+        public static final int new_event=0x7f070014;
         public static final int photo=0x7f070002;
-        public static final int prompt=0x7f070016;
-        public static final int spinner_text=0x7f070012;
-        public static final int stats=0x7f070014;
+        public static final int prompt=0x7f070017;
+        public static final int spinner_text=0x7f070013;
+        public static final int stats=0x7f070015;
         public static final int timeline=0x7f070006;
         public static final int title_activity_add_comment=0x7f07000a;
         public static final int title_activity_doodle=0x7f07000b;
         public static final int title_activity_draw_doodle=0x7f07000c;
         public static final int title_activity_login_page=0x7f070010;
         public static final int title_activity_post=0x7f070007;
+        public static final int title_activity_recap=0x7f070012;
         public static final int title_activity_record_audio=0x7f07000f;
         public static final int title_activity_record_video=0x7f07000e;
         public static final int title_activity_register_page=0x7f070011;
