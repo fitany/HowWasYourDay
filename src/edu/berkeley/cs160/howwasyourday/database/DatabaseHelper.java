@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 7); 
+		super(context, dbName, null, 8); 
 	}
 
 	@Override
@@ -116,9 +116,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public String[] findFamily(SQLiteDatabase db,long id) {
 		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
 		String[] result = new String[c.getCount()];
+		System.out.println(c.getCount());
 		int index = 0;
 		while(c.moveToNext()) {
 			result[index] = c.getInt(0)+"";
+			System.out.println(index);
+			index++;
 		}
 		
 		return result;
@@ -131,7 +134,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public ArrayList<PostEntry> getAllPost(SQLiteDatabase db, long familyId) {
 		String[] ids = findFamily(db, familyId);
-		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, PostUserId+"=?", ids, null,null, PostTime);
+		String unit = PostUserId+"=? OR ";
+		String result = "";
+		for (int i =0; i < ids.length-1; i++) {
+			result += unit;
+		}
+		result+= PostUserId+"=?";
+		Cursor c = db.query(PostTable, new String[] {PostUserId, PostDiscription, PostFeeling, PostPic, PostDoodle, PostTime, PostAudio, PostVideo}, result, ids, null,null, PostTime);
 	    ArrayList<PostEntry> posts = new ArrayList<PostEntry>();
 	     
 	    while(c.moveToNext()) {
