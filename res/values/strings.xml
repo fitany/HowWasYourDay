@@ -37,5 +37,6 @@
     
     <string name="desc">camera</string>
     <string name="prompt">Select your Feelings</string>
+    <string name="createFamily"><u>Create New Family</u></string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import edu.berkeley.cs160.howwasyourday.Family;
 import edu.berkeley.cs160.howwasyourday.PostEntry;
 import edu.berkeley.cs160.howwasyourday.User;
 
@@ -41,14 +42,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 9); 
+		super(context, dbName, null, 13); 
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		  // TODO Auto-generated method stub
 		  
-		  db.execSQL("CREATE TABLE "+familyTable+" ("+FamilyId+ " INTEGER PRIMARY KEY , "+FamilyName+ " TEXT UNIQUE)");
+		  db.execSQL("CREATE TABLE "+familyTable+" ("+FamilyId+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+FamilyName+ " TEXT UNIQUE)");
 		  
 		  db.execSQL("CREATE TABLE "+userTable+" ("+UserId+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ UserEmail +" TEXT NOT NULL UNIQUE, "+ UserPassword +" TEXT NOT NULL, " + UserFirstName +" TEXT, " + UserLastName +" TEXT, " +UserType+ " TEXT, " + UserFamilyId + " INTEGER ,FOREIGN KEY ("+UserFamilyId+") REFERENCES "+familyTable+" ("+FamilyId+"));");
 		  
@@ -66,14 +67,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    onCreate(db);
 	}
 	
-	public void createUser(SQLiteDatabase db, String email, String password, String firstname, String lastname, String userType) {
+	public void createFamily(SQLiteDatabase db, String name) {
+		ContentValues cv=new ContentValues();
+	    cv.put(FamilyName, name);
+	    db.insert(familyTable, null, cv);
+	}
+	
+	public void createUser(SQLiteDatabase db, String email, String password, String firstname, String lastname, String userType, long familyId) {
 		ContentValues cv=new ContentValues();
 	    cv.put(UserEmail, email);
 	    cv.put(UserPassword, password);
 	    cv.put(UserFirstName, firstname);
 	    cv.put(UserLastName, lastname);
 	    cv.put(UserType, userType);
-	    cv.put(UserFamilyId, 1);
+	    cv.put(UserFamilyId, familyId);
 	    db.insert(userTable, null, cv);
 	}
 	
@@ -81,6 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor c = db.query(userTable, new String[] {UserId, UserPassword, UserFirstName, UserLastName,UserType}, UserEmail+"=?", new String[]{email}, null,null, null);
 	    return c;
 	}
+	
 	
 	public void savePic(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
 		ContentValues cv=new ContentValues();
@@ -117,11 +125,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public String[] findFamily(SQLiteDatabase db,long id) {
 		Cursor c = db.query(userTable, new String[] {UserId}, UserFamilyId+"=?", new String[] {id+""}, null,null, null);
 		String[] result = new String[c.getCount()];
-		System.out.println(c.getCount());
 		int index = 0;
 		while(c.moveToNext()) {
 			result[index] = c.getInt(0)+"";
-			System.out.println(index);
 			index++;
 		}
 		
@@ -163,6 +169,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    
 	    return posts;
 	}
+	
+	public Family[] getAllFamilies(SQLiteDatabase db) {
+		Cursor c = db.rawQuery("select * from Families", null);
+		Family[] result = new Family[c.getCount()];
+    	
+		int index = 0;
+		while(c.moveToNext()) {
+			result[index] = new Family(c.getInt(c.getColumnIndex("FamilyId")), c.getString(c.getColumnIndex("FamilyName")));
+			index++;
+		}
+		
+		return result;
+    }
 	
 	public User findUser(SQLiteDatabase db, long id) {
 		Cursor curUser = db.query(userTable, new String[] {UserId, UserPassword, UserFirstName, UserLastName,UserType}, UserId+"=?", new String[]{id+""}, null,null, null);
