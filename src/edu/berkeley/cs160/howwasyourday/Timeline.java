@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,13 +47,13 @@ public class Timeline extends Activity {
 	DatabaseHelper db;
 	SQLiteDatabase database;
 	String[] feelings={"Normal", "Happy", "Sad", "Shocked","Tears","Blush", "Delighted", "Meep", "Smart", "Cool", "Mad"};
-
+	
     @SuppressLint("NewApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-         
+        
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
@@ -70,6 +71,7 @@ public class Timeline extends Activity {
 		//get ArrayList of posts from database, hardcoded for now
         db = new DatabaseHelper(this);
 		database = db.getWritableDatabase();
+		System.out.println("Family id:"+currentUser.familyId);
 		ArrayList<PostEntry> posts = db.getAllPost(database,currentUser.familyId);
 		/*
 		Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playing);
@@ -86,7 +88,6 @@ public class Timeline extends Activity {
 			PostEntry p = posts.get(i);
 			addNewPost(p,i);
 		}
-		
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -252,15 +253,17 @@ public class Timeline extends Activity {
         description.setText(post.discription);
         //description.setText("Look at this awesome photo, Mom!");
         //Fetch content
-        try {
+        //try {
 			String filename = post.pic;
 			System.out.println("filename:"+filename);
 			if(!filename.equals("") && filename.indexOf(".amr")==-1){
 		        File f=new File(filename);
-		        Bitmap bm;
-				bm = BitmapFactory.decodeStream(new FileInputStream(f));
+		        //Bitmap bm;
+				//bm = BitmapFactory.decodeStream(new FileInputStream(f));
 				ImageView content = (ImageView) child1.findViewById(R.id.content);
-		        content.setImageBitmap(bm);
+		        //content.setImageBitmap(bm);
+		        content.setImageBitmap(
+		        	    decodeSampledBitmap(filename, 100, 100));
 		        content.setAdjustViewBounds(true);
 		        //content.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 500));
 		        content.getLayoutParams().height = 500;
@@ -278,9 +281,9 @@ public class Timeline extends Activity {
 		        content.getLayoutParams().width = 500;
 	        	content.setOnClickListener(new AudioOnClickListener(post.pic));
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		//} catch (FileNotFoundException e) {
+			//e.printStackTrace();
+		//}
         /*
         ImageView content = (ImageView) child1.findViewById(R.id.content);
         content.setImageResource(R.drawable.playing);
@@ -382,5 +385,41 @@ public class Timeline extends Activity {
 	    	File playfile = new File(myAudioFile);
         	playMusic(playfile);
 	    }
+    }
+    public static Bitmap decodeSampledBitmap(String file,
+            int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(file, options);
+    }
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+	    // Raw height and width of image
+	    final int height = options.outHeight;
+	    final int width = options.outWidth;
+	    int inSampleSize = 1;
+	
+	    if (height > reqHeight || width > reqWidth) {
+	
+	        final int halfHeight = height / 2;
+	        final int halfWidth = width / 2;
+	
+	        // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+	        // height and width larger than the requested height and width.
+	        while ((halfHeight / inSampleSize) > reqHeight
+	                && (halfWidth / inSampleSize) > reqWidth) {
+	            inSampleSize *= 2;
+	        }
+	    }
+	    return inSampleSize;
     }
 }

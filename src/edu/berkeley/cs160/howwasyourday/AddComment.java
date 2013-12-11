@@ -235,15 +235,14 @@ public class AddComment extends Activity {
 		    try {
 		        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(currentPath));
 		        iv.setImageBitmap(b);
-		        iv.getLayoutParams().height = 100;
-		        iv.getLayoutParams().width = 100;
+		        iv.getLayoutParams().height = 400;
+		        iv.getLayoutParams().width = 400;
 		        iv.setBackgroundColor(Color.WHITE);
 		    } catch (FileNotFoundException e) {
 		        e.printStackTrace();
 		    }
         } else if (type.equals("audio")) {
         	iv.setImageResource(R.drawable.play_icon);
-        	
         	iv.setOnClickListener(new View.OnClickListener() {
         	    @Override
         	    public void onClick(View v) {

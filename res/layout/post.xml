@@ -27,7 +27,7 @@
 
 	<TextView android:id="@+id/description" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_below="@+id/profile_pic"
-		android:layout_alignLeft="@+id/profile_pic"
+		android:layout_alignLeft="@+id/profile_pic" android:textAppearance="?android:attr/textAppearanceMedium"
 		android:text="Look at this awesome picture, Mom!" />
 	
 	<ImageButton android:id="@+id/content"
