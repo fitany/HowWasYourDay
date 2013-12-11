@@ -7,12 +7,13 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import edu.berkeley.cs160.howwasyourday.database.DatabaseHelper;
 
@@ -23,7 +24,6 @@ public class Recap extends Activity{
     private PieView pvemo;
     private PieView pvtype;
     ArrayList<Integer> aLIst = new ArrayList<Integer>();
-    private Button button;
     Spinner spinner;
 	DatabaseHelper db;
 	SQLiteDatabase database;
@@ -33,27 +33,14 @@ public class Recap extends Activity{
 	User currentUser;
 	ArrayList<Integer> userid = new ArrayList<Integer>();
 	ArrayList<String> username = new ArrayList<String>();
-	
-	int numOfPic = 0;
-	int numOfDoodle = 0;
-	int numOfAudio = 0;
-	int numOfVideo = 0;
-	
-	int numOfNormal = 0;
-	int numOfHappy = 0;
-	int numOfSad = 0;
-	int numOfShocked = 0;
-	int numOfTears = 0;
-	int numOfBlush = 0;
-	int numOfDelighted = 0;
-	int numOfMeep = 0;
-	int numOfSmart = 0;
-	int numOfCool = 0;
-	int numOfMad = 0;
-	
+	int[] useridarray;
+	String[] usernamearray;
+	TextView emotions;
+	TextView types;
     
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_recap);
 		
         db = new DatabaseHelper(this);
@@ -61,6 +48,7 @@ public class Recap extends Activity{
 		
 		currentUser = LoginPage.getCurUser();
 		Cursor kids = db.findKids(database, currentUser.familyId);
+		
 		while(kids.moveToNext()) {
 	    	int id = kids.getInt(kids.getColumnIndex("UserId"));
 	    	userid.add(id);
@@ -69,100 +57,90 @@ public class Recap extends Activity{
 	    }
 		
 		
-		final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		//spinner.setAdapter(new MyAdapter(this, R.layout.recap, username));
-		// Specify the layout to use when the list of choices appears
-		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
-		//spinner.setAdapter(adapter);
-		/**
-		final Spinner mySpinner = (Spinner)findViewById(R.id.feeling);
-        mySpinner.setAdapter(new MyAdapter(this, R.layout.feeling_list, feelings));
-        
-        feelingBtn.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-           	 	mySpinner.performClick();
-           }
-        });
-        
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View v, int position, long id) {
-				// TODO Auto-generated method stub
-				feeling = position;
-				feelingBtn.setImageResource(images[position]);
-				feelingsText.setText("Feeling " + feelings[position]);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-			}
-        	
-        });**/
-		int[] useridarray = convertArrayList(userid);
-		String[] usernamearray = convertArrayListS(username);
-		if (usernamearray.length != 0){
-			addListenerOnButton();
-			addListenerOnSpinnerItemSelection();
-			Log.e("MK", "kidName start to selected" + kidName);
-			kidName = spinner.getSelectedItem().toString();
-			Log.e("MK", "kidName selected");
-			int kidId = 0;
-			
+		spinner = (Spinner) findViewById(R.id.kid);
+		pane = (LinearLayout) findViewById(R.id.pane);
+		pane2 = (LinearLayout) findViewById(R.id.pane2);
+		emotions = (TextView) findViewById(R.id.emotions);
+		types = (TextView) findViewById(R.id.types);
 		
-			int index = getIndex(kidName, usernamearray);
-			kidId = useridarray[index];
-			
-			getKidStats(kidId);
-			
-			pane = (LinearLayout) findViewById(R.id.pane);
-			//pane2 = (LinearLayout) findViewById(R.id.pane2);
-	
-		    pvemo = new PieView(this, aLIst);
-		    pvtype = new PieView(this, type);
-		    pane.addView(pvemo);
-		    pane2.addView(pvtype);
-		} else {
+		useridarray = convertArrayList(userid);
+		usernamearray = convertArrayListS(username);
+		
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, usernamearray);
+		spinner.setAdapter(spinnerArrayAdapter);
+		spinner.setPrompt("Choose a Child:");
+		
+		
+		if (usernamearray.length == 0){
 			Toast.makeText(Recap.this,
 					"You have no child registered for the family", Toast.LENGTH_SHORT).show();
+		} else {
+		
+			spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+	
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View v, int position, long id) {
+					// TODO Auto-generated method stub
+					updatePie();
+				}
+	
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+				}
+	        	
+	        });
 		}
 	}
 	
-	public void addListenerOnButton() {
-		    button = (Button) findViewById(R.id.spinner_button);
-		    button.setOnClickListener(new OnClickListener() {
-		      @Override
-		      public void onClick(View v) {
-		        
-		      }
-		    });
-		  }
-
-	public void addListenerOnSpinnerItemSelection() {
-		    spinner = (Spinner) findViewById(R.id.spinner1);
-		    spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
-		  }
-
+	private void updatePie() {
+		String kidName = spinner.getSelectedItem().toString();
+		int index = getIndex(kidName, usernamearray);
+		if (index >= 0) {
+			int kidId = useridarray[index];
+			getKidStats(kidId);
+	
+		    pvemo = new PieView(this, aLIst);
+		    pvtype = new PieView(this, type);
+		    System.out.println(aLIst);
+		    pane.removeAllViews();
+		    pane2.removeAllViews();
+		    pane.addView(pvemo);
+		    pane2.addView(pvtype);
+		    aLIst = new ArrayList<Integer>();
+		    type = new ArrayList<Integer>();
+		}	
+	}
     
     public void getKidStats(long kidId){
-    	System.out.println("In getKidStats");
     	/** TODO: get the number of emos and types of the posts made by the kid "kidName"
     	int happy = get the number of happy emos;
     	int sad = get the number of happy emos;
     	int angry = //get the number of happy emos;
     	**/
-//    	aLIst.add(happy);
-//	    aLIst.add(sad);
-//	    aLIst.add(angry);
+    	int numOfPic = 0;
+    	int numOfDoodle = 0;
+    	int numOfAudio = 0;
+    	int numOfVideo = 0;
+    	
+    	int numOfHappy = 0;
+    	int numOfSad = 0;
+    	int numOfShocked = 0;
+    	int numOfTears = 0;
+    	int numOfBlush = 0;
+    	int numOfDelighted = 0;
+    	int numOfMeep = 0;
+    	int numOfSmart = 0;
+    	int numOfCool = 0;
+    	int numOfMad = 0;
+
     	ArrayList<PostEntry> posts = db.getAllPostFromIndividual(database, kidId);
     	for (PostEntry post : posts) {
-    		if (!post.pic.equals("")) {
+    		if (post.pic != null) {
     			numOfPic++;
-    		} else if (!post.doodle.equals("")) {
+    		} else if (post.doodle != null) {
     			numOfDoodle++;
-    		} else if (!post.audio.equals("")) {
+    		} else if (post.audio != null) {
     			numOfAudio++;
     		} else {
     			numOfVideo++;
@@ -173,8 +151,15 @@ public class Recap extends Activity{
     	type.add(numOfAudio);
     	type.add(numOfVideo);
     	
+    	String posttype = types.getText().toString() + "\n"+"\n";
+    	posttype+= "Photos: " + numOfPic + "\n";
+    	posttype+= "Doodles: " + numOfDoodle + "\n";
+    	posttype+= "Audios: " + numOfAudio + "\n";
+    	posttype+= "Videos: " + numOfVideo + "\n";
+    	
+    	types.setText(posttype);
+    	
     	for (PostEntry post : posts) {
-    		System.out.println("Feeling:"+post.feeling);
     		if (post.feeling == 0) {
 				//numOfNone++;
     		} else if (post.feeling == 1) {
@@ -191,7 +176,6 @@ public class Recap extends Activity{
     			numOfMeep++;
     		} else if (post.feeling == 7) {
     			numOfSmart++;
-    			System.out.println("NumOfSmart:"+numOfSmart);
     		} else if (post.feeling == 8) {
     			numOfSad++;
     		} else if (post.feeling == 9) {
@@ -210,6 +194,39 @@ public class Recap extends Activity{
     	aLIst.add(numOfSad);
     	aLIst.add(numOfCool);
     	aLIst.add(numOfMad);
+    	
+    	String postemotions = emotions.getText().toString() + "\n"+"\n";
+    	if (numOfHappy != 0) {
+    		postemotions+= "Happy: " + numOfHappy + "\n";
+    	} 
+    	if (numOfShocked != 0) {
+    		postemotions+= "Shocked: " + numOfShocked + "\n";
+    	} 
+    	if (numOfTears != 0) {
+    		postemotions+= "Tears: " + numOfTears + "\n";
+    	}
+    	if (numOfBlush != 0) {
+    		postemotions+= "Blush: " + numOfBlush + "\n";
+    	} 
+    	if (numOfDelighted != 0) {
+    		postemotions+= "Delighted: " + numOfDelighted + "\n";
+    	}
+    	if (numOfMeep != 0) {
+    		postemotions+= "Meep: " + numOfMeep + "\n";
+    	} 
+    	if (numOfSmart != 0) {
+    		postemotions+= "Smart: " + numOfSmart + "\n";
+    	} 
+    	if (numOfSad != 0) {
+    		postemotions+= "Sad: " + numOfSad + "\n";
+    	} 
+    	if (numOfCool != 0) {
+    		postemotions+= "Cool: " + numOfCool + "\n";
+    	} 
+    	if (numOfMad != 0) {
+    		postemotions+= "Mad: " + numOfMad + "\n";
+    	} 
+    	emotions.setText(postemotions);
     	
     }
     
@@ -236,13 +253,12 @@ public class Recap extends Activity{
     }
     
     public static int getIndex(String a, String[] array) {
-    	int index = 0;
-    	for (int i=0;i<array.length-1;i++) {
-    		if (array[i] == a) {
-    			index = i;
+    	for (int i=0;i<array.length;i++) {
+    		if (array[i].equals(a)) {
+    			return i;
     		}
     	}
-    	return index;
+    	return -1;
     }
 	
 		
