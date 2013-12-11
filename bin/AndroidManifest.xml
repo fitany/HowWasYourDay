@@ -39,8 +39,8 @@
             android:label="@string/title_activity_doodle" >
         </activity>
         <activity
-            android:name="edu.berkeley.cs160.howwasyourday.DrawDoodle"
-            android:label="@string/title_activity_draw_doodle" >
+            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
+            android:label="@string/title_activity_login_page" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.RecordVideo"
@@ -51,8 +51,8 @@
             android:label="@string/title_activity_record_audio" >
         </activity>
         <activity
-            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
-            android:label="@string/title_activity_login_page" >
+            android:name="edu.berkeley.cs160.howwasyourday.DrawDoodle"
+            android:label="@string/title_activity_draw_doodle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

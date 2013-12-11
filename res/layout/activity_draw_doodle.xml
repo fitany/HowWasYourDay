@@ -3,11 +3,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DrawDoodle" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_blue"
+        android:orientation="horizontal"
+        android:weightSum="10" 
+        android:id="@+id/title">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/ic_action_back" 
+            android:onClick="home"/>
+
+        <TextView
+            android:id="@+id/register_page"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:layout_gravity="center"
+    		android:layout_marginLeft="40dp"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Doodle" />
+
+    </LinearLayout>
 
     <edu.berkeley.cs160.howwasyourday.DrawArea
         android:id="@+id/drawArea"
@@ -15,9 +47,11 @@
         android:layout_height="550sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="55sp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="60sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/title"
         android:background="@drawable/drawborder" />
 
     <Button
@@ -26,6 +60,7 @@
         android:layout_height="50sp"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/drawArea"
+        android:layout_marginLeft="5sp"
         android:onClick="getColor" 
         android:background="@drawable/red_button"
         android:gravity="center_vertical|center_horizontal" />
@@ -87,6 +122,7 @@
         android:layout_width="100sp"
         android:layout_height="30sp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5sp"
         android:layout_alignRight="@+id/drawArea"
         android:onClick="done"
         android:background="@color/light_grey"
@@ -97,6 +133,7 @@
         android:id="@+id/clearDoodle"
         android:layout_width="100sp"
         android:layout_height="30sp"
+        android:layout_marginBottom="5sp"
         android:layout_alignLeft="@+id/drawArea"
         android:layout_alignParentBottom="true"
         android:background="@color/light_grey"
@@ -106,9 +143,10 @@
 
     <ImageButton
         android:id="@+id/Eraser"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
-        android:onClick="getColor" 
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:onClick="getEraser" 
+        android:paddingBottom="3sp"
         android:layout_alignRight="@+id/drawArea"
         android:layout_alignTop="@+id/Brush"
         android:background="@color/light_grey"
@@ -117,10 +155,11 @@
 
     <ImageButton
         android:id="@+id/Brush"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
         android:layout_above="@+id/red_button"
-        android:layout_toLeftOf="@+id/Eraser"
+        android:layout_marginLeft="170sp"
+        android:paddingBottom="3sp"
         android:background="@color/light_grey"
         android:onClick="getStroke"
         android:scaleType="fitXY"
@@ -128,27 +167,29 @@
 
     <ImageButton
         android:id="@+id/Pencil"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:paddingBottom="3sp"
         android:layout_alignTop="@+id/Brush"
-        android:layout_toLeftOf="@+id/Brush"
+        android:layout_alignLeft="@+id/drawArea"
         android:background="@color/light_grey"
         android:onClick="getStroke"
         android:scaleType="fitXY"
         android:src="@drawable/pencil" />
 
-    <ImageButton
+    <!-- <ImageButton
         android:id="@+id/Text"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
         android:layout_alignTop="@+id/Pencil"
+        android:paddingBottom="3sp"
         android:layout_toLeftOf="@+id/Pencil"
         android:background="@color/light_grey"
         android:onClick="showText"
         android:scaleType="fitXY"
-        android:src="@drawable/text" />
+        android:src="@drawable/text" /> -->
 
-    <EditText
+<!--     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -156,6 +197,6 @@
         android:layout_below="@+id/purple_button"
         android:ems="10"
         android:visibility = "gone"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine" /> -->
 
 </RelativeLayout>
