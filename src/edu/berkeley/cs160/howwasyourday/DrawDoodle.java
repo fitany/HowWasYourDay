@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class DrawDoodle extends Activity {
@@ -31,6 +32,9 @@ public class DrawDoodle extends Activity {
 	Button blueBtn;
 	Button greenBtn;
 	Button purpleBtn;
+	ImageButton eraser;
+	ImageButton pencil;
+	ImageButton brush;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,10 @@ public class DrawDoodle extends Activity {
 		blueBtn = (Button) findViewById(R.id.blue_button);
 		greenBtn = (Button) findViewById(R.id.green_button);
 		purpleBtn = (Button) findViewById(R.id.purple_button);
+		eraser = (ImageButton) findViewById(R.id.Eraser);
+		pencil = (ImageButton) findViewById(R.id.Pencil);
+		brush = (ImageButton) findViewById(R.id.Brush);
+		
 		
 		touchListener = new OnTouchListener() {
 			@Override
@@ -175,6 +183,9 @@ public class DrawDoodle extends Activity {
 		drawArea.setColor(Color.WHITE);
 		drawArea.setSize(7);
 		erased = true;
+		eraser.setImageResource(R.drawable.eraser_pressed);
+		pencil.setImageResource(R.drawable.pencil);
+		brush.setImageResource(R.drawable.brush);
 	}
 	
 	public void getStroke(View v) {
@@ -186,10 +197,16 @@ public class DrawDoodle extends Activity {
 			Toast.makeText(this, "You have chosen pencil.",
 					Toast.LENGTH_SHORT).show();
 			size = 4;
+			eraser.setImageResource(R.drawable.eraser);
+			pencil.setImageResource(R.drawable.pencil_pressed);
+			brush.setImageResource(R.drawable.brush);
 		} else if (v.getId()== R.id.Brush) {
 			Toast.makeText(this, "You have chosen brush.",
 					Toast.LENGTH_SHORT).show();
 			size= 10;
+			eraser.setImageResource(R.drawable.eraser);
+			pencil.setImageResource(R.drawable.pencil);
+			brush.setImageResource(R.drawable.brush_pressed);
 		}  else {
 			
 		}
