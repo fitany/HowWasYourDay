@@ -7,15 +7,15 @@
         android:title="@string/action_settings"/>
     -->
     <item android:id="@+id/timeline"
-          android:icon="@drawable/timeline"
+          android:icon="@drawable/timeline_square"
           android:title="@string/timeline"
           android:showAsAction="always" />
     <item android:id="@+id/new_event"
-          android:icon="@drawable/new_event"
+          android:icon="@drawable/new_event_square"
           android:title="@string/new_event"
           android:showAsAction="always" />
     <item android:id="@+id/stats"
-          android:icon="@drawable/stats"
+          android:icon="@drawable/stats_square"
           android:title="@string/stats"
           android:showAsAction="always" />
     

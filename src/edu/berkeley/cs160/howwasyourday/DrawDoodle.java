@@ -101,33 +101,21 @@ public class DrawDoodle extends Activity {
 	public void getColor(View v) {
 		int loc = 0;
 		if(v.getId()== R.id.blue_button) {
-			Toast.makeText(this, "You have chosen blue.",
-			Toast.LENGTH_SHORT).show();
 			loc = Color.BLUE;
 			resetButton("blue");
 		} else if (v.getId()== R.id.red_button) {
-			Toast.makeText(this, "You have chosen red.",
-					Toast.LENGTH_SHORT).show();
 					resetButton("red");
 					loc = Color.RED;
 		} else if (v.getId()== R.id.green_button) {
-			Toast.makeText(this, "You have chosen green.",
-					Toast.LENGTH_SHORT).show();
 					loc = Color.GREEN; 
 					resetButton("green");
 		} else if (v.getId()== R.id.yellow_button) {
-			Toast.makeText(this, "You have chosen yellow.",
-					Toast.LENGTH_SHORT).show();
 					loc = Color.YELLOW; 
 					resetButton("yellow");
 		} else if (v.getId()== R.id.purple_button) {
-			Toast.makeText(this, "You have chosen purple.",
-					Toast.LENGTH_SHORT).show();
 					loc = this.getResources().getColor(R.color.purple);
 					resetButton("purple");
 		} else if (v.getId()== R.id.black_button) {
-			Toast.makeText(this, "You have chosen black",
-					Toast.LENGTH_SHORT).show();
 					loc = Color.BLACK; 
 					resetButton("all");
 		}  else {

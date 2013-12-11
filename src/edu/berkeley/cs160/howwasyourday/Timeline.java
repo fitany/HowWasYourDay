@@ -104,7 +104,7 @@ public class Timeline extends Activity {
 	    	stats = menu.findItem(R.id.stats);
 	    	//use this code to change the icon/appearance of menu item
 	    	MenuItem menuItem = menu.getItem(0);
-	    	menuItem.setIcon(R.drawable.timeline_selected);
+	    	menuItem.setIcon(R.drawable.timeline_selected_square);
 	    	return super.onCreateOptionsMenu(menu);
     	}
     }
@@ -195,9 +195,9 @@ public class Timeline extends Activity {
         //Fetch user profile pic and update, hardcoded to switch off between tom and ana
         ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
         if(post.userID%2==0)
-        	profile_pic.setImageResource(R.drawable.ana);
-        else
         	profile_pic.setImageResource(R.drawable.tom);
+        else
+        	profile_pic.setImageResource(R.drawable.ana);
         //Fetch name from db and update
         TextView name = (TextView) child1.findViewById(R.id.name);
         User post_user = db.findUser(database, (long)post.userID);
