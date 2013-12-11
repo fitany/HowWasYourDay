@@ -5,27 +5,18 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.net.Uri;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnTouchListener;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class DrawDoodle extends Activity {
@@ -35,6 +26,11 @@ public class DrawDoodle extends Activity {
 	String currentPath;
 	int preColor = Color.BLACK;
 	boolean erased = false;
+	Button redBtn;
+	Button yellowBtn;
+	Button blueBtn;
+	Button greenBtn;
+	Button purpleBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +39,11 @@ public class DrawDoodle extends Activity {
 		setContentView(R.layout.activity_draw_doodle);
 		
 		drawArea = (DrawArea) findViewById(R.id.drawArea);
+		redBtn = (Button) findViewById(R.id.red_button);
+		yellowBtn = (Button) findViewById(R.id.yellow_button);
+		blueBtn = (Button) findViewById(R.id.blue_button);
+		greenBtn = (Button) findViewById(R.id.green_button);
+		purpleBtn = (Button) findViewById(R.id.purple_button);
 		
 		touchListener = new OnTouchListener() {
 			@Override
@@ -94,32 +95,79 @@ public class DrawDoodle extends Activity {
 		if(v.getId()== R.id.blue_button) {
 			Toast.makeText(this, "You have chosen blue.",
 			Toast.LENGTH_SHORT).show();
-			loc = Color.BLUE; 
+			loc = Color.BLUE;
+			resetButton("blue");
 		} else if (v.getId()== R.id.red_button) {
 			Toast.makeText(this, "You have chosen red.",
 					Toast.LENGTH_SHORT).show();
+					resetButton("red");
 					loc = Color.RED;
 		} else if (v.getId()== R.id.green_button) {
 			Toast.makeText(this, "You have chosen green.",
 					Toast.LENGTH_SHORT).show();
 					loc = Color.GREEN; 
+					resetButton("green");
 		} else if (v.getId()== R.id.yellow_button) {
 			Toast.makeText(this, "You have chosen yellow.",
 					Toast.LENGTH_SHORT).show();
-					loc = Color.YELLOW; 		
+					loc = Color.YELLOW; 
+					resetButton("yellow");
 		} else if (v.getId()== R.id.purple_button) {
 			Toast.makeText(this, "You have chosen purple.",
 					Toast.LENGTH_SHORT).show();
 					loc = this.getResources().getColor(R.color.purple);
+					resetButton("purple");
 		} else if (v.getId()== R.id.black_button) {
 			Toast.makeText(this, "You have chosen black",
 					Toast.LENGTH_SHORT).show();
 					loc = Color.BLACK; 
+					resetButton("all");
 		}  else {
 			Toast.makeText(this, "some error happen",
 					Toast.LENGTH_SHORT).show();
 		}
 		drawArea.setColor(loc);
+	}
+	
+	@SuppressLint("NewApi")
+	private void resetButton(String s) {
+		if (s.equals("red")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button_pressed));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else if (s.equals("blue")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button_pressed));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else if (s.equals("green")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button_pressed));
+		} else if (s.equals("purple")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button_pressed));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else if (s.equals("yellow")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button_pressed));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		}
 	}
 	
 	public void getEraser(View v) {
