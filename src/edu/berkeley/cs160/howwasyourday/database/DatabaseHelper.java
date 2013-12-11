@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 14); 
+		super(context, dbName, null, 18); 
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.insert(PostTable, null, cv);
 	}
 	
-	public void saveDoole(SQLiteDatabase db, int userID, String discription, int feeling, String path) {
+	public void saveDoodle(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
 		ContentValues cv=new ContentValues();
 		cv.put(PostDoodle, path);
 		cv.put(PostUserId, userID);
@@ -112,9 +112,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.insert(PostTable, null, cv);
 	}
 	
-	public void saveAudio(SQLiteDatabase db, int userID, String discription, int feeling, String path) {
+	public void saveAudio(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
 		ContentValues cv=new ContentValues();
 		cv.put(PostAudio, path);
+		cv.put(PostUserId, userID);
+		cv.put(PostDiscription, discription);
+		cv.put(PostFeeling, feeling);
+		cv.put(PostTime, new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()));
+		db.insert(PostTable, null, cv);
+	}
+	
+	public void saveVideo(SQLiteDatabase db, long userID, String discription, int feeling, String path) {
+		ContentValues cv=new ContentValues();
+		cv.put(PostVideo, path);
 		cv.put(PostUserId, userID);
 		cv.put(PostDiscription, discription);
 		cv.put(PostFeeling, feeling);

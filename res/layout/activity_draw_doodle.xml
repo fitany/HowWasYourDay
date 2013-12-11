@@ -158,7 +158,7 @@
         android:layout_width="40sp"
         android:layout_height="40sp"
         android:layout_above="@+id/red_button"
-        android:layout_marginLeft="170sp"
+        android:layout_marginLeft="205sp"
         android:padding="0dp"
         android:onClick="getStroke"
         android:scaleType="fitXY"

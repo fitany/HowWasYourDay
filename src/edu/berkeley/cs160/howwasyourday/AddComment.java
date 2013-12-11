@@ -271,7 +271,15 @@ public class AddComment extends Activity {
 	}
 	
    public void newTimeline(View v) {
-	   db.savePic(database, currentUser.id, discription.getText().toString(), feeling, currentPath);
+	   if (type.equals("audio")) {
+		   db.saveAudio(database, currentUser.id, discription.getText().toString(), feeling, currentPath);
+	   } else if (type.equals("photo")) {
+		   db.savePic(database, currentUser.id, discription.getText().toString(), feeling, currentPath);
+	   } else if (type.equals("doodle")) {
+		   db.saveDoodle(database, currentUser.id, discription.getText().toString(), feeling, currentPath);
+	   } else {
+		   db.savePic(database, currentUser.id, discription.getText().toString(), feeling, currentPath);
+	   }
 	   Intent intent=new Intent(this,Timeline.class);
 	   startActivity(intent);
    }

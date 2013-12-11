@@ -218,6 +218,7 @@ public class Timeline extends Activity {
         	switch(feeling){
 	        	case 1://happy
 	        		face.setImageResource(R.drawable.happy);
+	        		break;
 	        	case 2://sad
 	        		face.setImageResource(R.drawable.sad);
 	        		break;
@@ -254,8 +255,16 @@ public class Timeline extends Activity {
         //Fetch content
         //try {
 			String filename = post.pic;
-			System.out.println("filename:"+filename);
-			if(!filename.equals("") && filename.indexOf(".amr")==-1){
+			if (filename == null) {
+				filename = post.doodle;
+			}
+			if (filename == null) {
+				filename = post.audio;
+			}		
+			if (filename == null) {
+				filename = post.video;
+			}
+			if(filename != null && filename.indexOf(".amr")==-1){
 		        File f=new File(filename);
 		        //Bitmap bm;
 				//bm = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -272,13 +281,13 @@ public class Timeline extends Activity {
 		        }
 		        else
 		        	content.setBackgroundColor(getResources().getColor(R.color.very_light_blue));
-			} else if(!filename.equals("")){
+			} else if(filename != null){
 				ImageButton content = (ImageButton) child1.findViewById(R.id.content);
 		        content.setImageResource(R.drawable.play_icon);
 		        content.setAdjustViewBounds(true);
 		        content.getLayoutParams().height = 500;
 		        content.getLayoutParams().width = 500;
-	        	content.setOnClickListener(new AudioOnClickListener(post.pic));
+	        	content.setOnClickListener(new AudioOnClickListener(filename));
 			}
 		//} catch (FileNotFoundException e) {
 			//e.printStackTrace();
@@ -420,5 +429,11 @@ public class Timeline extends Activity {
 	        }
 	    }
 	    return inSampleSize;
+    }
+    @Override
+    public void onBackPressed(){
+    	Intent intent=new Intent(this,LoginPage.class);
+    	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+ 	   	startActivity(intent);
     }
 }
