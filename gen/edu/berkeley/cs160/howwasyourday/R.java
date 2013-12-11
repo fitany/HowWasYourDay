@@ -132,12 +132,13 @@ public final class R {
         public static final int timeline_selected=0x7f02004f;
         public static final int timeline_selected_square=0x7f020050;
         public static final int tom=0x7f020051;
-        public static final int tutorial1=0x7f020052;
-        public static final int tutorial2=0x7f020053;
-        public static final int tutorial3=0x7f020054;
-        public static final int tutorial4=0x7f020055;
-        public static final int yellow_button=0x7f020056;
-        public static final int yellow_button_pressed=0x7f020057;
+        public static final int tutorial0=0x7f020052;
+        public static final int tutorial1=0x7f020053;
+        public static final int tutorial2=0x7f020054;
+        public static final int tutorial3=0x7f020055;
+        public static final int tutorial4=0x7f020056;
+        public static final int yellow_button=0x7f020057;
+        public static final int yellow_button_pressed=0x7f020058;
     }
     public static final class id {
         public static final int Brush=0x7f0b001a;

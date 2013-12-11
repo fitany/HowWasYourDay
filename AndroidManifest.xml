@@ -24,35 +24,44 @@
         android:uiOptions="splitActionBarWhenNarrow" >
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Timeline"
-            android:label="@string/timeline" >
+            android:launchMode="singleTop"
+            android:label="@string/timeline"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Post"
-            android:label="@string/title_activity_post" >
+            android:label="@string/title_activity_post"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.AddComment"
-            android:label="@string/title_activity_add_comment" >
+            android:label="@string/title_activity_add_comment"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Doodle"
-            android:label="@string/title_activity_doodle" >
-        </activity>
-        <activity
-            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
-            android:label="@string/title_activity_login_page" >
-        </activity>
-        <activity
-            android:name="edu.berkeley.cs160.howwasyourday.RecordVideo"
-            android:label="@string/title_activity_record_video" >
-        </activity>
-        <activity
-            android:name="edu.berkeley.cs160.howwasyourday.RecordAudio"
-            android:label="@string/title_activity_record_audio" >
+            android:label="@string/title_activity_doodle"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.DrawDoodle"
-            android:label="@string/title_activity_draw_doodle" >
+            android:label="@string/title_activity_draw_doodle"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.RecordVideo"
+            android:label="@string/title_activity_record_video"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.RecordAudio"
+            android:label="@string/title_activity_record_audio"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.berkeley.cs160.howwasyourday.LoginPage"
+            android:label="@string/title_activity_login_page"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,15 +70,18 @@
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.SharePhoto"
-            android:label="@string/title_activity_share_photo" >
+            android:label="@string/title_activity_share_photo"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.RegisterPage"
-            android:label="@string/title_activity_register_page" >
+            android:label="@string/title_activity_register_page"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.howwasyourday.Recap"
-            android:label="@string/title_activity_recap" >
+            android:label="@string/title_activity_recap"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
