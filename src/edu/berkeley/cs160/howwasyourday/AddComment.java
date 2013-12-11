@@ -45,7 +45,7 @@ public class AddComment extends Activity {
 	ImageView iv;
 	ListPopupWindow mListPopupWindow;
 	String[] feelings={"Normal", "Happy", "Sad", "Shocked","Tears","Blush", "Delighted", "Meep", "Smart", "Cool", "Mad"};
-	int[] images={R.drawable.ic_action_emotion, R.drawable.happy, R.drawable.sad, R.drawable.shocked, R.drawable.tears, R.drawable.blush, R.drawable.delighted,R.drawable.meep,R.drawable.smart,R.drawable.cool,R.drawable.mad};
+	int[] images={R.drawable.normal, R.drawable.happy, R.drawable.sad, R.drawable.shocked, R.drawable.tears, R.drawable.blush, R.drawable.delighted,R.drawable.meep,R.drawable.smart,R.drawable.cool,R.drawable.mad};
 	int feeling = 0;
 	ImageButton feelingBtn;
 	TextView feelingsText;
@@ -83,8 +83,17 @@ public class AddComment extends Activity {
         final ImageButton buttonBright = (ImageButton) findViewById(R.id.imageButton5);
         final ImageButton buttonDark = (ImageButton) findViewById (R.id.imageButton6);
         final ImageButton buttonRotateClockwise = (ImageButton) findViewById (R.id.imageButton4);
+        buttonBright.setVisibility(View.INVISIBLE);
+        buttonDark.setVisibility(View.INVISIBLE);
+        buttonRotateClockwise.setVisibility(View.INVISIBLE);
         
         feelingBtn.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+           	 	mySpinner.performClick();
+           }
+        });
+        
+        feelingsText.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
            	 	mySpinner.performClick();
            }

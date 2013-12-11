@@ -5,26 +5,19 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.net.Uri;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class DrawDoodle extends Activity {
@@ -32,13 +25,33 @@ public class DrawDoodle extends Activity {
 	DrawArea drawArea;
 	OnTouchListener touchListener;
 	String currentPath;
+	int preColor = Color.BLACK;
+	boolean erased = false;
+	Button redBtn;
+	Button yellowBtn;
+	Button blueBtn;
+	Button greenBtn;
+	Button purpleBtn;
+	ImageButton eraser;
+	ImageButton pencil;
+	ImageButton brush;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_draw_doodle);
 		
 		drawArea = (DrawArea) findViewById(R.id.drawArea);
+		redBtn = (Button) findViewById(R.id.red_button);
+		yellowBtn = (Button) findViewById(R.id.yellow_button);
+		blueBtn = (Button) findViewById(R.id.blue_button);
+		greenBtn = (Button) findViewById(R.id.green_button);
+		purpleBtn = (Button) findViewById(R.id.purple_button);
+		eraser = (ImageButton) findViewById(R.id.Eraser);
+		pencil = (ImageButton) findViewById(R.id.Pencil);
+		brush = (ImageButton) findViewById(R.id.Brush);
+		
 		
 		touchListener = new OnTouchListener() {
 			@Override
@@ -64,84 +77,152 @@ public class DrawDoodle extends Activity {
 		
 		drawArea.setOnTouchListener(touchListener);
 		
-		EditText text = (EditText)findViewById(R.id.editText);
-		text.setOnEditorActionListener(new OnEditorActionListener() {
-
-			@Override
-			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
-				if (arg2.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-					String value = arg0.getText().toString();
-					drawArea.text(value);
-					arg0.setVisibility(TextView.INVISIBLE);
-					return true;
-				}
-				return false;
-			}
-			
-		});
+////		EditText text = (EditText)findViewById(R.id.editText);
+//		text.setOnEditorActionListener(new OnEditorActionListener() {
+//
+//			@Override
+//			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+//				if (arg2.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+//					String value = arg0.getText().toString();
+//					drawArea.text(value);
+//					arg0.setVisibility(TextView.INVISIBLE);
+//					return true;
+//				}
+//				return false;
+//			}
+//			
+//		});
 	} 
 	
 	public void clear(View v) {
 		drawArea.clear();
 	}
+	
 	public void getColor(View v) {
 		int loc = 0;
 		if(v.getId()== R.id.blue_button) {
 			Toast.makeText(this, "You have chosen blue.",
 			Toast.LENGTH_SHORT).show();
-			loc = Color.BLUE; 
+			loc = Color.BLUE;
+			resetButton("blue");
 		} else if (v.getId()== R.id.red_button) {
 			Toast.makeText(this, "You have chosen red.",
 					Toast.LENGTH_SHORT).show();
-					loc = 0xf00; 
+					resetButton("red");
+					loc = Color.RED;
 		} else if (v.getId()== R.id.green_button) {
 			Toast.makeText(this, "You have chosen green.",
 					Toast.LENGTH_SHORT).show();
 					loc = Color.GREEN; 
+					resetButton("green");
 		} else if (v.getId()== R.id.yellow_button) {
 			Toast.makeText(this, "You have chosen yellow.",
 					Toast.LENGTH_SHORT).show();
 					loc = Color.YELLOW; 
-			
+					resetButton("yellow");
 		} else if (v.getId()== R.id.purple_button) {
 			Toast.makeText(this, "You have chosen purple.",
 					Toast.LENGTH_SHORT).show();
-					loc = 0xd1a5ea; 
-		} else if (v.getId()== R.id.Eraser) {
-			Toast.makeText(this, "You have chosen eraser.",
+					loc = this.getResources().getColor(R.color.purple);
+					resetButton("purple");
+		} else if (v.getId()== R.id.black_button) {
+			Toast.makeText(this, "You have chosen black",
 					Toast.LENGTH_SHORT).show();
-					loc = Color.WHITE; 
+					loc = Color.BLACK; 
+					resetButton("all");
 		}  else {
-		
+			Toast.makeText(this, "some error happen",
+					Toast.LENGTH_SHORT).show();
 		}
 		drawArea.setColor(loc);
 	}
 	
+	@SuppressLint("NewApi")
+	private void resetButton(String s) {
+		if (s.equals("red")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button_pressed));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else if (s.equals("blue")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button_pressed));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else if (s.equals("green")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button_pressed));
+		} else if (s.equals("purple")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button_pressed));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else if (s.equals("yellow")) {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button_pressed));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		} else {
+			redBtn.setBackground(this.getResources().getDrawable(R.drawable.red_button));
+			blueBtn.setBackground(this.getResources().getDrawable(R.drawable.blue_button));
+			yellowBtn.setBackground(this.getResources().getDrawable(R.drawable.yellow_button));
+			purpleBtn.setBackground(this.getResources().getDrawable(R.drawable.purple_button));
+			greenBtn.setBackground(this.getResources().getDrawable(R.drawable.green_button));
+		}
+	}
+	
+	public void getEraser(View v) {
+		preColor = drawArea.getColor();
+		drawArea.setColor(Color.WHITE);
+		drawArea.setSize(7);
+		erased = true;
+		eraser.setImageResource(R.drawable.eraser_pressed);
+		pencil.setImageResource(R.drawable.pencil);
+		brush.setImageResource(R.drawable.brush);
+	}
+	
 	public void getStroke(View v) {
 		int size = 10;
+		if (erased) {
+			drawArea.setColor(preColor);
+		}
 		if (v.getId()== R.id.Pencil) {
 			Toast.makeText(this, "You have chosen pencil.",
 					Toast.LENGTH_SHORT).show();
-			size = 3;
+			size = 4;
+			eraser.setImageResource(R.drawable.eraser);
+			pencil.setImageResource(R.drawable.pencil_pressed);
+			brush.setImageResource(R.drawable.brush);
 		} else if (v.getId()== R.id.Brush) {
 			Toast.makeText(this, "You have chosen brush.",
 					Toast.LENGTH_SHORT).show();
 			size= 10;
+			eraser.setImageResource(R.drawable.eraser);
+			pencil.setImageResource(R.drawable.pencil);
+			brush.setImageResource(R.drawable.brush_pressed);
 		}  else {
 			
 		}
 		drawArea.setSize(size);
 	}
 	
-	public void showText (View v) {
-		if (v.getId()== R.id.Text) {
-			Toast.makeText(this, "You have chosen text.",
-					Toast.LENGTH_SHORT).show();
-		}
-		EditText text = (EditText)findViewById(R.id.editText);
-		text.setVisibility(View.VISIBLE);
-
-	}
+	
+//	public void showText (View v) {
+//		if (v.getId()== R.id.Text) {
+//			Toast.makeText(this, "You have chosen text.",
+//					Toast.LENGTH_SHORT).show();
+//		}
+//		EditText text = (EditText)findViewById(R.id.editText);
+//		text.setVisibility(View.VISIBLE);
+//
+//	}
 	
 	public void done(View v){
 		String path = Environment.getExternalStorageDirectory().toString() + File.separator + "Doodle";
@@ -176,6 +257,10 @@ public class DrawDoodle extends Activity {
 		return true;
 	}
 	
+	public void home(View v) {
+		Intent i = new Intent(this, Timeline.class);
+		startActivity(i);
+	}
 	
 
 }

@@ -28,7 +28,7 @@ public class DrawArea extends View {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 		color = Color.BLACK;
-		size = 6;
+		size = 4;
 		setUp(color, size);
 	}
 	
@@ -66,6 +66,11 @@ public class DrawArea extends View {
 		this.color = color;
 		paint.setColor(color);
 	}
+	
+	public int getColor() {
+		return color;
+	}
+	
 	public void text(String inp) {
 		paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
