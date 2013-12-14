@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String PostTime="PostTime";
 	
 	public DatabaseHelper(Context context) {
-		super(context, dbName, null, 18); 
+		super(context, dbName, null, 25); 
 	}
 
 	@Override

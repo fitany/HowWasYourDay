@@ -36,6 +36,15 @@
         <item>Toby</item>
     </string-array>
     
+    <string-array name="timespan">
+        <item>This Week</item>
+        <item>This Month</item>
+        <item>This Year</item>
+        <item>All Time</item>
+    </string-array>
+    
+    <string name="unit_prompt">Past Week</string>
+    
     <string name="desc">camera</string>
     <string name="prompt">Choose a Feeling</string>
     <string name="createFamily"><u>Create New Family</u></string>

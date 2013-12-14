@@ -195,7 +195,7 @@ public class Timeline extends Activity {
         //Fetch user profile pic and update, hardcoded to switch off between tom and ana
         ImageView profile_pic = (ImageView) child1.findViewById(R.id.profile_pic);
         if(post.userID%2==0)
-        	profile_pic.setImageResource(R.drawable.tom);
+        	profile_pic.setImageResource(R.drawable.tiffany);
         else
         	profile_pic.setImageResource(R.drawable.ana);
         //Fetch name from db and update
